@@ -12,6 +12,26 @@ $commonPath = Join-Path $windowsRoot 'scripts\common-windows.ps1'
 $manifestPath = Join-Path $installerRoot 'node-runtime.json'
 $builderAst = $null
 
+$guofengPayload = @(
+  'presets\catalog.json',
+  'presets\preset-zhuqing\background.jpg',
+  'presets\preset-zhuqing\theme.json',
+  'presets\preset-zhuqing\theme.css',
+  'presets\preset-zhusha\background.jpg',
+  'presets\preset-zhusha\theme.json',
+  'presets\preset-zhusha\theme.css',
+  'presets\preset-moyun\background.jpg',
+  'presets\preset-moyun\theme.json',
+  'presets\preset-moyun\theme.css'
+)
+foreach ($relativePath in $guofengPayload) {
+  $payloadPath = Join-Path $windowsRoot $relativePath
+  if (-not (Test-Path -LiteralPath $payloadPath -PathType Leaf) -or
+    (Get-Item -LiteralPath $payloadPath).Length -le 0) {
+    throw "Bundled Guofeng payload is missing or empty: $relativePath"
+  }
+}
+
 foreach ($scriptPath in @($builderPath, $bootstrapPath, $communityApplyPath, $commonPath)) {
   if (-not (Test-Path -LiteralPath $scriptPath -PathType Leaf)) {
     throw "Required installer PowerShell does not exist: $scriptPath"
