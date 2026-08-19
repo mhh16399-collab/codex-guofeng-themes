@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-moyun",
+  "name": "墨韵",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "山水留白，落墨成章。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "MOYUN ONLINE",
+  "quote": "远山无言，思绪有形",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.9,
+    "focusY": 0.52,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#f2f1ec",
+    "panel": "#f0f1ed",
+    "panelAlt": "#e5e8e4",
+    "accent": "#2f5452",
+    "accentAlt": "#839391",
+    "secondary": "#b7bfba",
+    "highlight": "#1f3f3e",
+    "text": "#1f2424",
+    "muted": "#6d7572",
+    "line": "rgba(47, 84, 82, .24)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "墨韵 · Moyun",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

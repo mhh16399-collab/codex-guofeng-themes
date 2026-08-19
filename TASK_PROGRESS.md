@@ -6,9 +6,11 @@
 - [视觉已确认] 竹青使用竹影与青绿纸白；朱砂使用宫墙、月洞和窗棂投影，不使用节庆祥云；墨韵使用山水和飞白，不出现竹子或植物。用户已批准三套方向，并授权连续执行、不逐步询问。
 - [工作区] 基线 `main@95423d84`（v1.5.14），分支 `codex/guofeng-windows-v1`，独立 worktree `D:\CodexWorktrees\codex-guofeng-themes-v1`。`origin` 为 `mhh16399-collab/codex-guofeng-themes`，`upstream` 为 `Fei-Away/Codex-Dream-Skin`。
 - [设计] 规格写入 `docs/superpowers/specs/2026-08-19-guofeng-windows-v1-design.md`。保留内部 DreamSkin 状态路径、函数名和协议以兼容安全升级；只重做 Windows 展示品牌、主题预设、安装体验和文档。
-- [基线] PowerShell 7.6.4 可用；系统 PATH 无全局 Node，测试使用 Codex bundled Node v24.19.0，不另行安装。Windows 全套基线测试正在运行，已看到社区主题 fail-closed/回滚套件通过，等待最终退出结果。
+- [基线] PowerShell 7.6.4 可用；系统 PATH 无全局 Node，测试使用 Codex bundled Node v24.19.0，不另行安装。修改前 Windows 全套基线测试退出 0，社区主题 fail-closed、事务回滚、启动恢复、渲染器就绪与配置安全套件均通过。
+- [主题里程碑] 已生成并人工检查三张 16:9 纯背景，压缩为 2560×1440 JPEG；三套主题均包含 `background.jpg`、`theme.json`、通过 Safe CSS 校验的 `theme.css`。目录清单固定为竹青、朱砂、墨韵，全新安装默认竹青并保留用户活动主题。
+- [安装器里程碑] Windows 运行时、同版本修复、Release 构建器均已纳入三套主题与 `catalog.json` 的完整性清单；构建器固定校验审核文件 SHA-256，避免安装包漏装或静默替换视觉资产。聚焦国风主题测试、安装器静态契约与 PowerShell 解析检查均退出 0。
 - [网络] 普通 Git 克隆最初两次被连接重置，之后 `gh repo clone --depth 1` 成功并自动配置 `upstream`。API 下载的只读源码备份保留在 `D:\CodexProjects\codex-guofeng-themes`，不作为开发工作区。
-- [下一步] 完成计划文档与自审；按 TDD 先修改主题初始化/安装器断言，再生成三套纯背景和主题三件套，接入托盘与品牌，运行全量回归，提交并推送开发分支、创建 PR。未经另行授权不合并、不打 tag、不发布 Release。
+- [下一步] 完成 Windows 展示品牌、仓库首页与三套预览，运行全量回归和安装包构建检查，提交并推送开发分支、创建草稿 PR。未经另行授权不合并、不打 tag、不发布 Release。
 
 ## Issue #352 fix and v1.5.14 release (2026-08-12)
 

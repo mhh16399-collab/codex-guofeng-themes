@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "defaultThemeId": "preset-zhuqing",
+  "themes": [
+    "preset-zhuqing",
+    "preset-zhusha",
+    "preset-moyun"
+  ]
+}

@@ -464,6 +464,106 @@ function Get-DreamSkinActiveThemeAppearance {
   return 'auto'
 }
 
+function Read-DreamSkinBundledPresetCatalog {
+  param([Parameter(Mandatory = $true)][string]$SkillRoot)
+
+  $presetsRoot = Join-Path $SkillRoot 'presets'
+  $catalogPath = Join-Path $presetsRoot 'catalog.json'
+  Assert-DreamSkinNoReparseComponents -Path $presetsRoot
+  Assert-DreamSkinNoReparseComponents -Path $catalogPath
+  if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
+    throw 'Bundled preset catalog is missing: presets\catalog.json'
+  }
+  try {
+    $catalog = (Read-DreamSkinUtf8File -Path $catalogPath) | ConvertFrom-Json
+  } catch {
+    throw "Bundled preset catalog is not valid UTF-8 JSON: $($_.Exception.Message)"
+  }
+  if ($null -eq $catalog -or $catalog -isnot [psobject] -or
+    $catalog.PSObject.Properties['schemaVersion'].Value -ne 1) {
+    throw 'Bundled preset catalog schemaVersion must equal 1.'
+  }
+  $defaultThemeId = "$($catalog.PSObject.Properties['defaultThemeId'].Value)"
+  $themeValues = $catalog.PSObject.Properties['themes'].Value
+  if (-not $defaultThemeId -or $themeValues -is [string]) {
+    throw 'Bundled preset catalog must declare one defaultThemeId and a themes array.'
+  }
+  $themeIds = @($themeValues | ForEach-Object { "$_" })
+  if ($themeIds.Count -ne 3) {
+    throw 'Bundled preset catalog must declare exactly three Windows v1 themes.'
+  }
+  $seen = [System.Collections.Generic.HashSet[string]]::new(
+    [System.StringComparer]::Ordinal
+  )
+  $presets = @()
+  foreach ($themeId in $themeIds) {
+    if ($themeId -cnotmatch '^preset-[A-Za-z0-9_-]{1,72}$' -or -not $seen.Add($themeId)) {
+      throw "Bundled preset catalog contains an invalid or duplicate id: $themeId"
+    }
+    $source = Join-Path $presetsRoot $themeId
+    Assert-DreamSkinNoReparseComponents -Path $source
+    if (-not (Test-Path -LiteralPath $source -PathType Container)) {
+      throw "Bundled preset directory is missing: presets\$themeId"
+    }
+    $loaded = Read-DreamSkinTheme -ThemeDirectory $source
+    if ("$($loaded.Theme.id)" -cne $themeId -or
+      [System.IO.Path]::GetFileName($loaded.ImagePath) -cne 'background.jpg') {
+      throw "Bundled preset id or image contract does not match its directory: $themeId"
+    }
+    $cssPath = Join-Path $source 'theme.css'
+    Assert-DreamSkinNoReparseComponents -Path $cssPath
+    if (-not (Test-Path -LiteralPath $cssPath -PathType Leaf) -or
+      (Get-Item -LiteralPath $cssPath -Force).Length -le 0) {
+      throw "Bundled preset theme.css is missing or empty: $themeId"
+    }
+    Assert-DreamSkinSafeCssFile -Path $cssPath
+    $allowedFiles = @('background.jpg', 'theme.json', 'theme.css')
+    $sourceFiles = @(Get-ChildItem -LiteralPath $source -Force)
+    if ($sourceFiles.Count -ne 3 -or
+      @($sourceFiles | Where-Object { $_.PSIsContainer -or $_.Name -cnotin $allowedFiles }).Count -gt 0) {
+      throw "Bundled preset must contain only background.jpg, theme.json, and theme.css: $themeId"
+    }
+    $presets += [pscustomobject]@{
+      Id = $themeId
+      Source = $source
+      Theme = $loaded.Theme
+      ThemePath = $loaded.ThemePath
+      ImagePath = $loaded.ImagePath
+      CssPath = $cssPath
+    }
+  }
+  if (-not $seen.Contains($defaultThemeId)) {
+    throw 'Bundled preset catalog defaultThemeId must reference one declared theme.'
+  }
+  return [pscustomobject]@{
+    DefaultThemeId = $defaultThemeId
+    Presets = $presets
+  }
+}
+
+function Sync-DreamSkinBundledPresets {
+  param(
+    [Parameter(Mandatory = $true)][object]$Catalog,
+    [Parameter(Mandatory = $true)][object]$Paths
+  )
+  foreach ($preset in @($Catalog.Presets)) {
+    $destination = Join-Path $Paths.Saved $preset.Id
+    Assert-DreamSkinNoReparseComponents -Path $destination
+    Ensure-DreamSkinManagedDirectory -Path $destination -Root $Paths.Root
+    foreach ($fileName in @('background.jpg', 'theme.json', 'theme.css')) {
+      $sourceFile = Join-Path $preset.Source $fileName
+      $destinationFile = Join-Path $destination $fileName
+      Assert-DreamSkinNoReparseComponents -Path $sourceFile
+      Assert-DreamSkinNoReparseComponents -Path $destinationFile
+      Copy-Item -LiteralPath $sourceFile -Destination $destinationFile -Force
+      Assert-DreamSkinNoReparseComponents -Path $destinationFile
+    }
+    $saved = Read-DreamSkinTheme -ThemeDirectory $destination
+    Assert-DreamSkinImageFile -Path $saved.ImagePath
+    Assert-DreamSkinSafeCssFile -Path (Join-Path $destination 'theme.css')
+  }
+}
+
 function Initialize-DreamSkinThemeStore {
   param(
     [Parameter(Mandatory = $true)][string]$SkillRoot,
@@ -498,46 +598,26 @@ function Initialize-DreamSkinThemeStore {
     Assert-DreamSkinImageFile -Path $imageArchive
     Assert-DreamSkinNoReparseComponents -Path $activeTheme
     Copy-Item -LiteralPath (Join-Path $assetRoot 'theme.json') -Destination $activeTheme -Force
+    $assetCss = Join-Path $assetRoot 'theme.css'
+    if (-not (Test-Path -LiteralPath $assetCss -PathType Leaf)) {
+      throw 'Bundled default theme.css is missing.'
+    }
+    Assert-DreamSkinSafeCssFile -Path $assetCss
+    $activeCss = Join-Path $paths.Active 'theme.css'
+    Assert-DreamSkinNoReparseComponents -Path $activeCss
+    Copy-Item -LiteralPath $assetCss -Destination $activeCss -Force
+    Assert-DreamSkinSafeCssFile -Path $activeCss
   }
   $retiredPresetDirectory = Join-Path $paths.Saved 'preset-romantic-rose'
   Assert-DreamSkinNoReparseComponents -Path $retiredPresetDirectory
   if (Test-Path -LiteralPath $retiredPresetDirectory) {
     Remove-Item -LiteralPath $retiredPresetDirectory -Recurse -Force
   }
-  $presetDirectory = Join-Path $paths.Saved $bundledPresetId
-  $presetTheme = Join-Path $presetDirectory 'theme.json'
-  Assert-DreamSkinNoReparseComponents -Path $presetDirectory
-  Assert-DreamSkinNoReparseComponents -Path $presetTheme
-  # Refresh the saved copy on every run (matching macOS seeding) so preset
-  # metadata upgrades — e.g. the #183 appearance pin — reach existing installs.
-  Ensure-DreamSkinManagedDirectory -Path $presetDirectory -Root $paths.Root
-  $presetImage = Join-Path $presetDirectory $assetImageName
-  Assert-DreamSkinNoReparseComponents -Path $presetImage
-  Copy-Item -LiteralPath $assetImage -Destination $presetImage -Force
-  Assert-DreamSkinNoReparseComponents -Path $presetImage
-  Assert-DreamSkinImageFile -Path $presetImage
-  Assert-DreamSkinNoReparseComponents -Path $presetTheme
-  Copy-Item -LiteralPath (Join-Path $assetRoot 'theme.json') -Destination $presetTheme -Force
-  # Bundled Gothic Void Crusade (same pack as macOS presets/).
-  $gothicSource = Join-Path $SkillRoot 'presets\preset-gothic-void-crusade'
-  $gothicDirectory = Join-Path $paths.Saved 'preset-gothic-void-crusade'
-  $gothicTheme = Join-Path $gothicDirectory 'theme.json'
-  $gothicSourceTheme = Join-Path $gothicSource 'theme.json'
-  $gothicSourceImage = Join-Path $gothicSource 'background.jpg'
-  Assert-DreamSkinNoReparseComponents -Path $gothicDirectory
-  Assert-DreamSkinNoReparseComponents -Path $gothicTheme
-  if ((Test-Path -LiteralPath $gothicSourceTheme -PathType Leaf) -and
-    (Test-Path -LiteralPath $gothicSourceImage -PathType Leaf)) {
-    Ensure-DreamSkinManagedDirectory -Path $gothicDirectory -Root $paths.Root
-    $gothicImage = Join-Path $gothicDirectory 'background.jpg'
-    Assert-DreamSkinNoReparseComponents -Path $gothicImage
-    Assert-DreamSkinImageFile -Path $gothicSourceImage
-    Copy-Item -LiteralPath $gothicSourceImage -Destination $gothicImage -Force
-    Assert-DreamSkinNoReparseComponents -Path $gothicImage
-    Assert-DreamSkinImageFile -Path $gothicImage
-    Assert-DreamSkinNoReparseComponents -Path $gothicTheme
-    Copy-Item -LiteralPath $gothicSourceTheme -Destination $gothicTheme -Force
+  $catalog = Read-DreamSkinBundledPresetCatalog -SkillRoot $SkillRoot
+  if ($catalog.DefaultThemeId -cne $bundledPresetId) {
+    throw 'Bundled default asset theme must match presets/catalog.json defaultThemeId.'
   }
+  Sync-DreamSkinBundledPresets -Catalog $catalog -Paths $paths
   # Refresh the staged active copy of official presets too; otherwise metadata
   # staged by an older engine (e.g. pre-#183 appearance "auto") keeps steering
   # the appearanceTheme pin after upgrades.
@@ -548,8 +628,11 @@ function Initialize-DreamSkinThemeStore {
     } catch {}
     $refreshSource = $null
     if ($activeId -ceq $bundledPresetId) { $refreshSource = $assetRoot }
-    elseif ($activeId -ceq 'preset-gothic-void-crusade' -and
-      (Test-Path -LiteralPath $gothicSourceTheme -PathType Leaf)) { $refreshSource = $gothicSource }
+    else {
+      $activePreset = @($catalog.Presets | Where-Object { $_.Id -ceq $activeId }) |
+        Select-Object -First 1
+      if ($null -ne $activePreset) { $refreshSource = $activePreset.Source }
+    }
     if ($null -ne $refreshSource) {
       $sourcePack = Read-DreamSkinTheme -ThemeDirectory $refreshSource
       $sourceJson = Read-DreamSkinUtf8File -Path $sourcePack.ThemePath
@@ -562,6 +645,12 @@ function Initialize-DreamSkinThemeStore {
         Assert-DreamSkinNoReparseComponents -Path $refreshedImage
         Assert-DreamSkinImageFile -Path $refreshedImage
         Copy-Item -LiteralPath $sourcePack.ThemePath -Destination $activeTheme -Force
+        $sourceCss = Join-Path $sourcePack.Directory 'theme.css'
+        $refreshedCss = Join-Path $paths.Active 'theme.css'
+        Assert-DreamSkinSafeCssFile -Path $sourceCss
+        Assert-DreamSkinNoReparseComponents -Path $refreshedCss
+        Copy-Item -LiteralPath $sourceCss -Destination $refreshedCss -Force
+        Assert-DreamSkinSafeCssFile -Path $refreshedCss
       }
     }
   }
