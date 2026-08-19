@@ -1,5 +1,15 @@
 # Task Progress
 
+## Codex 国风主题工坊 Windows v1（2026-08-19）
+
+- [目标] 在保留上游可恢复 CDP 换肤内核的前提下，交付 Windows-only 国风发行版，首发竹青、朱砂、墨韵三套主题；全新安装默认竹青，托盘可一键切换三套。
+- [视觉已确认] 竹青使用竹影与青绿纸白；朱砂使用宫墙、月洞和窗棂投影，不使用节庆祥云；墨韵使用山水和飞白，不出现竹子或植物。用户已批准三套方向，并授权连续执行、不逐步询问。
+- [工作区] 基线 `main@95423d84`（v1.5.14），分支 `codex/guofeng-windows-v1`，独立 worktree `D:\CodexWorktrees\codex-guofeng-themes-v1`。`origin` 为 `mhh16399-collab/codex-guofeng-themes`，`upstream` 为 `Fei-Away/Codex-Dream-Skin`。
+- [设计] 规格写入 `docs/superpowers/specs/2026-08-19-guofeng-windows-v1-design.md`。保留内部 DreamSkin 状态路径、函数名和协议以兼容安全升级；只重做 Windows 展示品牌、主题预设、安装体验和文档。
+- [基线] PowerShell 7.6.4 可用；系统 PATH 无全局 Node，测试使用 Codex bundled Node v24.19.0，不另行安装。Windows 全套基线测试正在运行，已看到社区主题 fail-closed/回滚套件通过，等待最终退出结果。
+- [网络] 普通 Git 克隆最初两次被连接重置，之后 `gh repo clone --depth 1` 成功并自动配置 `upstream`。API 下载的只读源码备份保留在 `D:\CodexProjects\codex-guofeng-themes`，不作为开发工作区。
+- [下一步] 完成计划文档与自审；按 TDD 先修改主题初始化/安装器断言，再生成三套纯背景和主题三件套，接入托盘与品牌，运行全量回归，提交并推送开发分支、创建 PR。未经另行授权不合并、不打 tag、不发布 Release。
+
 ## Issue #352 fix and v1.5.14 release (2026-08-12)
 
 - [fix merged] PR #360 (`e3787857953998a1916c39b10942ac6c15978a25`) passed exact-head CI run `31558654733`: Static, macOS repository regressions plus universal DMG, Windows PowerShell 7, and Windows PowerShell 5.1 plus Setup.exe. It was squash-merged with the authorized same-owner review bypass at `2026-08-12T03:06:37Z` as `main@69a5a2e4b68174b1c0c70a2fa62adf1aca1eff2a`.
