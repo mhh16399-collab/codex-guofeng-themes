@@ -177,8 +177,7 @@ function Write-DreamSkinIcon {
           $edgeCoverage = 0
           foreach ($sampleY in @(0.125, 0.375, 0.625, 0.875)) {
             foreach ($sampleX in @(0.125, 0.375, 0.625, 0.875)) {
-              # DreamSkin 品牌 mark（与网站 favicon 同源）：白圆角方 +
-              # 墨色对角半区（x+y>=1）+ 青点 + 14% 发丝描边环。
+              # Guofeng mark：宣纸圆角方 + 竹青对角半区 + 朱砂印点 + 发丝描边环。
               $x = ($column + $sampleX) / $size
               $y = ($row + $sampleY) / $size
               $dx = [Math]::Max([Math]::Abs($x - 0.5) - 0.16, 0.0)
@@ -200,15 +199,15 @@ function Write-DreamSkinIcon {
           $darkBlend = $darkCoverage / 16.0
           $dotBlend = $dotCoverage / 16.0
           $edgeBlend = 0.14 * ($edgeCoverage / 16.0)
-          $red = 253.0 * (1.0 - $darkBlend) + 23.0 * $darkBlend
-          $green = 253.0 * (1.0 - $darkBlend) + 24.0 * $darkBlend
-          $blue = 252.0 * (1.0 - $darkBlend) + 28.0 * $darkBlend
-          $red = $red * (1.0 - $dotBlend) + 45.0 * $dotBlend
-          $green = $green * (1.0 - $dotBlend) + 225.0 * $dotBlend
-          $blue = $blue * (1.0 - $dotBlend) + 194.0 * $dotBlend
-          $red = [int][Math]::Round($red * (1.0 - $edgeBlend) + 23.0 * $edgeBlend)
-          $green = [int][Math]::Round($green * (1.0 - $edgeBlend) + 24.0 * $edgeBlend)
-          $blue = [int][Math]::Round($blue * (1.0 - $edgeBlend) + 28.0 * $edgeBlend)
+          $red = 247.0 * (1.0 - $darkBlend) + 47.0 * $darkBlend
+          $green = 248.0 * (1.0 - $darkBlend) + 111.0 * $darkBlend
+          $blue = 242.0 * (1.0 - $darkBlend) + 89.0 * $darkBlend
+          $red = $red * (1.0 - $dotBlend) + 183.0 * $dotBlend
+          $green = $green * (1.0 - $dotBlend) + 73.0 * $dotBlend
+          $blue = $blue * (1.0 - $dotBlend) + 58.0 * $dotBlend
+          $red = [int][Math]::Round($red * (1.0 - $edgeBlend) + 31.0 * $edgeBlend)
+          $green = [int][Math]::Round($green * (1.0 - $edgeBlend) + 78.0 * $edgeBlend)
+          $blue = [int][Math]::Round($blue * (1.0 - $edgeBlend) + 62.0 * $edgeBlend)
           $writer.Write([byte]$blue)
           $writer.Write([byte]$green)
           $writer.Write([byte]$red)

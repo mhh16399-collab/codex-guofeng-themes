@@ -570,7 +570,7 @@ export async function loadTheme(themeDir) {
   const theme = {
     schemaVersion: 1,
     id: normalizeThemeText(raw.id, "custom", 80, "id", themePath),
-    name: normalizeThemeText(raw.name, "Codex Dream Skin", 80, "name", themePath),
+    name: normalizeThemeText(raw.name, "Codex Guofeng Themes", 80, "name", themePath),
     brandSubtitle: normalizeThemeText(raw.brandSubtitle, "CODEX DREAM SKIN", 120, "brandSubtitle", themePath),
     tagline: normalizeThemeText(raw.tagline, "Make something wonderful.", 120, "tagline", themePath),
     projectPrefix: normalizeThemeText(raw.projectPrefix, "选择项目 · ", 120, "projectPrefix", themePath),

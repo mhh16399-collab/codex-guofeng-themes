@@ -7,11 +7,11 @@ Node.js 或执行 PowerShell 脚本。
 
 先从 Microsoft Store 安装官方 ChatGPT / Codex 桌面应用，至少启动一次后退出。
 
-1. 在 GitHub 的 [Releases](https://github.com/Fei-Away/Codex-Dream-Skin/releases) 下载最新的
+1. 在 GitHub 的 [Releases](https://github.com/mhh16399-collab/codex-guofeng-themes/releases) 下载最新的
    `CodexDreamSkin-Setup-vX.Y.Z.exe`。`SHA256SUMS.txt` 是可选的完整性校验文件。
 2. 双击安装器，按向导完成安装。默认安装到当前用户的 LocalAppData，不需要管理员权限；安装前
    请先退出 Codex。
-3. 安装完成后，从开始菜单启动 Codex Dream Skin，系统托盘会显示主题图标。
+3. 安装完成后，从开始菜单启动 Codex Guofeng Themes，系统托盘会显示主题图标。
 
 ### 为什么有时会看到“Windows 已保护你的电脑”
 
@@ -34,7 +34,7 @@ Node.js 或执行 PowerShell 脚本。
 
 ## 日常使用
 
-使用“Codex Dream Skin”快捷方式启动，使用托盘菜单换图、导入主题 ZIP、保存主题、暂停或恢复。主题和运行状态
+使用“Codex Guofeng Themes”快捷方式启动，使用托盘菜单切换竹青、朱砂、墨韵，或换图、导入主题 ZIP、保存主题、暂停和恢复。主题和运行状态
 保存在 `%LOCALAPPDATA%\CodexDreamSkin`，安装目录可以更新而不会删除这些数据。
 
 安装后的快捷方式使用受限的 `RemoteSigned` 策略；普通用户不需要打开 PowerShell，也不需要手动
@@ -70,7 +70,7 @@ SmartScreen 的决定针对下载到本机的具体文件。你对某个安装�
 
 ## 卸载与恢复
 
-在“设置 → 应用 → 已安装的应用”中卸载 Codex Dream Skin。卸载器会先恢复 Codex 官方外观并关闭
+在“设置 → 应用 → 已安装的应用”中卸载 Codex Guofeng Themes。卸载器会先恢复 Codex 官方外观并关闭
 CDP；恢复失败时会停止卸载，不会直接删除运行文件。默认保留 `%LOCALAPPDATA%\CodexDreamSkin` 中的
 主题和图片，方便重新安装；确认不再需要时再手动删除该数据目录。
 

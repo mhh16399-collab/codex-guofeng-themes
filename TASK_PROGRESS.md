@@ -9,8 +9,10 @@
 - [基线] PowerShell 7.6.4 可用；系统 PATH 无全局 Node，测试使用 Codex bundled Node v24.19.0，不另行安装。修改前 Windows 全套基线测试退出 0，社区主题 fail-closed、事务回滚、启动恢复、渲染器就绪与配置安全套件均通过。
 - [主题里程碑] 已生成并人工检查三张 16:9 纯背景，压缩为 2560×1440 JPEG；三套主题均包含 `background.jpg`、`theme.json`、通过 Safe CSS 校验的 `theme.css`。目录清单固定为竹青、朱砂、墨韵，全新安装默认竹青并保留用户活动主题。
 - [安装器里程碑] Windows 运行时、同版本修复、Release 构建器均已纳入三套主题与 `catalog.json` 的完整性清单；构建器固定校验审核文件 SHA-256，避免安装包漏装或静默替换视觉资产。聚焦国风主题测试、安装器静态契约与 PowerShell 解析检查均退出 0。
+- [品牌与门面] Windows 展示名称统一为 `Codex Guofeng Themes` / `Codex 国风主题`，安装器、托盘、源码快捷方式、更新仓库和卸载兼容清理已覆盖；内部 `%LOCALAPPDATA%\CodexDreamSkin` 与 `dreamskin://` 保持不变。首页已加入三套批准实机预览、中英文说明、安全边界、上游署名和贡献入口。
+- [最终回归] 品牌与三套主题接入后的 `windows/tests/run-tests.ps1` 在 PowerShell 7.6.4 + bundled Node v24.19.0 上退出 0；ZIP 导入边界、启动外观回滚、子进程结果、CDP 失败恢复、渲染就绪/可见证据、配置事务、参数引用和回环验证全部通过。安装器静态契约、国风主题目录测试和相关 Node readiness 10/10 亦通过。
 - [网络] 普通 Git 克隆最初两次被连接重置，之后 `gh repo clone --depth 1` 成功并自动配置 `upstream`。API 下载的只读源码备份保留在 `D:\CodexProjects\codex-guofeng-themes`，不作为开发工作区。
-- [下一步] 完成 Windows 展示品牌、仓库首页与三套预览，运行全量回归和安装包构建检查，提交并推送开发分支、创建草稿 PR。未经另行授权不合并、不打 tag、不发布 Release。
+- [下一步] 执行最终解析/哈希/链接/差异检查，提交并推送 `codex/guofeng-windows-v1`，创建面向 `main` 的草稿 PR。未经另行授权不合并、不打 tag、不发布 Release。
 
 ## Issue #352 fix and v1.5.14 release (2026-08-12)
 

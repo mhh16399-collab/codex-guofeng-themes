@@ -9,6 +9,11 @@ $builderPath = Join-Path $installerRoot 'build-release.ps1'
 $bootstrapPath = Join-Path $installerRoot 'setup-bootstrap.ps1'
 $communityApplyPath = Join-Path $windowsRoot 'scripts\apply-community-theme.ps1'
 $commonPath = Join-Path $windowsRoot 'scripts\common-windows.ps1'
+$localizationPath = Join-Path $windowsRoot 'scripts\localization-windows.ps1'
+$trayPath = Join-Path $windowsRoot 'scripts\tray-dream-skin.ps1'
+$updatePath = Join-Path $windowsRoot 'scripts\check-update.ps1'
+$sourceInstallPath = Join-Path $windowsRoot 'scripts\install-dream-skin.ps1'
+$restorePath = Join-Path $windowsRoot 'scripts\restore-dream-skin.ps1'
 $manifestPath = Join-Path $installerRoot 'node-runtime.json'
 $builderAst = $null
 
@@ -64,6 +69,30 @@ $definition = [System.IO.File]::ReadAllText($definitionPath)
 $builder = [System.IO.File]::ReadAllText($builderPath)
 $bootstrap = [System.IO.File]::ReadAllText($bootstrapPath)
 $common = [System.IO.File]::ReadAllText($commonPath)
+$localization = [System.IO.File]::ReadAllText($localizationPath)
+$tray = [System.IO.File]::ReadAllText($trayPath)
+$updater = [System.IO.File]::ReadAllText($updatePath)
+$sourceInstall = [System.IO.File]::ReadAllText($sourceInstallPath)
+$restore = [System.IO.File]::ReadAllText($restorePath)
+foreach ($brandContract in @(
+  @{ Content = $definition; Text = '#define AppName "Codex Guofeng Themes"' },
+  @{ Content = $definition; Text = '#define AppUrl "https://github.com/mhh16399-collab/codex-guofeng-themes"' },
+  @{ Content = $definition; Text = 'AppUpdatesURL=https://github.com/mhh16399-collab/codex-guofeng-themes/releases' },
+  @{ Content = $definition; Text = 'Name: "{group}\Codex Guofeng Themes"' },
+  @{ Content = $tray; Text = "'Codex Guofeng Themes'" },
+  @{ Content = $localization; Text = "UpdateTitle = 'Codex Guofeng Themes Update'" },
+  @{ Content = $localization; Text = "UpdateTitle = 'Codex 国风主题更新'" },
+  @{ Content = $updater; Text = "`$repository = 'mhh16399-collab/codex-guofeng-themes'" },
+  @{ Content = $bootstrap; Text = "'Codex Guofeng Themes.lnk'" },
+  @{ Content = $sourceInstall; Text = "'Codex Guofeng Themes.lnk'" },
+  @{ Content = $sourceInstall; Text = "'Codex Guofeng Themes - Restore.lnk'" },
+  @{ Content = $restore; Text = "'Codex Guofeng Themes.lnk'" },
+  @{ Content = $restore; Text = "'Codex Dream Skin.lnk'" }
+)) {
+  if (-not $brandContract.Content.Contains($brandContract.Text)) {
+    throw "Windows user-facing Guofeng brand contract is missing: $($brandContract.Text)"
+  }
+}
 if ($definition.Contains('-ExecutionPolicy Bypass') -or
   $builder.Contains('-ExecutionPolicy Bypass') -or
   $bootstrap.Contains('-ExecutionPolicy Bypass') -or
@@ -91,11 +120,11 @@ foreach ($requiredDefinition in @(
   "ExtractTemporaryFiles('{tmp}\setup-bootstrap.ps1');",
   "ExtractTemporaryFiles('{tmp}\payload\*');",
   "RunBootstrap(TemporaryBootstrap, '-Install', WizardSilent, ExitCode)",
-  "RaiseException('Codex Dream Skin initialization could not be started.');",
+  "RaiseException('Codex Guofeng Themes initialization could not be started.');",
   'procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);',
   'if CurUninstallStep <> usUninstall then',
   "RunBootstrap(ExpandConstant('{app}\setup-bootstrap.ps1'), '-Uninstall', True, ExitCode)",
-  "'Codex Dream Skin could not restore Codex (exit code ' +",
+  "'Codex Guofeng Themes could not restore Codex (exit code ' +",
   "IntToStr(ExitCode) + '). No installed files were removed.'",
   '[Registry]',
   'Root: HKCU; Subkey: "Software\Classes\dreamskin"',
@@ -117,8 +146,8 @@ if (-not $definition.Contains('#define PersistentPowerShellPath "{win}\System32\
   throw 'Persistent shortcuts and URL handlers must use a System32 PowerShell path that 64-bit launchers can access.'
 }
 $persistentCommandEntries = @(
-  'Name: "{group}\Codex Dream Skin"',
-  'Name: "{userstartup}\Codex Dream Skin"',
+  'Name: "{group}\Codex Guofeng Themes"',
+  'Name: "{userstartup}\Codex Guofeng Themes"',
   'Subkey: "Software\Classes\dreamskin\shell\open\command"'
 )
 foreach ($entry in $persistentCommandEntries) {
@@ -143,7 +172,7 @@ $runBootstrapIndex = $definition.IndexOf(
   [System.StringComparison]::Ordinal
 )
 $uninstallFailureIndex = $definition.LastIndexOf(
-  "'Codex Dream Skin could not restore Codex (exit code ' +",
+  "'Codex Guofeng Themes could not restore Codex (exit code ' +",
   [System.StringComparison]::Ordinal
 )
 if ($uninstallStepIndex -lt 0 -or $runBootstrapIndex -le $uninstallStepIndex -or
@@ -222,7 +251,7 @@ foreach ($requiredRepairContract in @(
   'runtime\node\node.exe',
   'runtime\node\LICENSE',
   '$missingEngineFiles.Count -eq 0',
-  'A newer Codex Dream Skin',
+  'A newer Codex Guofeng Themes',
   'The installer payload is missing its bundled Node.js runtime'
 )) {
   if (-not $bootstrap.Contains($requiredRepairContract)) {

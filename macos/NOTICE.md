@@ -13,6 +13,15 @@ It does **not** grant rights to:
 - Any user-supplied images or third-party artwork you drop into a theme
 - Character likenesses, franchise art, or celebrity imagery
 
+## Codex Guofeng Themes Windows artwork
+
+The Windows presets `preset-zhuqing`, `preset-zhusha`, and `preset-moyun` were
+created for the `mhh16399-collab/codex-guofeng-themes` fork with generative
+image tooling and human art direction. Their runtime backgrounds and repository
+preview images are redistributed with this project. They depict abstract
+bamboo shadows, architectural forms, and ink landscapes without branded or
+character likeness material.
+
 ## Demo artwork
 
 `assets/portal-hero.png` is original abstract geometric art generated for this open-source repository (no characters). Replace it with your own image before shipping a branded theme to customers.
@@ -31,7 +40,6 @@ OpenAI/Codex affiliation or endorsement.
 The following user/maintainer-supplied files are excluded from the MIT software license:
 
 - `presets/preset-arina-hashimoto/background.jpg`
-- `../windows/assets/dream-reference.jpg`
 - `../docs/images/presets/arina-hashimoto-source.png`
 - `../docs/images/presets/arina-hashimoto-light.jpg`
 - `../docs/images/presets/arina-hashimoto-dark.jpg`
