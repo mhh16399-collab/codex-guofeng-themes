@@ -12,7 +12,7 @@
 - [品牌与门面] Windows 展示名称统一为 `Codex Guofeng Themes` / `Codex 国风主题`，安装器、托盘、源码快捷方式、更新仓库和卸载兼容清理已覆盖；内部 `%LOCALAPPDATA%\CodexDreamSkin` 与 `dreamskin://` 保持不变。首页已加入三套批准实机预览、中英文说明、安全边界、上游署名和贡献入口。
 - [最终回归] 品牌与三套主题接入后的 `windows/tests/run-tests.ps1` 在 PowerShell 7.6.4 + bundled Node v24.19.0 上退出 0；ZIP 导入边界、启动外观回滚、子进程结果、CDP 失败恢复、渲染就绪/可见证据、配置事务、参数引用和回环验证全部通过。安装器静态契约、国风主题目录测试和相关 Node readiness 10/10 亦通过。
 - [网络] 普通 Git 克隆最初两次被连接重置，之后 `gh repo clone --depth 1` 成功并自动配置 `upstream`。API 下载的只读源码备份保留在 `D:\CodexProjects\codex-guofeng-themes`，不作为开发工作区。
-- [下一步] 执行最终解析/哈希/链接/差异检查，提交并推送 `codex/guofeng-windows-v1`，创建面向 `main` 的草稿 PR。未经另行授权不合并、不打 tag、不发布 Release。
+- [发布状态] 分支 `codex/guofeng-windows-v1` 已推送，面向 `main` 的草稿 PR #1 已创建；fork 的既有 CI/Release 工作流已通过 GitHub API 启用，等待 PR exact-head 检查。未经另行授权不合并、不打 tag、不发布 Release。
 
 ## Issue #352 fix and v1.5.14 release (2026-08-12)
 
