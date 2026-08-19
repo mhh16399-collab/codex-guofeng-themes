@@ -300,6 +300,25 @@ if ([int]$guofengCatalog.schemaVersion -ne 1 -or
   @($guofengCatalog.themes).Count -ne $guofengPresetIds.Count) {
   throw 'The reviewed Guofeng theme catalog metadata is unexpected.'
 }
+
+function Get-ReleaseReviewedFileHash {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [switch]$NormalizeText
+  )
+  if (-not $NormalizeText) {
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+  }
+
+  $text = (Read-ReleaseTextFile -Path $Path).Replace("`r`n", "`n").Replace("`r", "`n")
+  $bytes = [System.Text.UTF8Encoding]::new($false).GetBytes($text)
+  $sha256 = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    return ([System.BitConverter]::ToString($sha256.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+  } finally {
+    $sha256.Dispose()
+  }
+}
 for ($presetIndex = 0; $presetIndex -lt $guofengPresetIds.Count; $presetIndex++) {
   $presetId = $guofengPresetIds[$presetIndex]
   if ("$(@($guofengCatalog.themes)[$presetIndex])" -cne $presetId) {
@@ -316,7 +335,8 @@ foreach ($relative in $guofengPresetHashes.Keys) {
   if (-not (Test-Path -LiteralPath $sourceFile -PathType Leaf)) {
     throw "A reviewed Guofeng theme file is missing: $relative"
   }
-  $actualHash = (Get-FileHash -LiteralPath $sourceFile -Algorithm SHA256).Hash.ToLowerInvariant()
+  $actualHash = Get-ReleaseReviewedFileHash -Path $sourceFile `
+    -NormalizeText:($relative -cnotmatch '\.jpg$')
   if ($actualHash -cne $guofengPresetHashes[$relative]) {
     throw "A reviewed Guofeng theme file changed: $relative"
   }
@@ -442,8 +462,9 @@ try {
     }
   }
   foreach ($relative in $guofengPresetHashes.Keys) {
-    $stagedHash = (Get-FileHash -LiteralPath (Join-Path (Join-Path $payloadRoot 'presets') $relative) `
-      -Algorithm SHA256).Hash.ToLowerInvariant()
+    $stagedHash = Get-ReleaseReviewedFileHash `
+      -Path (Join-Path (Join-Path $payloadRoot 'presets') $relative) `
+      -NormalizeText:($relative -cnotmatch '\.jpg$')
     if ($stagedHash -cne $guofengPresetHashes[$relative]) {
       throw 'Staged installer payload did not retain the reviewed Guofeng theme catalog.'
     }
