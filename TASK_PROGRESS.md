@@ -1,5 +1,19 @@
 # Task Progress
 
+## Codex 国风主题工坊 Windows v1（2026-08-19）
+
+- [目标] 在保留上游可恢复 CDP 换肤内核的前提下，交付 Windows-only 国风发行版，首发竹青、朱砂、墨韵三套主题；全新安装默认竹青，托盘可一键切换三套。
+- [视觉已确认] 竹青使用竹影与青绿纸白；朱砂使用宫墙、月洞和窗棂投影，不使用节庆祥云；墨韵使用山水和飞白，不出现竹子或植物。用户已批准三套方向，并授权连续执行、不逐步询问。
+- [工作区] 基线 `main@95423d84`（v1.5.14），分支 `codex/guofeng-windows-v1`，独立 worktree `D:\CodexWorktrees\codex-guofeng-themes-v1`。`origin` 为 `mhh16399-collab/codex-guofeng-themes`，`upstream` 为 `Fei-Away/Codex-Dream-Skin`。
+- [设计] 规格写入 `docs/superpowers/specs/2026-08-19-guofeng-windows-v1-design.md`。保留内部 DreamSkin 状态路径、函数名和协议以兼容安全升级；只重做 Windows 展示品牌、主题预设、安装体验和文档。
+- [基线] PowerShell 7.6.4 可用；系统 PATH 无全局 Node，测试使用 Codex bundled Node v24.19.0，不另行安装。修改前 Windows 全套基线测试退出 0，社区主题 fail-closed、事务回滚、启动恢复、渲染器就绪与配置安全套件均通过。
+- [主题里程碑] 已生成并人工检查三张 16:9 纯背景，压缩为 2560×1440 JPEG；三套主题均包含 `background.jpg`、`theme.json`、通过 Safe CSS 校验的 `theme.css`。目录清单固定为竹青、朱砂、墨韵，全新安装默认竹青并保留用户活动主题。
+- [安装器里程碑] Windows 运行时、同版本修复、Release 构建器均已纳入三套主题与 `catalog.json` 的完整性清单；构建器固定校验审核文件 SHA-256，避免安装包漏装或静默替换视觉资产。聚焦国风主题测试、安装器静态契约与 PowerShell 解析检查均退出 0。
+- [品牌与门面] Windows 展示名称统一为 `Codex Guofeng Themes` / `Codex 国风主题`，安装器、托盘、源码快捷方式、更新仓库和卸载兼容清理已覆盖；内部 `%LOCALAPPDATA%\CodexDreamSkin` 与 `dreamskin://` 保持不变。首页已加入三套批准实机预览、中英文说明、安全边界、上游署名和贡献入口。
+- [最终回归] 品牌与三套主题接入后的 `windows/tests/run-tests.ps1` 在 PowerShell 7.6.4 + bundled Node v24.19.0 上退出 0；ZIP 导入边界、启动外观回滚、子进程结果、CDP 失败恢复、渲染就绪/可见证据、配置事务、参数引用和回环验证全部通过。安装器静态契约、国风主题目录测试和相关 Node readiness 10/10 亦通过。
+- [网络] 普通 Git 克隆最初两次被连接重置，之后 `gh repo clone --depth 1` 成功并自动配置 `upstream`。API 下载的只读源码备份保留在 `D:\CodexProjects\codex-guofeng-themes`，不作为开发工作区。
+- [发布状态] 分支 `codex/guofeng-windows-v1` 已推送，面向 `main` 的草稿 PR #1 已创建；fork 的既有 CI/Release 工作流已通过 GitHub API 启用，等待 PR exact-head 检查。未经另行授权不合并、不打 tag、不发布 Release。
+
 ## Issue #352 fix and v1.5.14 release (2026-08-12)
 
 - [fix merged] PR #360 (`e3787857953998a1916c39b10942ac6c15978a25`) passed exact-head CI run `31558654733`: Static, macOS repository regressions plus universal DMG, Windows PowerShell 7, and Windows PowerShell 5.1 plus Setup.exe. It was squash-merged with the authorized same-owner review bypass at `2026-08-12T03:06:37Z` as `main@69a5a2e4b68174b1c0c70a2fa62adf1aca1eff2a`.

@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $engineRoot = Split-Path -Parent $PSScriptRoot
 $versionPath = Join-Path $engineRoot 'VERSION'
-$repository = 'Fei-Away/Codex-Dream-Skin'
+$repository = 'mhh16399-collab/codex-guofeng-themes'
 $releasePage = "https://github.com/$repository/releases/latest"
 . (Join-Path $PSScriptRoot 'localization-windows.ps1')
 $stateRoot = Join-Path $env:LOCALAPPDATA 'CodexDreamSkin'

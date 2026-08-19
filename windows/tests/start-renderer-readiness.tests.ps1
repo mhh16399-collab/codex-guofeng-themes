@@ -196,7 +196,7 @@ try {
 }
 
 $announcedActive = @($script:hostMessages | Where-Object {
-  $_ -like 'Codex Dream Skin is active*'
+  $_ -like 'Codex Guofeng Themes is active*'
 }).Count -gt 0
 if (-not $failed -or $script:verifyCalls -ne 1 -or $script:onceCalls -ne 1 -or
   $script:removeCalls -ne 0 -or $script:appearanceInstallCalls -ne 1 -or

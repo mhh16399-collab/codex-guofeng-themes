@@ -366,8 +366,17 @@ function Install-DreamSkinRuntimeEngine {
     'assets\selectors.json',
     'assets\theme-package-validator.mjs',
     'assets\theme.json',
-    'presets\preset-gothic-void-crusade\background.jpg',
-    'presets\preset-gothic-void-crusade\theme.json',
+    'assets\theme.css',
+    'presets\catalog.json',
+    'presets\preset-zhuqing\background.jpg',
+    'presets\preset-zhuqing\theme.json',
+    'presets\preset-zhuqing\theme.css',
+    'presets\preset-zhusha\background.jpg',
+    'presets\preset-zhusha\theme.json',
+    'presets\preset-zhusha\theme.css',
+    'presets\preset-moyun\background.jpg',
+    'presets\preset-moyun\theme.json',
+    'presets\preset-moyun\theme.css',
     'scripts\apply-community-theme.ps1',
     'scripts\common-windows.ps1',
     'scripts\check-update.ps1',
@@ -1395,7 +1404,7 @@ function Stop-DreamSkinCodex {
 function Confirm-DreamSkinRestart {
   param([string]$Message)
   $shell = New-Object -ComObject WScript.Shell
-  return $shell.Popup($Message, 0, 'Codex Dream Skin', 52) -eq 6
+  return $shell.Popup($Message, 0, 'Codex Guofeng Themes', 52) -eq 6
 }
 
 function Invoke-DreamSkinCodexWindowActivation {

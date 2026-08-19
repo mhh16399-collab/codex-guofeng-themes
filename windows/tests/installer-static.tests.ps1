@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 $ErrorActionPreference = 'Stop'
@@ -9,8 +9,33 @@ $builderPath = Join-Path $installerRoot 'build-release.ps1'
 $bootstrapPath = Join-Path $installerRoot 'setup-bootstrap.ps1'
 $communityApplyPath = Join-Path $windowsRoot 'scripts\apply-community-theme.ps1'
 $commonPath = Join-Path $windowsRoot 'scripts\common-windows.ps1'
+$localizationPath = Join-Path $windowsRoot 'scripts\localization-windows.ps1'
+$trayPath = Join-Path $windowsRoot 'scripts\tray-dream-skin.ps1'
+$updatePath = Join-Path $windowsRoot 'scripts\check-update.ps1'
+$sourceInstallPath = Join-Path $windowsRoot 'scripts\install-dream-skin.ps1'
+$restorePath = Join-Path $windowsRoot 'scripts\restore-dream-skin.ps1'
 $manifestPath = Join-Path $installerRoot 'node-runtime.json'
 $builderAst = $null
+
+$guofengPayload = @(
+  'presets\catalog.json',
+  'presets\preset-zhuqing\background.jpg',
+  'presets\preset-zhuqing\theme.json',
+  'presets\preset-zhuqing\theme.css',
+  'presets\preset-zhusha\background.jpg',
+  'presets\preset-zhusha\theme.json',
+  'presets\preset-zhusha\theme.css',
+  'presets\preset-moyun\background.jpg',
+  'presets\preset-moyun\theme.json',
+  'presets\preset-moyun\theme.css'
+)
+foreach ($relativePath in $guofengPayload) {
+  $payloadPath = Join-Path $windowsRoot $relativePath
+  if (-not (Test-Path -LiteralPath $payloadPath -PathType Leaf) -or
+    (Get-Item -LiteralPath $payloadPath).Length -le 0) {
+    throw "Bundled Guofeng payload is missing or empty: $relativePath"
+  }
+}
 
 foreach ($scriptPath in @($builderPath, $bootstrapPath, $communityApplyPath, $commonPath)) {
   if (-not (Test-Path -LiteralPath $scriptPath -PathType Leaf)) {
@@ -44,6 +69,30 @@ $definition = [System.IO.File]::ReadAllText($definitionPath)
 $builder = [System.IO.File]::ReadAllText($builderPath)
 $bootstrap = [System.IO.File]::ReadAllText($bootstrapPath)
 $common = [System.IO.File]::ReadAllText($commonPath)
+$localization = [System.IO.File]::ReadAllText($localizationPath)
+$tray = [System.IO.File]::ReadAllText($trayPath)
+$updater = [System.IO.File]::ReadAllText($updatePath)
+$sourceInstall = [System.IO.File]::ReadAllText($sourceInstallPath)
+$restore = [System.IO.File]::ReadAllText($restorePath)
+foreach ($brandContract in @(
+  @{ Content = $definition; Text = '#define AppName "Codex Guofeng Themes"' },
+  @{ Content = $definition; Text = '#define AppUrl "https://github.com/mhh16399-collab/codex-guofeng-themes"' },
+  @{ Content = $definition; Text = 'AppUpdatesURL=https://github.com/mhh16399-collab/codex-guofeng-themes/releases' },
+  @{ Content = $definition; Text = 'Name: "{group}\Codex Guofeng Themes"' },
+  @{ Content = $tray; Text = "'Codex Guofeng Themes'" },
+  @{ Content = $localization; Text = "UpdateTitle = 'Codex Guofeng Themes Update'" },
+  @{ Content = $localization; Text = "UpdateTitle = 'Codex 国风主题更新'" },
+  @{ Content = $updater; Text = "`$repository = 'mhh16399-collab/codex-guofeng-themes'" },
+  @{ Content = $bootstrap; Text = "'Codex Guofeng Themes.lnk'" },
+  @{ Content = $sourceInstall; Text = "'Codex Guofeng Themes.lnk'" },
+  @{ Content = $sourceInstall; Text = "'Codex Guofeng Themes - Restore.lnk'" },
+  @{ Content = $restore; Text = "'Codex Guofeng Themes.lnk'" },
+  @{ Content = $restore; Text = "'Codex Dream Skin.lnk'" }
+)) {
+  if (-not $brandContract.Content.Contains($brandContract.Text)) {
+    throw "Windows user-facing Guofeng brand contract is missing: $($brandContract.Text)"
+  }
+}
 if ($definition.Contains('-ExecutionPolicy Bypass') -or
   $builder.Contains('-ExecutionPolicy Bypass') -or
   $bootstrap.Contains('-ExecutionPolicy Bypass') -or
@@ -57,7 +106,7 @@ foreach ($requiredDefinition in @(
   'PrivilegesRequired=lowest',
   'ArchitecturesAllowed=x64compatible',
   'ChangesAssociations=yes',
-  'OutputBaseFilename=CodexDreamSkin-Setup-v{#AppVersion}',
+  'OutputBaseFilename=CodexGuofengThemes-Setup-v{#AppVersion}',
   'Source: "{#StageRoot}\payload\*"',
   'DestDir: "{app}\payload"',
   'Flags: unchecked',
@@ -71,11 +120,11 @@ foreach ($requiredDefinition in @(
   "ExtractTemporaryFiles('{tmp}\setup-bootstrap.ps1');",
   "ExtractTemporaryFiles('{tmp}\payload\*');",
   "RunBootstrap(TemporaryBootstrap, '-Install', WizardSilent, ExitCode)",
-  "RaiseException('Codex Dream Skin initialization could not be started.');",
+  "RaiseException('Codex Guofeng Themes initialization could not be started.');",
   'procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);',
   'if CurUninstallStep <> usUninstall then',
   "RunBootstrap(ExpandConstant('{app}\setup-bootstrap.ps1'), '-Uninstall', True, ExitCode)",
-  "'Codex Dream Skin could not restore Codex (exit code ' +",
+  "'Codex Guofeng Themes could not restore Codex (exit code ' +",
   "IntToStr(ExitCode) + '). No installed files were removed.'",
   '[Registry]',
   'Root: HKCU; Subkey: "Software\Classes\dreamskin"',
@@ -97,8 +146,8 @@ if (-not $definition.Contains('#define PersistentPowerShellPath "{win}\System32\
   throw 'Persistent shortcuts and URL handlers must use a System32 PowerShell path that 64-bit launchers can access.'
 }
 $persistentCommandEntries = @(
-  'Name: "{group}\Codex Dream Skin"',
-  'Name: "{userstartup}\Codex Dream Skin"',
+  'Name: "{group}\Codex Guofeng Themes"',
+  'Name: "{userstartup}\Codex Guofeng Themes"',
   'Subkey: "Software\Classes\dreamskin\shell\open\command"'
 )
 foreach ($entry in $persistentCommandEntries) {
@@ -123,7 +172,7 @@ $runBootstrapIndex = $definition.IndexOf(
   [System.StringComparison]::Ordinal
 )
 $uninstallFailureIndex = $definition.LastIndexOf(
-  "'Codex Dream Skin could not restore Codex (exit code ' +",
+  "'Codex Guofeng Themes could not restore Codex (exit code ' +",
   [System.StringComparison]::Ordinal
 )
 if ($uninstallStepIndex -lt 0 -or $runBootstrapIndex -le $uninstallStepIndex -or
@@ -154,16 +203,22 @@ foreach ($requiredBuilderContract in @(
   'Get-FileHash -LiteralPath $archivePath -Algorithm SHA256',
   'Copy-ZipEntry -Archive $zip -EntryName "$($manifest.nodeEntry)"',
   'Copy-ZipEntry -Archive $zip -EntryName "$($manifest.licenseEntry)"',
-  '$publicPresetImageSha256',
-  '$publicPresetThemeSha256',
+  '$guofengPresetIds',
+  '$guofengPresetHashes',
+  'function Get-ReleaseReviewedFileHash',
+  '-NormalizeText:($relative -cnotmatch ''\.jpg$'')',
+  '.Replace("`r`n", "`n").Replace("`r", "`n")',
   '$innoChineseLanguageSha256',
   '$innoSetupLicenseSha256',
   'Copy-Item -LiteralPath $innoChineseLanguagePath',
-  "'preset-gothic-void-crusade'",
-  "'presets\preset-gothic-void-crusade'",
-  "`$publicPresetTheme.image = 'dream-reference.jpg'",
-  '$stagedPublicImageHash',
-  'Staged installer payload did not retain the reviewed public release theme.',
+  "'preset-zhuqing'",
+  "'preset-zhusha'",
+  "'preset-moyun'",
+  "'presets\catalog.json'",
+  "'presets\preset-zhuqing\theme.css'",
+  "'presets\preset-zhusha\theme.css'",
+  "'presets\preset-moyun\theme.css'",
+  'Staged installer payload did not retain the reviewed Guofeng theme catalog.',
   "'assets\theme-package-validator.mjs'",
   "'assets\safe-css-policy.json'",
   "'assets\safe-css-validator.mjs'",
@@ -172,7 +227,7 @@ foreach ($requiredBuilderContract in @(
   "'LICENSE.txt'",
   "'NOTICE.md'",
   "Write-DreamSkinIcon -Path",
-  '"CodexDreamSkin-Setup-v$version.exe"'
+  '"CodexGuofengThemes-Setup-v$version.exe"'
 )) {
   if (-not $builder.Contains($requiredBuilderContract)) {
     throw "Windows release builder is missing a required operation: $requiredBuilderContract"
@@ -190,13 +245,16 @@ foreach ($requiredRepairContract in @(
   'scripts\validate-safe-css-file.mjs',
   'scripts\apply-community-theme.ps1',
   'scripts\localization-windows.ps1',
-  'presets\preset-gothic-void-crusade\theme.json',
+  'presets\catalog.json',
+  'presets\preset-zhuqing\theme.css',
+  'presets\preset-zhusha\theme.css',
+  'presets\preset-moyun\theme.css',
   'scripts\start-dream-skin.ps1',
   'scripts\check-update.ps1',
   'runtime\node\node.exe',
   'runtime\node\LICENSE',
   '$missingEngineFiles.Count -eq 0',
-  'A newer Codex Dream Skin',
+  'A newer Codex Guofeng Themes',
   'The installer payload is missing its bundled Node.js runtime'
 )) {
   if (-not $bootstrap.Contains($requiredRepairContract)) {

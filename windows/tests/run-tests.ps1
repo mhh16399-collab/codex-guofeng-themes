@@ -1076,24 +1076,27 @@ try {
     throw 'Theme-store migration did not retire the old preset ID while preserving custom themes.'
   }
   $initialTheme = Read-DreamSkinTheme -ThemeDirectory $themePaths.Active
-  if ($initialTheme.Theme.id -cne 'preset-arina-hashimoto' -or
-    $initialTheme.Theme.name -cne '桥本有菜' -or
-    $initialTheme.Theme.appearance -cne 'auto' -or
+  if ($initialTheme.Theme.id -cne 'preset-zhuqing' -or
+    $initialTheme.Theme.name -cne '竹青' -or
+    $initialTheme.Theme.appearance -cne 'light' -or
     $initialTheme.Theme.art.safeArea -cne 'left' -or
     $initialTheme.Theme.art.taskMode -cne 'ambient' -or
     [System.IO.Path]::GetExtension($initialTheme.ImagePath) -cne '.jpg') {
-    throw 'Default Windows theme did not seed the Arina Hashimoto wallpaper contract.'
+    throw 'Fresh Windows theme state did not default to the Zhuqing contract.'
   }
   $preseededThemes = @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot)
-  $preseededIds = @($preseededThemes | ForEach-Object { $_.Id })
-  if ($preseededThemes.Count -lt 2 -or
-    $preseededIds -notcontains 'preset-arina-hashimoto' -or
-    $preseededIds -notcontains 'preset-gothic-void-crusade') {
-    throw 'Windows did not preseed both Arina Hashimoto and Gothic Void Crusade.'
+  $preseededIds = @($preseededThemes | ForEach-Object { $_.Id } | Sort-Object)
+  $expectedPreseededIds = @('preset-moyun', 'preset-zhuqing', 'preset-zhusha')
+  if ($preseededThemes.Count -ne 3 -or
+    @(Compare-Object -ReferenceObject $expectedPreseededIds -DifferenceObject $preseededIds).Count -ne 0) {
+    throw 'Windows did not preseed exactly Zhuqing, Zhusha, and Moyun.'
   }
-  $gothicSeed = $preseededThemes | Where-Object { $_.Id -ceq 'preset-gothic-void-crusade' } | Select-Object -First 1
-  if ($null -eq $gothicSeed -or $gothicSeed.Name -cne 'Gothic Void Crusade') {
-    throw 'Gothic Void Crusade was not preseeded with the expected display name.'
+  foreach ($preseededTheme in $preseededThemes) {
+    $preseededCss = Join-Path $preseededTheme.Path 'theme.css'
+    if (-not (Test-Path -LiteralPath $preseededCss -PathType Leaf)) {
+      throw "Bundled Guofeng theme is missing theme.css: $($preseededTheme.Id)"
+    }
+    Assert-DreamSkinSafeCssFile -Path $preseededCss
   }
   $updatedTheme = Set-DreamSkinActiveTheme -ImagePath (Join-Path $Root 'assets\dream-reference.jpg') `
     -Theme $null -Name '测试主题' -StateRoot $themeStateRoot
@@ -1108,7 +1111,7 @@ try {
   $null = Initialize-DreamSkinThemeStore -SkillRoot $Root -StateRoot $themeStateRoot
   $idempotentTheme = Read-DreamSkinTheme -ThemeDirectory $themePaths.Active
   $afterReinitCount = @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot).Count
-  if ($idempotentTheme.Theme.id -cne 'custom' -or $afterReinitCount -ne 2) {
+  if ($idempotentTheme.Theme.id -cne 'custom' -or $afterReinitCount -ne 3) {
     throw 'Theme-store initialization overwrote the active custom theme or duplicated its bundled presets.'
   }
 
@@ -1116,15 +1119,12 @@ try {
   $releaseFixtureAssets = Join-Path $releaseFixtureRoot 'assets'
   $releaseFixtureScripts = Join-Path $releaseFixtureRoot 'scripts'
   $releaseFixturePresets = Join-Path $releaseFixtureRoot 'presets'
-  $releaseFixturePresetDirectory = Join-Path $releaseFixturePresets 'preset-gothic-void-crusade'
   $releaseFixtureState = Join-Path $temporaryRoot 'release-theme-state'
-  $repositoryRoot = Split-Path -Parent $Root
-  $publicPresetRoot = Join-Path $repositoryRoot 'macos\presets\preset-gothic-void-crusade'
-  New-Item -ItemType Directory -Path $releaseFixtureAssets, $releaseFixtureScripts, $releaseFixturePresetDirectory -Force | Out-Null
+  New-Item -ItemType Directory -Path $releaseFixtureAssets, $releaseFixtureScripts, $releaseFixturePresets -Force | Out-Null
   Copy-Item -LiteralPath (Join-Path $Root 'VERSION') -Destination $releaseFixtureRoot -Force
   foreach ($releaseAsset in @(
     'dream-skin.css', 'renderer-inject.js', 'safe-css-policy.json', 'safe-css-validator.mjs', 'selectors.json',
-    'theme-package-validator.mjs'
+    'theme-package-validator.mjs', 'dream-reference.jpg', 'theme.json', 'theme.css'
   )) {
     Copy-Item -LiteralPath (Join-Path $Root "assets\$releaseAsset") `
       -Destination $releaseFixtureAssets -Force
@@ -1143,34 +1143,32 @@ try {
   Copy-Item -LiteralPath (Join-Path $Root 'scripts\tray-dream-skin.ps1') -Destination $releaseFixtureScripts -Force
   Copy-Item -LiteralPath (Join-Path $Root 'scripts\validate-safe-css-file.mjs') -Destination $releaseFixtureScripts -Force
   Copy-Item -LiteralPath (Join-Path $Root 'scripts\verify-dream-skin.ps1') -Destination $releaseFixtureScripts -Force
-  Copy-Item -LiteralPath (Join-Path $publicPresetRoot 'background.jpg') `
-    -Destination $releaseFixturePresetDirectory -Force
-  Copy-Item -LiteralPath (Join-Path $publicPresetRoot 'theme.json') `
-    -Destination $releaseFixturePresetDirectory -Force
-  Copy-Item -LiteralPath (Join-Path $publicPresetRoot 'background.jpg') `
-    -Destination (Join-Path $releaseFixtureAssets 'dream-reference.jpg') -Force
-  $releaseFixtureTheme = (Read-DreamSkinUtf8File -Path (Join-Path $publicPresetRoot 'theme.json')) |
-    ConvertFrom-Json
-  $releaseFixtureTheme.image = 'dream-reference.jpg'
-  Write-DreamSkinUtf8FileAtomically -Path (Join-Path $releaseFixtureAssets 'theme.json') `
-    -Content (($releaseFixtureTheme | ConvertTo-Json -Depth 8) + "`r`n")
+  Copy-Item -LiteralPath (Join-Path $Root 'presets\catalog.json') `
+    -Destination $releaseFixturePresets -Force
+  foreach ($presetId in @('preset-zhuqing', 'preset-zhusha', 'preset-moyun')) {
+    Copy-Item -LiteralPath (Join-Path $Root "presets\$presetId") `
+      -Destination $releaseFixturePresets -Recurse -Force
+  }
   $releaseThemePaths = Initialize-DreamSkinThemeStore -SkillRoot $releaseFixtureRoot `
     -StateRoot $releaseFixtureState
   $releaseActiveTheme = Read-DreamSkinTheme -ThemeDirectory $releaseThemePaths.Active
   $releaseSavedThemes = @(Get-DreamSkinSavedThemes -StateRoot $releaseFixtureState)
-  if ($releaseActiveTheme.Theme.id -cne 'preset-gothic-void-crusade' -or
-    $releaseSavedThemes.Count -ne 1 -or
-    $releaseSavedThemes[0].Id -cne 'preset-gothic-void-crusade') {
-    throw 'Release-safe bundled theme did not seed dynamically by its validated preset id.'
+  $releaseSavedThemeIds = @($releaseSavedThemes | ForEach-Object { $_.Id })
+  if ($releaseActiveTheme.Theme.id -cne 'preset-zhuqing' -or
+    $releaseSavedThemes.Count -ne 3 -or
+    @($releaseSavedThemeIds | Where-Object { $_ -cnotin @('preset-zhuqing', 'preset-zhusha', 'preset-moyun') }).Count -ne 0) {
+    throw 'Release-safe Guofeng themes did not seed from the validated preset catalog.'
   }
   $releaseEngine = Install-DreamSkinRuntimeEngine -SkillRoot $releaseFixtureRoot `
     -StateRoot (Join-Path $temporaryRoot 'release-engine-state')
-  if (-not (Test-Path -LiteralPath (Join-Path $releaseEngine.Root 'presets\preset-gothic-void-crusade\theme.json') -PathType Leaf)) {
-    throw 'Release-shaped payload could not stage its public Gothic preset into the managed engine.'
+  foreach ($presetId in @('preset-zhuqing', 'preset-zhusha', 'preset-moyun')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $releaseEngine.Root "presets\$presetId\theme.css") -PathType Leaf)) {
+      throw "Release-shaped payload could not stage its Guofeng preset into the managed engine: $presetId"
+    }
   }
 
   $savedTheme = Save-DreamSkinCurrentTheme -Name '已保存主题' -StateRoot $themeStateRoot
-  if ($savedTheme.Theme.name -cne '已保存主题' -or @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot).Count -ne 3) {
+  if ($savedTheme.Theme.name -cne '已保存主题' -or @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot).Count -ne 4) {
     throw 'Saved theme creation or discovery failed.'
   }
   $null = Use-DreamSkinSavedTheme -ThemeDirectory $savedTheme.Directory -StateRoot $themeStateRoot

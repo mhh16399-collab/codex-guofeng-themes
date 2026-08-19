@@ -1,5 +1,5 @@
 name: "Feature request / 功能建议"
-description: "Suggest an improvement for Codex Dream Skin / 为换肤工具提改进建议"
+description: "Suggest an improvement for Codex Guofeng Themes / 为国风主题工坊提建议"
 title: "[Feature]: "
 labels: ["enhancement", "needs-triage"]
 body:
@@ -9,17 +9,15 @@ body:
         Share an idea that fits this project’s scope: **external theming** for Codex Desktop via loopback CDP — not API relays, not patching the official app.
         欢迎提建议。本项目范围是：通过 **本机 CDP** 给 Codex 桌面端做 **外部换肤**，不包含中转配置、不修改官方安装包。
 
-        Please check [README](https://github.com/Fei-Away/Codex-Dream-Skin/blob/main/README.md) and [CHANGELOG](https://github.com/Fei-Away/Codex-Dream-Skin/blob/main/macos/CHANGELOG.md) first.
-        提交前可先看 README 与 CHANGELOG，避免重复已有能力。
+        Please check the [README](https://github.com/mhh16399-collab/codex-guofeng-themes/blob/main/README.md) first.
+        提交前请先看 README，避免重复已有能力。
 
   - type: dropdown
     id: platform
     attributes:
       label: Target platform / 目标平台
       options:
-        - macOS
         - Windows
-        - Both / 双平台
         - Docs / repo only / 仅文档或仓库
         - Unsure / 不确定
     validations:

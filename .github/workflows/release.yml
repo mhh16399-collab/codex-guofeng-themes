@@ -303,51 +303,6 @@ jobs:
             exit 1
           }
 
-  build-macos:
-    name: Build macOS DMG
-    needs: [guard, create-tag]
-    if: needs.guard.outputs.should_release == 'true'
-    runs-on: macos-latest
-    steps:
-      - name: Check out source
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
-          ref: ${{ needs.guard.outputs.release_sha }}
-          persist-credentials: false
-
-      - name: Set up Node.js for macOS regressions
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: '22'
-
-      - name: Build unsigned DMG
-        shell: bash
-        env:
-          VERSION: ${{ needs.guard.outputs.version }}
-        run: |
-          set -euo pipefail
-          NODE="$(command -v node)" \
-            CODEX_DREAM_SKIN_SKIP_SIGNED_RUNTIME_TESTS=1 \
-            CODEX_DREAM_SKIN_SKIP_DOCTOR=1 \
-            ./macos/tests/run-tests.sh
-          swift test --package-path macos/menubar-app
-          test -x macos/scripts/build-dmg.sh || chmod +x macos/scripts/build-dmg.sh
-          # The builder owns app assembly, engine staging, and ad-hoc signing.
-          # Release signing/notarization remains optional and is intentionally
-          # outside this unsigned public workflow.
-          ./macos/scripts/build-dmg.sh --skip-tests
-          artifact="macos/release/CodexDreamSkin-v${VERSION}.dmg"
-          test -s "$artifact"
-          hdiutil imageinfo "$artifact" >/dev/null
-
-      - name: Upload macOS artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: release-macos
-          if-no-files-found: error
-          path: macos/release/CodexDreamSkin-v${{ needs.guard.outputs.version }}.dmg
-          retention-days: 14
-
   build-windows:
     name: Build Windows Setup
     needs: [guard, create-tag]
@@ -401,7 +356,7 @@ jobs:
             -File .\windows\installer\build-release.ps1 `
             -OutputDirectory $output -IsccPath $env:ISCC_PATH
           if ($LASTEXITCODE -ne 0) { throw "Windows release builder failed with exit code $LASTEXITCODE." }
-          $artifact = Join-Path $output "CodexDreamSkin-Setup-v$env:VERSION.exe"
+          $artifact = Join-Path $output "CodexGuofengThemes-Setup-v$env:VERSION.exe"
           if (-not (Test-Path -LiteralPath $artifact -PathType Leaf)) {
             throw "Expected Windows artifact was not created: $artifact"
           }
@@ -412,12 +367,12 @@ jobs:
         with:
           name: release-windows
           if-no-files-found: error
-          path: ${{ runner.temp }}/codex-dream-skin-release/CodexDreamSkin-Setup-v${{ needs.guard.outputs.version }}.exe
+          path: ${{ runner.temp }}/codex-dream-skin-release/CodexGuofengThemes-Setup-v${{ needs.guard.outputs.version }}.exe
           retention-days: 14
 
   publish-release:
     name: Validate and publish GitHub Release
-    needs: [guard, create-tag, build-macos, build-windows]
+    needs: [guard, create-tag, build-windows]
     if: needs.guard.outputs.should_release == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -443,28 +398,23 @@ jobs:
           RELEASE_SHA: ${{ needs.guard.outputs.release_sha }}
         run: |
           set -euo pipefail
-          test -s "dist/CodexDreamSkin-v${VERSION}.dmg"
-          test -s "dist/CodexDreamSkin-Setup-v${VERSION}.exe"
+          test -s "dist/CodexGuofengThemes-Setup-v${VERSION}.exe"
           (
             cd dist
-            sha256sum "CodexDreamSkin-v${VERSION}.dmg" \
-              "CodexDreamSkin-Setup-v${VERSION}.exe" > SHA256SUMS.txt
+            sha256sum "CodexGuofengThemes-Setup-v${VERSION}.exe" > SHA256SUMS.txt
           )
           cat > release-notes.md <<EOF
-          ## Codex Dream Skin v${VERSION}
+          ## Codex 国风主题工坊 v${VERSION}
 
-          ### Downloads
+          ### 下载
 
-          - **macOS:** [CodexDreamSkin-v${VERSION}.dmg](https://github.com/Fei-Away/Codex-Dream-Skin/releases/download/v${VERSION}/CodexDreamSkin-v${VERSION}.dmg)
-          - **Windows:** [CodexDreamSkin-Setup-v${VERSION}.exe](https://github.com/Fei-Away/Codex-Dream-Skin/releases/download/v${VERSION}/CodexDreamSkin-Setup-v${VERSION}.exe)
-          - [SHA256SUMS.txt](https://github.com/Fei-Away/Codex-Dream-Skin/releases/download/v${VERSION}/SHA256SUMS.txt)
+          - **Windows 安装包：** [CodexGuofengThemes-Setup-v${VERSION}.exe](https://github.com/mhh16399-collab/codex-guofeng-themes/releases/download/v${VERSION}/CodexGuofengThemes-Setup-v${VERSION}.exe)
+          - **SHA-256 校验：** [SHA256SUMS.txt](https://github.com/mhh16399-collab/codex-guofeng-themes/releases/download/v${VERSION}/SHA256SUMS.txt)
 
-          The packages are currently unsigned. Follow the graphical first-run steps in
-          [macOS installation](https://github.com/Fei-Away/Codex-Dream-Skin/blob/v${VERSION}/docs/install-macos.md)
-          or [Windows installation](https://github.com/Fei-Away/Codex-Dream-Skin/blob/v${VERSION}/docs/install-windows.md).
-          No terminal trust command is required for ordinary users.
+          本次为 Windows 首发版，内置竹青、朱砂、墨韵三套国风主题，竹青为默认主题。
+          安装包目前未做商业代码签名；请按 [Windows 安装说明](https://github.com/mhh16399-collab/codex-guofeng-themes/blob/v${VERSION}/docs/install-windows.md) 操作。
 
-          This release was built automatically from ${RELEASE_SHA} after the version bump reached main.
+          本发行版由 ${RELEASE_SHA} 在版本更新进入 main 后自动构建并校验。
           EOF
 
       - name: Stage, verify, and publish release
@@ -487,20 +437,18 @@ jobs:
               exit 1
             }
             gh release upload "$TAG" --clobber \
-              dist/CodexDreamSkin-v${VERSION}.dmg \
-              dist/CodexDreamSkin-Setup-v${VERSION}.exe \
+              dist/CodexGuofengThemes-Setup-v${VERSION}.exe \
               dist/SHA256SUMS.txt
             gh release edit "$TAG" --draft \
-              --title "Codex Dream Skin v${VERSION}" \
+              --title "Codex 国风主题工坊 v${VERSION}" \
               --notes-file release-notes.md
           else
             gh release create "$TAG" \
               --verify-tag \
               --draft \
-              --title "Codex Dream Skin v${VERSION}" \
+              --title "Codex 国风主题工坊 v${VERSION}" \
               --notes-file release-notes.md \
-              dist/CodexDreamSkin-v${VERSION}.dmg \
-              dist/CodexDreamSkin-Setup-v${VERSION}.exe \
+              dist/CodexGuofengThemes-Setup-v${VERSION}.exe \
               dist/SHA256SUMS.txt
           fi
 
@@ -513,8 +461,7 @@ jobs:
             throw new Error("Draft release metadata is invalid before publication.");
           }
           const expected = [
-            "CodexDreamSkin-v" + process.env.VERSION + ".dmg",
-            "CodexDreamSkin-Setup-v" + process.env.VERSION + ".exe",
+            "CodexGuofengThemes-Setup-v" + process.env.VERSION + ".exe",
             "SHA256SUMS.txt",
           ];
           if (release.assets.length !== expected.length || !expected.every((name) => release.assets.some((asset) => asset.name === name))) {
@@ -533,8 +480,7 @@ jobs:
           RELEASE_JSON="$final_json" VERSION="$VERSION" node <<'NODE'
           const release = JSON.parse(process.env.RELEASE_JSON);
           const expected = [
-            "CodexDreamSkin-v" + process.env.VERSION + ".dmg",
-            "CodexDreamSkin-Setup-v" + process.env.VERSION + ".exe",
+            "CodexGuofengThemes-Setup-v" + process.env.VERSION + ".exe",
             "SHA256SUMS.txt",
           ];
           if (release.isDraft || release.isPrerelease || release.tagName !== "v" + process.env.VERSION ||

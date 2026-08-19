@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-zhusha",
+  "name": "朱砂",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "宫墙映日，朱色凝神。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "ZHUSHA ONLINE",
+  "quote": "守正出新，落笔有章",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.92,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#f7f0e5",
+    "panel": "#f7f1e9",
+    "panelAlt": "#efe2d5",
+    "accent": "#9f2f28",
+    "accentAlt": "#c86a56",
+    "secondary": "#d7b9a5",
+    "highlight": "#741f1a",
+    "text": "#322522",
+    "muted": "#776963",
+    "line": "rgba(159, 47, 40, .22)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "朱砂 · Zhusha",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

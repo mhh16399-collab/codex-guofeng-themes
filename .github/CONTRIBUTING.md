@@ -4,12 +4,12 @@
   <strong>中文</strong> · <a href="./CONTRIBUTING.en.md">English</a>
 </p>
 
-感谢你为 Codex Dream Skin 提交改进。这个项目通过本机回环 CDP 给官方 Codex 桌面应用加载外部主题。macOS 和 Windows 有独立的安装、注入与恢复路径，请先确定改动属于哪个平台，再缩小范围。
+感谢你为 Codex 国风主题工坊提交改进。本分叉当前只发布 Windows 版本，通过本机回环 CDP 给官方 Codex 桌面应用加载外部主题。
 
 ## 开始之前
 
-1. 阅读[项目 README](../README.md)和[平台对照](../docs/platforms.md)。macOS 的使用说明在 [`macos/README.md`](../macos/README.md)，Windows 的实现约束在 [`windows/SKILL.md`](../windows/SKILL.md)。
-2. 搜索[现有 Issue](https://github.com/Fei-Away/Codex-Dream-Skin/issues)和[开放 PR](https://github.com/Fei-Away/Codex-Dream-Skin/pulls)。相同文件已有活跃改动时，优先补充原讨论，或把新方案拆成不重叠的小改动。
+1. 阅读[项目 README](../README.md)与 [`windows/README.md`](../windows/README.md)。
+2. 搜索[现有 Issue](https://github.com/mhh16399-collab/codex-guofeng-themes/issues)和[开放 PR](https://github.com/mhh16399-collab/codex-guofeng-themes/pulls)。相同文件已有活跃改动时，优先补充原讨论，或把新方案拆成不重叠的小改动。
 3. 从最新的上游 `main` 创建分支。一个 PR 只解决一个问题，不要把新主题、运行时修复和无关整理混在一起。
 
 ## 提交 Issue

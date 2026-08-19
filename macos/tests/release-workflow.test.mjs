@@ -28,5 +28,25 @@ assert.doesNotMatch(
   /main_sha="\$\(git rev-parse origin\/main\)"/,
   "The release candidate must not be rebound to a later origin/main tip.",
 );
+assert.doesNotMatch(
+  workflow,
+  /^  build-macos:/m,
+  "The Guofeng v1 release must remain Windows-only.",
+);
+assert.doesNotMatch(
+  workflow,
+  /CodexDreamSkin-v\$\{VERSION\}\.dmg/,
+  "A Windows-only Guofeng release must not require a DMG.",
+);
+assert.match(
+  workflow,
+  /CodexGuofengThemes-Setup-v\$\{VERSION\}\.exe/,
+  "The public installer must use the Guofeng project name.",
+);
+assert.match(
+  workflow,
+  /github\.com\/mhh16399-collab\/codex-guofeng-themes\/releases\/download/,
+  "Release notes must link to this fork rather than the upstream repository.",
+);
 
 console.log("PASS: Release workflow binds assets and tag to the exact event commit.");

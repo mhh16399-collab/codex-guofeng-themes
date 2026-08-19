@@ -26,12 +26,20 @@ $innoChineseLanguagePath = Join-Path $innoLanguageRoot 'ChineseSimplified.isl'
 $innoSetupLicensePath = Join-Path $innoLanguageRoot 'Inno-Setup-License.txt'
 $innoChineseLanguageSha256 = '7d544b9bb1d142cfa11f2e5d3cc8abe2e55f8e066c5124e3772675aa236e1278'
 $innoSetupLicenseSha256 = '0c81595601bce47eeef8d865d5da7f9ca2c6a12235b7482b29f5ab23ed02ee5a'
-$publicPresetRoot = Join-Path (Join-Path (Join-Path $repositoryRoot 'macos') 'presets') `
-  'preset-gothic-void-crusade'
-$publicPresetImagePath = Join-Path $publicPresetRoot 'background.jpg'
-$publicPresetThemePath = Join-Path $publicPresetRoot 'theme.json'
-$publicPresetImageSha256 = 'b76a7cbe2ff9d923846e931984d243a7ba1f25de8d190b5c6412c809c41aee42'
-$publicPresetThemeSha256 = '8316c6ad29e3b84806358ab4a730c7e063b261e379179b9608cf751c282d66a7'
+$guofengPresetsRoot = Join-Path $windowsRoot 'presets'
+$guofengPresetIds = @('preset-zhuqing', 'preset-zhusha', 'preset-moyun')
+$guofengPresetHashes = [ordered]@{
+  'catalog.json' = '56d82d8caeab90b22c3f4525554ff59f5e858e5230a0959310e07c87fd992d09'
+  'preset-zhuqing\background.jpg' = '2715879d9a476d868146b9b9241a97fe10ef2d4eb0111ccb862ad09138449dde'
+  'preset-zhuqing\theme.json' = '4e9b1d3a7ca0772a7980dbef7cdbf593bf5da0d18f1046ae240e46a37440dd01'
+  'preset-zhuqing\theme.css' = '0e2c52f085d532d29a28f131d953877c8de93f1acdd0cebcfe606d67209b1201'
+  'preset-zhusha\background.jpg' = 'd82bc8b11dbd4a505bbc26ddcb3ce52d86884b6d0c33037529227d496487e001'
+  'preset-zhusha\theme.json' = '437ef9a53f3670eb3f79ead31b57fd77244faf6177117e72c0fb5b5c2d697ff2'
+  'preset-zhusha\theme.css' = 'bf9e9afea05f0b7b07bb8356808dfc15e9fe12ba3c93da32cd511bee2952aa41'
+  'preset-moyun\background.jpg' = 'e2783912293a6309b957d6b80db1e9adc256fe23941dfbe63ad8ae028e467c10'
+  'preset-moyun\theme.json' = 'd90f9b974b10785bd2d8f386f7247be1c79653e21395d1b568511d52ba5ec104'
+  'preset-moyun\theme.css' = '07dc515b3667bd7b047cc46af2f4242f7688487ee3ef31141848625d87df4e09'
+}
 
 function Read-ReleaseTextFile {
   param([Parameter(Mandatory = $true)][string]$Path)
@@ -169,8 +177,7 @@ function Write-DreamSkinIcon {
           $edgeCoverage = 0
           foreach ($sampleY in @(0.125, 0.375, 0.625, 0.875)) {
             foreach ($sampleX in @(0.125, 0.375, 0.625, 0.875)) {
-              # DreamSkin 品牌 mark（与网站 favicon 同源）：白圆角方 +
-              # 墨色对角半区（x+y>=1）+ 青点 + 14% 发丝描边环。
+              # Guofeng mark：宣纸圆角方 + 竹青对角半区 + 朱砂印点 + 发丝描边环。
               $x = ($column + $sampleX) / $size
               $y = ($row + $sampleY) / $size
               $dx = [Math]::Max([Math]::Abs($x - 0.5) - 0.16, 0.0)
@@ -192,15 +199,15 @@ function Write-DreamSkinIcon {
           $darkBlend = $darkCoverage / 16.0
           $dotBlend = $dotCoverage / 16.0
           $edgeBlend = 0.14 * ($edgeCoverage / 16.0)
-          $red = 253.0 * (1.0 - $darkBlend) + 23.0 * $darkBlend
-          $green = 253.0 * (1.0 - $darkBlend) + 24.0 * $darkBlend
-          $blue = 252.0 * (1.0 - $darkBlend) + 28.0 * $darkBlend
-          $red = $red * (1.0 - $dotBlend) + 45.0 * $dotBlend
-          $green = $green * (1.0 - $dotBlend) + 225.0 * $dotBlend
-          $blue = $blue * (1.0 - $dotBlend) + 194.0 * $dotBlend
-          $red = [int][Math]::Round($red * (1.0 - $edgeBlend) + 23.0 * $edgeBlend)
-          $green = [int][Math]::Round($green * (1.0 - $edgeBlend) + 24.0 * $edgeBlend)
-          $blue = [int][Math]::Round($blue * (1.0 - $edgeBlend) + 28.0 * $edgeBlend)
+          $red = 247.0 * (1.0 - $darkBlend) + 47.0 * $darkBlend
+          $green = 248.0 * (1.0 - $darkBlend) + 111.0 * $darkBlend
+          $blue = 242.0 * (1.0 - $darkBlend) + 89.0 * $darkBlend
+          $red = $red * (1.0 - $dotBlend) + 183.0 * $dotBlend
+          $green = $green * (1.0 - $dotBlend) + 73.0 * $dotBlend
+          $blue = $blue * (1.0 - $dotBlend) + 58.0 * $dotBlend
+          $red = [int][Math]::Round($red * (1.0 - $edgeBlend) + 31.0 * $edgeBlend)
+          $green = [int][Math]::Round($green * (1.0 - $edgeBlend) + 78.0 * $edgeBlend)
+          $blue = [int][Math]::Round($blue * (1.0 - $edgeBlend) + 62.0 * $edgeBlend)
           $writer.Write([byte]$blue)
           $writer.Write([byte]$green)
           $writer.Write([byte]$red)
@@ -286,21 +293,53 @@ $innoSetupLicenseHash = (Get-FileHash -LiteralPath $innoSetupLicensePath -Algori
 if ($innoSetupLicenseHash -cne $innoSetupLicenseSha256) {
   throw "The pinned Inno Setup license changed. Expected $innoSetupLicenseSha256, found $innoSetupLicenseHash."
 }
-$publicPresetTheme = (Read-ReleaseTextFile -Path $publicPresetThemePath) | ConvertFrom-Json
-if ("$($publicPresetTheme.id)" -cne 'preset-gothic-void-crusade' -or
-  "$($publicPresetTheme.image)" -cne 'background.jpg') {
-  throw 'The public Windows release preset metadata is unexpected.'
+$guofengCatalog = (Read-ReleaseTextFile -Path (Join-Path $guofengPresetsRoot 'catalog.json')) |
+  ConvertFrom-Json
+if ([int]$guofengCatalog.schemaVersion -ne 1 -or
+  "$($guofengCatalog.defaultThemeId)" -cne 'preset-zhuqing' -or
+  @($guofengCatalog.themes).Count -ne $guofengPresetIds.Count) {
+  throw 'The reviewed Guofeng theme catalog metadata is unexpected.'
 }
-if (-not (Test-Path -LiteralPath $publicPresetImagePath -PathType Leaf)) {
-  throw "The public Windows release preset image is missing: $publicPresetImagePath"
+
+function Get-ReleaseReviewedFileHash {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [switch]$NormalizeText
+  )
+  if (-not $NormalizeText) {
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+  }
+
+  $text = (Read-ReleaseTextFile -Path $Path).Replace("`r`n", "`n").Replace("`r", "`n")
+  $bytes = [System.Text.UTF8Encoding]::new($false).GetBytes($text)
+  $sha256 = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    return ([System.BitConverter]::ToString($sha256.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+  } finally {
+    $sha256.Dispose()
+  }
 }
-$publicPresetImageHash = (Get-FileHash -LiteralPath $publicPresetImagePath -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($publicPresetImageHash -cne $publicPresetImageSha256) {
-  throw "The reviewed public preset image changed. Expected $publicPresetImageSha256, found $publicPresetImageHash."
+for ($presetIndex = 0; $presetIndex -lt $guofengPresetIds.Count; $presetIndex++) {
+  $presetId = $guofengPresetIds[$presetIndex]
+  if ("$(@($guofengCatalog.themes)[$presetIndex])" -cne $presetId) {
+    throw 'The reviewed Guofeng theme catalog order is unexpected.'
+  }
+  $presetTheme = (Read-ReleaseTextFile -Path (Join-Path $guofengPresetsRoot "$presetId\theme.json")) |
+    ConvertFrom-Json
+  if ("$($presetTheme.id)" -cne $presetId -or "$($presetTheme.image)" -cne 'background.jpg') {
+    throw "The reviewed Guofeng theme metadata is unexpected: $presetId"
+  }
 }
-$publicPresetThemeHash = (Get-FileHash -LiteralPath $publicPresetThemePath -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($publicPresetThemeHash -cne $publicPresetThemeSha256) {
-  throw "The reviewed public preset metadata changed. Expected $publicPresetThemeSha256, found $publicPresetThemeHash."
+foreach ($relative in $guofengPresetHashes.Keys) {
+  $sourceFile = Join-Path $guofengPresetsRoot $relative
+  if (-not (Test-Path -LiteralPath $sourceFile -PathType Leaf)) {
+    throw "A reviewed Guofeng theme file is missing: $relative"
+  }
+  $actualHash = Get-ReleaseReviewedFileHash -Path $sourceFile `
+    -NormalizeText:($relative -cnotmatch '\.jpg$')
+  if ($actualHash -cne $guofengPresetHashes[$relative]) {
+    throw "A reviewed Guofeng theme file changed: $relative"
+  }
 }
 $compiler = Resolve-IsccExecutable -RequestedPath $IsccPath
 
@@ -353,16 +392,7 @@ try {
   New-Item -ItemType Directory -Path $languageRoot | Out-Null
   Copy-ReleaseDirectory -Source (Join-Path $windowsRoot 'assets') -Destination (Join-Path $payloadRoot 'assets')
   Copy-ReleaseDirectory -Source (Join-Path $windowsRoot 'scripts') -Destination (Join-Path $payloadRoot 'scripts')
-  Copy-ReleaseDirectory -Source $publicPresetRoot `
-    -Destination (Join-Path $payloadRoot 'presets\preset-gothic-void-crusade')
-  Copy-Item -LiteralPath $publicPresetImagePath `
-    -Destination (Join-Path (Join-Path $payloadRoot 'assets') 'dream-reference.jpg') -Force
-  $publicPresetTheme.image = 'dream-reference.jpg'
-  [System.IO.File]::WriteAllText(
-    (Join-Path (Join-Path $payloadRoot 'assets') 'theme.json'),
-    (($publicPresetTheme | ConvertTo-Json -Depth 8) + "`r`n"),
-    [System.Text.UTF8Encoding]::new($false)
-  )
+  Copy-ReleaseDirectory -Source $guofengPresetsRoot -Destination (Join-Path $payloadRoot 'presets')
   [System.IO.File]::WriteAllText(
     (Join-Path $payloadRoot 'VERSION'),
     "$version`r`n",
@@ -397,9 +427,18 @@ try {
     'assets\selectors.json',
     'assets\theme-package-validator.mjs',
     'assets\theme.json',
+    'assets\theme.css',
     'assets\codex-dream-skin.ico',
-    'presets\preset-gothic-void-crusade\background.jpg',
-    'presets\preset-gothic-void-crusade\theme.json',
+    'presets\catalog.json',
+    'presets\preset-zhuqing\background.jpg',
+    'presets\preset-zhuqing\theme.json',
+    'presets\preset-zhuqing\theme.css',
+    'presets\preset-zhusha\background.jpg',
+    'presets\preset-zhusha\theme.json',
+    'presets\preset-zhusha\theme.css',
+    'presets\preset-moyun\background.jpg',
+    'presets\preset-moyun\theme.json',
+    'presets\preset-moyun\theme.css',
     'scripts\apply-community-theme.ps1',
     'scripts\check-update.ps1',
     'scripts\common-windows.ps1',
@@ -422,18 +461,13 @@ try {
       throw "Staged installer payload is incomplete: $relative"
     }
   }
-  $stagedPublicImage = Join-Path (Join-Path $payloadRoot 'assets') 'dream-reference.jpg'
-  $stagedPublicImageHash = (Get-FileHash -LiteralPath $stagedPublicImage -Algorithm SHA256).Hash.ToLowerInvariant()
-  $stagedPublicThemePath = Join-Path (Join-Path $payloadRoot 'presets') `
-    'preset-gothic-void-crusade\theme.json'
-  $stagedPublicThemeHash = (Get-FileHash -LiteralPath $stagedPublicThemePath -Algorithm SHA256).Hash.ToLowerInvariant()
-  $stagedPublicTheme = (Read-ReleaseTextFile `
-    -Path (Join-Path (Join-Path $payloadRoot 'assets') 'theme.json')) | ConvertFrom-Json
-  if ($stagedPublicImageHash -cne $publicPresetImageSha256 -or
-    $stagedPublicThemeHash -cne $publicPresetThemeSha256 -or
-    "$($stagedPublicTheme.id)" -cne 'preset-gothic-void-crusade' -or
-    "$($stagedPublicTheme.image)" -cne 'dream-reference.jpg') {
-    throw 'Staged installer payload did not retain the reviewed public release theme.'
+  foreach ($relative in $guofengPresetHashes.Keys) {
+    $stagedHash = Get-ReleaseReviewedFileHash `
+      -Path (Join-Path (Join-Path $payloadRoot 'presets') $relative) `
+      -NormalizeText:($relative -cnotmatch '\.jpg$')
+    if ($stagedHash -cne $guofengPresetHashes[$relative]) {
+      throw 'Staged installer payload did not retain the reviewed Guofeng theme catalog.'
+    }
   }
 
   $arguments = @(
@@ -442,11 +476,11 @@ try {
     "/DOutputDir=$OutputDirectory",
     $definitionPath
   )
-  Write-Host "Building CodexDreamSkin-Setup-v$version.exe..."
+  Write-Host "Building CodexGuofengThemes-Setup-v$version.exe..."
   & $compiler @arguments
   if ($LASTEXITCODE -ne 0) { throw "ISCC.exe failed with exit code $LASTEXITCODE." }
 
-  $artifactPath = Join-Path $OutputDirectory "CodexDreamSkin-Setup-v$version.exe"
+  $artifactPath = Join-Path $OutputDirectory "CodexGuofengThemes-Setup-v$version.exe"
   if (-not (Test-Path -LiteralPath $artifactPath -PathType Leaf)) {
     throw "Inno Setup did not create the expected artifact: $artifactPath"
   }
