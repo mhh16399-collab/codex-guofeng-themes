@@ -179,7 +179,7 @@ jobs:
             -OutputDirectory $output -IsccPath $env:ISCC_PATH
           if ($LASTEXITCODE -ne 0) { throw "Windows release builder failed with exit code $LASTEXITCODE." }
           $version = [System.IO.File]::ReadAllText((Resolve-Path .\windows\VERSION)).Trim()
-          $artifact = Join-Path $output "CodexDreamSkin-Setup-v$version.exe"
+          $artifact = Join-Path $output "CodexGuofengThemes-Setup-v$version.exe"
           if (-not (Test-Path -LiteralPath $artifact -PathType Leaf) -or
             (Get-Item -LiteralPath $artifact).Length -le 0) {
             throw 'Windows installer artifact is missing or empty.'

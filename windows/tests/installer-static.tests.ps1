@@ -106,7 +106,7 @@ foreach ($requiredDefinition in @(
   'PrivilegesRequired=lowest',
   'ArchitecturesAllowed=x64compatible',
   'ChangesAssociations=yes',
-  'OutputBaseFilename=CodexDreamSkin-Setup-v{#AppVersion}',
+  'OutputBaseFilename=CodexGuofengThemes-Setup-v{#AppVersion}',
   'Source: "{#StageRoot}\payload\*"',
   'DestDir: "{app}\payload"',
   'Flags: unchecked',
@@ -227,7 +227,7 @@ foreach ($requiredBuilderContract in @(
   "'LICENSE.txt'",
   "'NOTICE.md'",
   "Write-DreamSkinIcon -Path",
-  '"CodexDreamSkin-Setup-v$version.exe"'
+  '"CodexGuofengThemes-Setup-v$version.exe"'
 )) {
   if (-not $builder.Contains($requiredBuilderContract)) {
     throw "Windows release builder is missing a required operation: $requiredBuilderContract"

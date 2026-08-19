@@ -8,7 +8,7 @@ Node.js 或执行 PowerShell 脚本。
 先从 Microsoft Store 安装官方 ChatGPT / Codex 桌面应用，至少启动一次后退出。
 
 1. 在 GitHub 的 [Releases](https://github.com/mhh16399-collab/codex-guofeng-themes/releases) 下载最新的
-   `CodexDreamSkin-Setup-vX.Y.Z.exe`。`SHA256SUMS.txt` 是可选的完整性校验文件。
+   `CodexGuofengThemes-Setup-vX.Y.Z.exe`。`SHA256SUMS.txt` 是可选的完整性校验文件。
 2. 双击安装器，按向导完成安装。默认安装到当前用户的 LocalAppData，不需要管理员权限；安装前
    请先退出 Codex。
 3. 安装完成后，从开始菜单启动 Codex Guofeng Themes，系统托盘会显示主题图标。
@@ -56,7 +56,7 @@ Node.js 或执行 PowerShell 脚本。
 
 更新是覆盖安装，不是重新配置：
 
-1. 从 Releases 下载新的 `CodexDreamSkin-Setup-vX.Y.Z.exe`。
+1. 从 Releases 下载新的 `CodexGuofengThemes-Setup-vX.Y.Z.exe`。
 2. 退出 Dream Skin 托盘，并关闭 Codex。
 3. 运行新的安装器，按向导覆盖现有安装。
 4. 重新启动快捷方式；活动主题、已保存主题、图片和配置备份会保留。

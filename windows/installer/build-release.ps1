@@ -476,11 +476,11 @@ try {
     "/DOutputDir=$OutputDirectory",
     $definitionPath
   )
-  Write-Host "Building CodexDreamSkin-Setup-v$version.exe..."
+  Write-Host "Building CodexGuofengThemes-Setup-v$version.exe..."
   & $compiler @arguments
   if ($LASTEXITCODE -ne 0) { throw "ISCC.exe failed with exit code $LASTEXITCODE." }
 
-  $artifactPath = Join-Path $OutputDirectory "CodexDreamSkin-Setup-v$version.exe"
+  $artifactPath = Join-Path $OutputDirectory "CodexGuofengThemes-Setup-v$version.exe"
   if (-not (Test-Path -LiteralPath $artifactPath -PathType Leaf)) {
     throw "Inno Setup did not create the expected artifact: $artifactPath"
   }

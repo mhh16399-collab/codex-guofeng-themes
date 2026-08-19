@@ -16,7 +16,7 @@ Codex Guofeng Themes 通过本机回环 CDP 给官方 Codex Windows 桌面应用
 ## Release 安装（推荐普通用户）
 
 正式版本发布后，普通用户请从 [本仓库 Releases](https://github.com/mhh16399-collab/codex-guofeng-themes/releases) 下载
-`CodexDreamSkin-Setup-vX.Y.Z.exe`，按 [`docs/install-windows.md`](../docs/install-windows.md) 的图形
+`CodexGuofengThemes-Setup-vX.Y.Z.exe`，按 [`docs/install-windows.md`](../docs/install-windows.md) 的图形
 界面步骤安装。安装器自带固定 Node 运行时，不需要 clone 仓库或运行 `.ps1`；默认按当前用户安装，
 不应要求管理员权限。未签名的新下载偶尔会触发 SmartScreen，按“更多信息 → 仍要运行”即可，
 不要关闭 Defender。后续更新运行新的 Setup.exe 覆盖安装，主题和图片会保留。
