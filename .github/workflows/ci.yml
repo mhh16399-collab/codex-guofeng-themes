@@ -137,13 +137,13 @@ jobs:
         working-directory: site
         run: npm ci
 
-      - name: Test gallery
-        working-directory: site
-        run: node --test tests/*.test.mjs
-
       - name: Build gallery
         working-directory: site
         run: npm run build
+
+      - name: Test gallery
+        working-directory: site
+        run: node --test tests/*.test.mjs
 
   windows-tests:
     name: Windows (${{ matrix.name }})

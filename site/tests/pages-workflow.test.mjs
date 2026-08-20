@@ -35,4 +35,17 @@ test("CI tests and builds the gallery before publication", async () => {
   assert.match(workflow, /npm ci/);
   assert.match(workflow, /npm run build/);
   assert.match(workflow, /node --test tests\/\*\.test\.mjs/);
+  assert.ok(
+    workflow.indexOf("npm run build") < workflow.indexOf("node --test tests/*.test.mjs"),
+    "CI must build the gallery before tests inspect generated packaging files",
+  );
+});
+
+test("Pages builds the gallery before validating generated packaging files", async () => {
+  const workflow = await readFile(pagesUrl, "utf8");
+
+  assert.ok(
+    workflow.indexOf("npm run build") < workflow.indexOf("node --test tests/*.test.mjs"),
+    "Pages must build the gallery before tests inspect generated packaging files",
+  );
 });
