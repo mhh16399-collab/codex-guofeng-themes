@@ -133,6 +133,18 @@ jobs:
           node macos/scripts/injector.mjs --check-payload >/dev/null
           node windows/scripts/injector.mjs --check-payload >/dev/null
 
+      - name: Install gallery dependencies
+        working-directory: site
+        run: npm ci
+
+      - name: Test gallery
+        working-directory: site
+        run: node --test tests/*.test.mjs
+
+      - name: Build gallery
+        working-directory: site
+        run: npm run build
+
   windows-tests:
     name: Windows (${{ matrix.name }})
     runs-on: windows-latest

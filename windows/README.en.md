@@ -18,7 +18,7 @@ Codex Dream Skin loads an external theme into the official Codex Windows desktop
 ## Release install (recommended for users)
 
 Download `CodexGuofengThemes-Setup-vX.Y.Z.exe` from
-[GitHub Releases](https://github.com/Fei-Away/Codex-Dream-Skin/releases) and
+[GitHub Releases](https://github.com/mhh16399-collab/codex-guofeng-themes/releases) and
 follow [`docs/install-windows.md`](../docs/install-windows.md). The installer
 contains the pinned Node runtime, so users do not need a source checkout or to
 run a `.ps1` file. It installs per-user and should not request administrator

@@ -1,15 +1,15 @@
 # Codex Guofeng Themes
 
-An unofficial, Windows-only theming layer for the official Codex desktop app, with three bundled Chinese-inspired themes: Zhuqing, Zhusha, and Moyun.
+An unofficial, Windows-only theming layer for the official Codex desktop app, with eight bundled Chinese-inspired themes: Zhuqing, Zhusha, Moyun, Ruyao Tianqing, Dunhuang Liujin, Qinghua Ci, Haitang Songjin, and Jiye Xinghe.
 
-[中文主页](./README.md) · [Windows guide](./windows/README.md) · [MIT License](./LICENSE)
+[Theme Gallery](https://mhh16399-collab.github.io/codex-guofeng-themes/) · [中文主页](./README.md) · [Windows guide](./windows/README.md) · [MIT License](./LICENSE)
 
 ![Zhuqing preview](./docs/images/guofeng/zhuqing-preview.png)
 
 ## Highlights
 
 - One-click switching from the Windows system tray
-- Three reviewed built-in themes; Zhuqing is the fresh-install default
+- Eight reviewed built-in themes; Zhuqing is the fresh-install default
 - Local image replacement, saved combinations, and ZIP theme import
 - Allowlisted Safe CSS validation with bounded, atomic imports
 - Failure rollback and a complete restore-to-official-appearance path

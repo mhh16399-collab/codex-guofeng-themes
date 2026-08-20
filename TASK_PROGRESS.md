@@ -1,5 +1,19 @@
 # Task Progress
 
+## Codex 国风主题馆与五套新主题 v2（2026-08-20）
+
+- [目标] 在 Windows v1.6.0 上增加汝窑天青、敦煌鎏金、青花瓷、海棠宋锦、霁夜星河五套主题，并建设 GitHub Pages“Codex 国风主题馆”；完成后共 8 套内置主题，竹青仍为默认。
+- [视觉已确认] 用户已批准五套方向，并要求连续执行、不逐步询问。青花瓷采用更浅的雾蓝灰侧栏；五套运行时背景必须是无 UI 的纯图，Gallery 使用单独的 Codex 窗口预览。
+- [工作区] 分支 `codex/guofeng-gallery-v2`，独立 worktree `D:\CodexWorktrees\codex-guofeng-themes-v1`，基于已发布 `origin/main@7e4c2483`。
+- [上游审计] 2026-08-20 已 fetch `upstream/main@95423d84`（v1.5.14）。`origin/main` 是该提交的直接后继，ahead 1 / behind 0；上游无尚未进入本项目的客户端提交。网页更新日志和仓库 Windows changelog 已交叉核对。
+- [必须守住] Codex 26.721/26.727 DOM、慢启动不误杀、启动失败 appearance journal、精确 Store/CDP 身份、Node 验签与 Unicode 路径、ZIP/Safe CSS、冷启动一键换肤、配置三方恢复等上游修复不得回退。
+- [设计] 新规格为 `docs/superpowers/specs/2026-08-20-guofeng-gallery-v2-design.md`。采用上游核心 + 国风数据层增量；主题馆借鉴原版 Gallery 的浏览骨架，但采用宣纸、宋式排版、竹青和朱砂印记，不伪造社区热度、收藏和排行。
+- [网络] 旧进程代理 `127.0.0.1:53963` 已失效；系统当前代理为 `127.0.0.1:63285`，GitHub API 和 Git 直连可用。不要写入系统代理设置。
+- [主题实现] 五套新主题均已落为 `background.jpg`、`theme.json`、`theme.css`，并接入 Windows 主题目录、托盘目录与安装器校验清单。Gallery 的五张展示图与用户批准的五张预览逐字节一致；运行时背景保持无 UI 纯图。
+- [主题馆] `site/` 已完成八套主题浏览、搜索、明暗筛选、详情弹窗、安装引导和桌面四列/移动单列响应式布局；GitHub Pages 与 CI 工作流已加入，官方 Action 固定到完整提交 SHA。桌面与移动真实浏览器预览保存在 `docs/images/guofeng/`。
+- [版本与文档] 六处版本源已同步为 v1.7.0；中英文主页、Windows 安装文档和 changelog 已更新为八套主题，并加入主题馆入口。
+- [当前验证] Gallery 契约、Pages 工作流、Sites fallback 共 8/8 通过，Vite production build 成功；正在执行全套 Windows 回归与 Setup.exe 构建。没有提交、推送、PR、Pages 部署或 v1.7.0 Release。
+
 ## Codex 国风主题工坊 Windows v1（2026-08-19）
 
 - [目标] 在保留上游可恢复 CDP 换肤内核的前提下，交付 Windows-only 国风发行版，首发竹青、朱砂、墨韵三套主题；全新安装默认竹青，托盘可一键切换三套。

@@ -34,7 +34,7 @@ Node.js 或执行 PowerShell 脚本。
 
 ## 日常使用
 
-使用“Codex Guofeng Themes”快捷方式启动，使用托盘菜单切换竹青、朱砂、墨韵，或换图、导入主题 ZIP、保存主题、暂停和恢复。主题和运行状态
+使用“Codex Guofeng Themes”快捷方式启动，使用托盘菜单切换竹青、朱砂、墨韵、汝窑天青、敦煌鎏金、青花瓷、海棠宋锦、霁夜星河，或换图、导入主题 ZIP、保存主题、暂停和恢复。主题和运行状态
 保存在 `%LOCALAPPDATA%\CodexDreamSkin`，安装目录可以更新而不会删除这些数据。
 
 安装后的快捷方式使用受限的 `RemoteSigned` 策略；普通用户不需要打开 PowerShell，也不需要手动

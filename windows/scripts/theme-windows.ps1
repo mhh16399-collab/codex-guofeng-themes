@@ -489,8 +489,8 @@ function Read-DreamSkinBundledPresetCatalog {
     throw 'Bundled preset catalog must declare one defaultThemeId and a themes array.'
   }
   $themeIds = @($themeValues | ForEach-Object { "$_" })
-  if ($themeIds.Count -ne 3) {
-    throw 'Bundled preset catalog must declare exactly three Windows v1 themes.'
+  if ($themeIds.Count -lt 1 -or $themeIds.Count -gt 32) {
+    throw 'Bundled preset catalog must declare between 1 and 32 Windows themes.'
   }
   $seen = [System.Collections.Generic.HashSet[string]]::new(
     [System.StringComparer]::Ordinal

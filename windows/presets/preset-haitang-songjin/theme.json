@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-haitang-songjin",
+  "name": "海棠宋锦",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "锦纹织春，海棠含章。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "SONGJIN ONLINE",
+  "quote": "经纬成锦，细作生花",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.9,
+    "focusY": 0.53,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#f5ead4",
+    "panel": "#f7f0e2",
+    "panelAlt": "#eee2cc",
+    "accent": "#9e5d4e",
+    "accentAlt": "#b78267",
+    "secondary": "#c9ad83",
+    "highlight": "#743e35",
+    "text": "#3a2e27",
+    "muted": "#7d6f62",
+    "line": "rgba(158, 93, 78, .22)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "海棠宋锦 · Haitang Songjin",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

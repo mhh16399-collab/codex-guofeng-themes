@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-qinghua-ci",
+  "name": "青花瓷",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "瓷白藏青，笔下生花。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "QINGHUA ONLINE",
+  "quote": "一笔青花，清雅成章",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.91,
+    "focusY": 0.52,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#f5f3ed",
+    "panel": "#f0f3f3",
+    "panelAlt": "#e4ebed",
+    "accent": "#597991",
+    "accentAlt": "#8fa8b6",
+    "secondary": "#c6d1d5",
+    "highlight": "#385f7c",
+    "text": "#243440",
+    "muted": "#687983",
+    "line": "rgba(71, 104, 127, .22)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "青花瓷 · Qinghua Ci",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

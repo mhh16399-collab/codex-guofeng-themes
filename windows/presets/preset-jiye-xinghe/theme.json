@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-jiye-xinghe",
+  "name": "霁夜星河",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "星官列野，霁夜无垠。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "JIYE ONLINE",
+  "quote": "仰观星野，俯写万端",
+  "image": "background.jpg",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.89,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#07111e",
+    "panel": "#0e1a28",
+    "panelAlt": "#162638",
+    "accent": "#b69053",
+    "accentAlt": "#5f8190",
+    "secondary": "#314b5e",
+    "highlight": "#d2b06d",
+    "text": "#ecdfc7",
+    "muted": "#a7adab",
+    "line": "rgba(182, 144, 83, .27)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "霁夜星河 · Jiye Xinghe",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}
