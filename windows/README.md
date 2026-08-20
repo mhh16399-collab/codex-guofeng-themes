@@ -4,7 +4,7 @@
   <strong>中文</strong> · <a href="./README.en.md">English</a>
 </p>
 
-Codex Guofeng Themes 通过本机回环 CDP 给官方 Codex Windows 桌面应用加载外部主题。它内置竹青、朱砂、墨韵三套国风主题，保留原生侧栏、项目选择、任务内容和输入框，不修改 WindowsApps、`app.asar` 或应用签名。
+Codex Guofeng Themes 通过本机回环 CDP 给官方 Codex Windows 桌面应用加载外部主题。它内置竹青、朱砂、墨韵、汝窑天青、敦煌鎏金、青花瓷、海棠宋锦、霁夜星河八套国风主题，保留原生侧栏、项目选择、任务内容和输入框，不修改 WindowsApps、`app.asar` 或应用签名。
 
 ## 运行要求
 

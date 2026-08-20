@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-ruyao-tianqing",
+  "name": "汝窑天青",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "雨过天青，温润如玉。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "RUYAO ONLINE",
+  "quote": "天青无言，静水流深",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.9,
+    "focusY": 0.52,
+    "safeArea": "left",
+    "taskMode": "ambient"
+  },
+  "colors": {
+    "background": "#eef3f0",
+    "panel": "#edf4f1",
+    "panelAlt": "#dfe9e5",
+    "accent": "#6e9589",
+    "accentAlt": "#9db6ae",
+    "secondary": "#c7d6d1",
+    "highlight": "#476f63",
+    "text": "#243633",
+    "muted": "#64746f",
+    "line": "rgba(86, 125, 114, .24)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "汝窑天青 · Ruyao Tianqing",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

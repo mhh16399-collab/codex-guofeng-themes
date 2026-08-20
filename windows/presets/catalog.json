@@ -4,6 +4,11 @@
   "themes": [
     "preset-zhuqing",
     "preset-zhusha",
-    "preset-moyun"
+    "preset-moyun",
+    "preset-ruyao-tianqing",
+    "preset-dunhuang-liujin",
+    "preset-qinghua-ci",
+    "preset-haitang-songjin",
+    "preset-jiye-xinghe"
   ]
 }

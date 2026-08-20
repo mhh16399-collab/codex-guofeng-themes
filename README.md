@@ -9,14 +9,16 @@
   <a href="https://github.com/mhh16399-collab/codex-guofeng-themes/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/mhh16399-collab/codex-guofeng-themes/actions/workflows/ci.yml/badge.svg"></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-2f6f59.svg"></a>
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows%2010%2B-1677ff.svg">
-  <img alt="themes" src="https://img.shields.io/badge/bundled%20themes-3-b7493a.svg">
+  <img alt="themes" src="https://img.shields.io/badge/bundled%20themes-8-b7493a.svg">
 </p>
 
-不替换 Codex 程序文件，不修改 `WindowsApps`、`app.asar` 或应用签名。安装后通过系统托盘在竹青、朱砂、墨韵之间一键切换，也能导入自己的背景和 Safe CSS 主题包；恢复按钮可随时回到官方外观。
+不替换 Codex 程序文件，不修改 `WindowsApps`、`app.asar` 或应用签名。安装后可通过系统托盘在八套国风主题之间一键切换，也能导入自己的背景和 Safe CSS 主题包；恢复按钮可随时回到官方外观。
+
+**[进入 Codex 国风主题馆](https://mhh16399-collab.github.io/codex-guofeng-themes/)** · 浏览全部主题、搜索筛选并查看安装说明。
 
 > 当前发行目标仅为 Windows x64。项目基于 [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin) 的 MIT 开源换肤内核开发，保留兼容状态目录与安全恢复机制。它是非官方项目，与 OpenAI 无隶属、赞助或背书关系。
 
-## 三套首发主题
+## 八套馆藏主题
 
 ### 竹青 · Zhuqing
 
@@ -36,9 +38,39 @@
 
 ![墨韵主题实机预览](./docs/images/guofeng/moyun-preview.png)
 
+### 汝窑天青 · Ruyao Tianqing
+
+雨过天青、冰裂釉色与宋瓷陈设。低饱和青灰让工作区保持清雅、通透。
+
+![汝窑天青主题实机预览](./site/public/themes/ruyao-tianqing.png)
+
+### 敦煌鎏金 · Dunhuang Liujin
+
+飞天、藻井、矿物色与旧壁金线。暗色底衬托敦煌纹样，保留代码区的可读性。
+
+![敦煌鎏金主题实机预览](./site/public/themes/dunhuang-liujin.png)
+
+### 青花瓷 · Qinghua Ci
+
+月白瓷面、青花折枝与器物留白。降低蓝色浓度，呈现温润而不刺眼的瓷韵。
+
+![青花瓷主题实机预览](./site/public/themes/qinghua-ci.png)
+
+### 海棠宋锦 · Haitang Songjin
+
+海棠纹、宋锦织理与暖金经纬。以织物层次丰富界面，不牺牲内容清晰度。
+
+![海棠宋锦主题实机预览](./site/public/themes/haitang-songjin.png)
+
+### 霁夜星河 · Jiye Xinghe
+
+中国古代星图、黛蓝夜空与细金星轨。沉静深色适合夜间工作。
+
+![霁夜星河主题实机预览](./site/public/themes/jiye-xinghe.png)
+
 ## 现在能做什么
 
-- 托盘菜单一键切换三套内置主题
+- 托盘菜单一键切换八套内置主题
 - 更换任意本地 JPG / PNG / WebP 背景
 - 保存当前搭配，随时再次启用
 - 导入经过边界检查与 Safe CSS 校验的主题 ZIP
@@ -60,7 +92,7 @@
 powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File .\scripts\install-dream-skin.ps1
 ```
 
-安装后从开始菜单打开 **Codex Guofeng Themes**。托盘菜单内可直接选择竹青、朱砂或墨韵。更完整的安装、验证、恢复和故障排查见 [Windows 使用说明](./windows/README.md)。
+安装后从开始菜单打开 **Codex Guofeng Themes**。托盘菜单内可直接选择八套内置主题。更完整的安装、验证、恢复和故障排查见 [Windows 使用说明](./windows/README.md)。
 
 ## 主题包结构
 
@@ -80,7 +112,7 @@ my-theme/
 - 只连接本机回环 CDP，并验证会话属于官方 Codex 包
 - 不修改或解包官方应用，不更改 ACL，不需要管理员权限
 - 主题导入限制文件数、体积、路径和扩展名，原子提交并支持回滚
-- 安装器固定校验 Node.js 与三套审核主题的 SHA-256
+- 安装器固定校验 Node.js 与八套审核主题的 SHA-256
 - 内部继续使用 `%LOCALAPPDATA%\CodexDreamSkin` 和 `dreamskin://`，用于兼容上游升级、已有主题与恢复流程
 
 安全问题请按 [`SECURITY.md`](./SECURITY.md) 私下报告，不要在公开 Issue 中附带 token、`auth.json`、私人对话或完整日志。
@@ -93,10 +125,10 @@ my-theme/
 
 - 换肤与恢复内核源自 [Codex Dream Skin](https://github.com/Fei-Away/Codex-Dream-Skin)，感谢原作者与所有贡献者。
 - 软件代码按 [MIT License](./LICENSE) 发布；OpenAI、Codex 和第三方商标不包含在该许可中。
-- 三套国风背景为本分叉首发视觉资产，详细归属与第三方组件说明见 [`macos/NOTICE.md`](./macos/NOTICE.md)（安装包沿用该通知文件）。
+- 八套国风背景为本分叉视觉资产，详细归属与第三方组件说明见 [`macos/NOTICE.md`](./macos/NOTICE.md)（安装包沿用该通知文件）。
 
 ---
 
 ## English
 
-Codex Guofeng Themes is a Windows-only, unofficial theming layer for the official Codex desktop app. It bundles three original Chinese-inspired themes, provides tray-based one-click switching, validates imported theme packages and Safe CSS, and can restore the official appearance without modifying the app package. See the Chinese sections above and the [Windows guide](./windows/README.md) for setup and safety details.
+Codex Guofeng Themes is a Windows-only, unofficial theming layer for the official Codex desktop app. It bundles eight original Chinese-inspired themes, provides tray-based one-click switching, validates imported theme packages and Safe CSS, and can restore the official appearance without modifying the app package. See the Chinese sections above and the [Windows guide](./windows/README.md) for setup and safety details.

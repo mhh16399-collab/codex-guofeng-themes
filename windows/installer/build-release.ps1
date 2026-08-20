@@ -27,9 +27,18 @@ $innoSetupLicensePath = Join-Path $innoLanguageRoot 'Inno-Setup-License.txt'
 $innoChineseLanguageSha256 = '7d544b9bb1d142cfa11f2e5d3cc8abe2e55f8e066c5124e3772675aa236e1278'
 $innoSetupLicenseSha256 = '0c81595601bce47eeef8d865d5da7f9ca2c6a12235b7482b29f5ab23ed02ee5a'
 $guofengPresetsRoot = Join-Path $windowsRoot 'presets'
-$guofengPresetIds = @('preset-zhuqing', 'preset-zhusha', 'preset-moyun')
+$guofengPresetIds = @(
+  'preset-zhuqing',
+  'preset-zhusha',
+  'preset-moyun',
+  'preset-ruyao-tianqing',
+  'preset-dunhuang-liujin',
+  'preset-qinghua-ci',
+  'preset-haitang-songjin',
+  'preset-jiye-xinghe'
+)
 $guofengPresetHashes = [ordered]@{
-  'catalog.json' = '56d82d8caeab90b22c3f4525554ff59f5e858e5230a0959310e07c87fd992d09'
+  'catalog.json' = 'a75e704d806003eff3c075da0d19eb4041cc1b79a9264fe88d4b436486de27be'
   'preset-zhuqing\background.jpg' = '2715879d9a476d868146b9b9241a97fe10ef2d4eb0111ccb862ad09138449dde'
   'preset-zhuqing\theme.json' = '4e9b1d3a7ca0772a7980dbef7cdbf593bf5da0d18f1046ae240e46a37440dd01'
   'preset-zhuqing\theme.css' = '0e2c52f085d532d29a28f131d953877c8de93f1acdd0cebcfe606d67209b1201'
@@ -39,6 +48,21 @@ $guofengPresetHashes = [ordered]@{
   'preset-moyun\background.jpg' = 'e2783912293a6309b957d6b80db1e9adc256fe23941dfbe63ad8ae028e467c10'
   'preset-moyun\theme.json' = 'd90f9b974b10785bd2d8f386f7247be1c79653e21395d1b568511d52ba5ec104'
   'preset-moyun\theme.css' = '07dc515b3667bd7b047cc46af2f4242f7688487ee3ef31141848625d87df4e09'
+  'preset-ruyao-tianqing\background.jpg' = 'b87957a8a680819279e805ca9a201b3f19fb7b315e7f6a2a3ad3999e878f0a68'
+  'preset-ruyao-tianqing\theme.json' = '6f3020e846402d330d47e9d5f18c15155b67edbd8f7a3d146702ea1c7fa9e974'
+  'preset-ruyao-tianqing\theme.css' = '6753a134b469828a3655f8b707f7caff094ff7d886dd359809c2f13ded07769e'
+  'preset-dunhuang-liujin\background.jpg' = '87833dc26c437f1c3245ef95c7936c55be51453e863e0cd0d129cd001df5ff24'
+  'preset-dunhuang-liujin\theme.json' = 'bc2adac7a2f6e77413c0063eb830671ff751fdf88a1a6105fd1956165ad466a3'
+  'preset-dunhuang-liujin\theme.css' = '075edda2eccda8f6fbe26bf5911ccdb2c14a51ac4b0618f82170011e5efe4b87'
+  'preset-qinghua-ci\background.jpg' = '8d9800617948999be55ba79a819b3db5e3d0066de84217e04e68f3b7ac885160'
+  'preset-qinghua-ci\theme.json' = '5e11b1834f97505cc0d2941e144496cfa02af0e86bfbc47625b5648345b2c3f3'
+  'preset-qinghua-ci\theme.css' = 'd51ce0c0f35e65bb69773b680e01b312412bea09116600c4914326b58197de2c'
+  'preset-haitang-songjin\background.jpg' = '61e11828a9becd41817ce9cfaf10c9567c3c2df50859d60d06ed9f16694612df'
+  'preset-haitang-songjin\theme.json' = '1939e5ead83d3573a9a658936452cf37f838673aecb2ad6a390d4ec026e343d0'
+  'preset-haitang-songjin\theme.css' = 'b540c2faba3d1a49bc05803409408605577a4c0a75279ec549ecd537d847ed47'
+  'preset-jiye-xinghe\background.jpg' = '175e7bcd2c4c518ddbcbcf9db2434475d1233d18ccbcc61739a5c7154fe76de2'
+  'preset-jiye-xinghe\theme.json' = '0b7a30ec80faffe3c90fb0bcf5280375760de463ac708903f5aee42b8fc58305'
+  'preset-jiye-xinghe\theme.css' = '14ba1625d1577ad99136903cf40070a97f1de22859c70057f48fe53030c1bb03'
 }
 
 function Read-ReleaseTextFile {
@@ -439,6 +463,21 @@ try {
     'presets\preset-moyun\background.jpg',
     'presets\preset-moyun\theme.json',
     'presets\preset-moyun\theme.css',
+    'presets\preset-ruyao-tianqing\background.jpg',
+    'presets\preset-ruyao-tianqing\theme.json',
+    'presets\preset-ruyao-tianqing\theme.css',
+    'presets\preset-dunhuang-liujin\background.jpg',
+    'presets\preset-dunhuang-liujin\theme.json',
+    'presets\preset-dunhuang-liujin\theme.css',
+    'presets\preset-qinghua-ci\background.jpg',
+    'presets\preset-qinghua-ci\theme.json',
+    'presets\preset-qinghua-ci\theme.css',
+    'presets\preset-haitang-songjin\background.jpg',
+    'presets\preset-haitang-songjin\theme.json',
+    'presets\preset-haitang-songjin\theme.css',
+    'presets\preset-jiye-xinghe\background.jpg',
+    'presets\preset-jiye-xinghe\theme.json',
+    'presets\preset-jiye-xinghe\theme.css',
     'scripts\apply-community-theme.ps1',
     'scripts\check-update.ps1',
     'scripts\common-windows.ps1',

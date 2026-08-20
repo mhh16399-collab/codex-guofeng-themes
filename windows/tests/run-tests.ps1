@@ -1086,10 +1086,13 @@ try {
   }
   $preseededThemes = @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot)
   $preseededIds = @($preseededThemes | ForEach-Object { $_.Id } | Sort-Object)
-  $expectedPreseededIds = @('preset-moyun', 'preset-zhuqing', 'preset-zhusha')
-  if ($preseededThemes.Count -ne 3 -or
+  $expectedPreseededIds = @(
+    'preset-dunhuang-liujin', 'preset-haitang-songjin', 'preset-jiye-xinghe', 'preset-moyun',
+    'preset-qinghua-ci', 'preset-ruyao-tianqing', 'preset-zhuqing', 'preset-zhusha'
+  )
+  if ($preseededThemes.Count -ne 8 -or
     @(Compare-Object -ReferenceObject $expectedPreseededIds -DifferenceObject $preseededIds).Count -ne 0) {
-    throw 'Windows did not preseed exactly Zhuqing, Zhusha, and Moyun.'
+    throw 'Windows did not preseed exactly the eight reviewed Guofeng themes.'
   }
   foreach ($preseededTheme in $preseededThemes) {
     $preseededCss = Join-Path $preseededTheme.Path 'theme.css'
@@ -1111,7 +1114,7 @@ try {
   $null = Initialize-DreamSkinThemeStore -SkillRoot $Root -StateRoot $themeStateRoot
   $idempotentTheme = Read-DreamSkinTheme -ThemeDirectory $themePaths.Active
   $afterReinitCount = @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot).Count
-  if ($idempotentTheme.Theme.id -cne 'custom' -or $afterReinitCount -ne 3) {
+  if ($idempotentTheme.Theme.id -cne 'custom' -or $afterReinitCount -ne 8) {
     throw 'Theme-store initialization overwrote the active custom theme or duplicated its bundled presets.'
   }
 
@@ -1145,7 +1148,7 @@ try {
   Copy-Item -LiteralPath (Join-Path $Root 'scripts\verify-dream-skin.ps1') -Destination $releaseFixtureScripts -Force
   Copy-Item -LiteralPath (Join-Path $Root 'presets\catalog.json') `
     -Destination $releaseFixturePresets -Force
-  foreach ($presetId in @('preset-zhuqing', 'preset-zhusha', 'preset-moyun')) {
+  foreach ($presetId in $expectedPreseededIds) {
     Copy-Item -LiteralPath (Join-Path $Root "presets\$presetId") `
       -Destination $releaseFixturePresets -Recurse -Force
   }
@@ -1155,20 +1158,20 @@ try {
   $releaseSavedThemes = @(Get-DreamSkinSavedThemes -StateRoot $releaseFixtureState)
   $releaseSavedThemeIds = @($releaseSavedThemes | ForEach-Object { $_.Id })
   if ($releaseActiveTheme.Theme.id -cne 'preset-zhuqing' -or
-    $releaseSavedThemes.Count -ne 3 -or
-    @($releaseSavedThemeIds | Where-Object { $_ -cnotin @('preset-zhuqing', 'preset-zhusha', 'preset-moyun') }).Count -ne 0) {
+    $releaseSavedThemes.Count -ne 8 -or
+    @($releaseSavedThemeIds | Where-Object { $_ -cnotin $expectedPreseededIds }).Count -ne 0) {
     throw 'Release-safe Guofeng themes did not seed from the validated preset catalog.'
   }
   $releaseEngine = Install-DreamSkinRuntimeEngine -SkillRoot $releaseFixtureRoot `
     -StateRoot (Join-Path $temporaryRoot 'release-engine-state')
-  foreach ($presetId in @('preset-zhuqing', 'preset-zhusha', 'preset-moyun')) {
+  foreach ($presetId in $expectedPreseededIds) {
     if (-not (Test-Path -LiteralPath (Join-Path $releaseEngine.Root "presets\$presetId\theme.css") -PathType Leaf)) {
       throw "Release-shaped payload could not stage its Guofeng preset into the managed engine: $presetId"
     }
   }
 
   $savedTheme = Save-DreamSkinCurrentTheme -Name '已保存主题' -StateRoot $themeStateRoot
-  if ($savedTheme.Theme.name -cne '已保存主题' -or @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot).Count -ne 4) {
+  if ($savedTheme.Theme.name -cne '已保存主题' -or @(Get-DreamSkinSavedThemes -StateRoot $themeStateRoot).Count -ne 9) {
     throw 'Saved theme creation or discovery failed.'
   }
   $null = Use-DreamSkinSavedTheme -ThemeDirectory $savedTheme.Directory -StateRoot $themeStateRoot

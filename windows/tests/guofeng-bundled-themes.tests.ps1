@@ -11,7 +11,17 @@ if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
   throw 'Windows Guofeng preset catalog is missing.'
 }
 $catalog = [System.IO.File]::ReadAllText($catalogPath) | ConvertFrom-Json
-$expectedIds = @('preset-moyun', 'preset-zhuqing', 'preset-zhusha')
+$expectedThemes = [ordered]@{
+  'preset-dunhuang-liujin' = 'dark'
+  'preset-haitang-songjin' = 'light'
+  'preset-jiye-xinghe' = 'dark'
+  'preset-moyun' = 'light'
+  'preset-qinghua-ci' = 'light'
+  'preset-ruyao-tianqing' = 'light'
+  'preset-zhuqing' = 'light'
+  'preset-zhusha' = 'light'
+}
+$expectedIds = @($expectedThemes.Keys)
 $actualIds = @($catalog.themes | ForEach-Object { "$_" } | Sort-Object)
 if ($catalog.schemaVersion -ne 1 -or
   "$($catalog.defaultThemeId)" -cne 'preset-zhuqing' -or
@@ -26,9 +36,10 @@ foreach ($themeId in $actualIds) {
   $loaded = Read-DreamSkinTheme -ThemeDirectory $themeRoot
   if ("$($loaded.Theme.id)" -cne $themeId -or
     "$($loaded.Theme.image)" -cne 'background.jpg' -or
-    "$($loaded.Theme.appearance)" -cne 'light' -or
+    "$($loaded.Theme.appearance)" -cne $expectedThemes[$themeId] -or
     "$($loaded.Theme.art.safeArea)" -cne 'left' -or
     "$($loaded.Theme.art.taskMode)" -cne 'ambient' -or
+    @($loaded.Theme.colors.PSObject.Properties).Count -ne 10 -or
     -not (Test-Path -LiteralPath $themePath -PathType Leaf) -or
     -not (Test-Path -LiteralPath $cssPath -PathType Leaf)) {
     throw "Bundled Guofeng theme contract is incomplete: $themeId"
@@ -48,9 +59,9 @@ try {
 
   $savedThemes = @(Get-DreamSkinSavedThemes -StateRoot $stateRoot)
   $savedIds = @($savedThemes | ForEach-Object { $_.Id } | Sort-Object)
-  if ($savedThemes.Count -ne 3 -or
+  if ($savedThemes.Count -ne 8 -or
     @(Compare-Object -ReferenceObject $expectedIds -DifferenceObject $savedIds).Count -ne 0) {
-    throw 'Fresh Windows theme state did not save exactly the three Guofeng themes.'
+    throw 'Fresh Windows theme state did not save exactly the eight Guofeng themes.'
   }
 
   $custom = Set-DreamSkinActiveTheme `
@@ -61,11 +72,11 @@ try {
   $savedAfterReinitialize = @(Get-DreamSkinSavedThemes -StateRoot $stateRoot)
   if ("$($custom.Theme.id)" -cne 'custom' -or
     "$($activeAfterReinitialize.Theme.id)" -cne 'custom' -or
-    $savedAfterReinitialize.Count -ne 3) {
+    $savedAfterReinitialize.Count -ne 8) {
     throw 'Guofeng preset refresh overwrote a custom active theme or duplicated saved presets.'
   }
 } finally {
   Remove-Item -LiteralPath $stateRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-Write-Output 'PASS: Windows seeds exactly Zhuqing, Zhusha, and Moyun while preserving custom active themes.'
+Write-Output 'PASS: Windows seeds exactly eight reviewed Guofeng themes while preserving custom active themes.'

@@ -1,0 +1,30 @@
+[data-ds-part="sidebar"] {
+  background-color: rgba(230, 239, 235, 0.82);
+  border-right-color: rgba(86, 125, 114, 0.2);
+  border-right-width: 1px;
+  border-right-style: solid;
+  backdrop-filter: blur(17px) saturate(0.96);
+}
+[data-ds-part="home-hero"] {
+  color: var(--ds-theme-color-text);
+  letter-spacing: 0.2px;
+}
+[data-ds-part="composer"] {
+  background-color: rgba(238, 243, 240, 0.88);
+  border-color: rgba(86, 125, 114, 0.24);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(36, 54, 51, 0.07);
+  backdrop-filter: blur(18px) saturate(0.94);
+}
+[data-ds-part="dialog"] {
+  background-color: rgba(238, 243, 240, 0.95);
+  border-color: rgba(86, 125, 114, 0.22);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 16px;
+}
+[data-ds-part="project-list"] {
+  color: var(--ds-theme-color-text);
+}

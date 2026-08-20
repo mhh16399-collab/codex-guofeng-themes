@@ -7,6 +7,12 @@
 README.preview.html
 docs/readme-preview.html
 release/
+site/node_modules/
+site/.pnpm-store/
+site/dist/
+/gallery-*.png
+/design-compare*.png
+/design-reference-normalized*.png
 # Keep the large captured DOM/screenshot fixtures local, but version the
 # canonical renderer sources that generate both platform assets.
 runtime/*

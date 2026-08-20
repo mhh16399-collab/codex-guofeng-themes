@@ -411,7 +411,7 @@ jobs:
           - **Windows 安装包：** [CodexGuofengThemes-Setup-v${VERSION}.exe](https://github.com/mhh16399-collab/codex-guofeng-themes/releases/download/v${VERSION}/CodexGuofengThemes-Setup-v${VERSION}.exe)
           - **SHA-256 校验：** [SHA256SUMS.txt](https://github.com/mhh16399-collab/codex-guofeng-themes/releases/download/v${VERSION}/SHA256SUMS.txt)
 
-          本次为 Windows 首发版，内置竹青、朱砂、墨韵三套国风主题，竹青为默认主题。
+          本次内置八套国风主题：竹青、朱砂、墨韵、汝窑天青、敦煌鎏金、青花瓷、海棠宋锦、霁夜星河，竹青为默认主题。
           安装包目前未做商业代码签名；请按 [Windows 安装说明](https://github.com/mhh16399-collab/codex-guofeng-themes/blob/v${VERSION}/docs/install-windows.md) 操作。
 
           本发行版由 ${RELEASE_SHA} 在版本更新进入 main 后自动构建并校验。
