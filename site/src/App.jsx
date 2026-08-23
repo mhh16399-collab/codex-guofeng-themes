@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { paginateThemes } from "./pagination.js";
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 const applyUri = (version) => `dreamskin://apply?version=${version}`;
 const packageUri = (theme) => asset(`downloads/preset-${theme.id}.zip`);
+const PAGE_SIZE = 6;
 
 const themes = [
   { id: "zhuqing", name: "竹青", romanized: "Zhu Qing", tone: "light", toneLabel: "浅色", tagline: "竹影入窗，纸白生青", story: "以宣纸白承接青竹的清透，把长时间工作的界面收束成安静、克制的书斋。", colors: ["#edf3eb", "#a9d8bd", "#16815f"], image: "themes/zhuqing.png" },
@@ -38,10 +40,12 @@ export function App() {
   const initialTone = params.get("tone");
   const [filter, setFilter] = useState(["light", "dark"].includes(initialTone) ? initialTone : "all");
   const [query, setQuery] = useState(params.get("q") ?? "");
+  const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(null);
   const [launchHint, setLaunchHint] = useState(null);
   const closeButtonRef = useRef(null);
   const returnFocusRef = useRef(null);
+  const galleryRef = useRef(null);
 
   const filteredThemes = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("zh-CN");
@@ -51,6 +55,7 @@ export function App() {
       return matchesTone && (!needle || haystack.includes(needle));
     });
   }, [filter, query]);
+  const pagination = paginateThemes(filteredThemes, page, PAGE_SIZE);
 
   useEffect(() => updateQuery(filter, query), [filter, query]);
   useEffect(() => {
@@ -69,6 +74,14 @@ export function App() {
   const openDetails = (theme, trigger) => {
     returnFocusRef.current = trigger;
     setSelected(theme);
+  };
+
+  const changePage = (nextPage) => {
+    setPage(nextPage);
+    window.requestAnimationFrame(() => {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      galleryRef.current?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    });
   };
 
   return (
@@ -106,7 +119,7 @@ export function App() {
           </figure>
         </section>
 
-        <section className="gallery-section" id="gallery" aria-labelledby="gallery-title">
+        <section ref={galleryRef} className="gallery-section" id="gallery" aria-labelledby="gallery-title">
           <div className="section-heading">
             <div>
               <p className="eyebrow">THEME COLLECTION</p>
@@ -119,18 +132,18 @@ export function App() {
           <div className="gallery-tools">
             <label className="search-field">
               <span>检索</span>
-              <input type="search" placeholder="搜索主题 / 拼音 / 意境" value={query} onChange={(event) => setQuery(event.target.value)} />
+              <input type="search" placeholder="搜索主题 / 拼音 / 意境" value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} />
             </label>
             <div className="tone-filters" aria-label="主题明暗筛选">
               {[["all", "全部主题"], ["light", "浅色"], ["dark", "深色"]].map(([value, label]) => (
-                <button className={filter === value ? "active" : ""} key={value} type="button" aria-pressed={filter === value} onClick={() => setFilter(value)}>{label}</button>
+                <button className={filter === value ? "active" : ""} key={value} type="button" aria-pressed={filter === value} onClick={() => { setFilter(value); setPage(1); }}>{label}</button>
               ))}
             </div>
           </div>
 
           {filteredThemes.length ? (
             <div className="theme-grid">
-              {filteredThemes.map((theme, index) => (
+              {pagination.items.map((theme, index) => (
                 <article className="theme-card" key={theme.id}>
                   <button className="preview-button" type="button" onClick={(event) => openDetails(theme, event.currentTarget)} aria-label={`查看${theme.name}详情`}>
                     <img loading={index > 2 ? "lazy" : "eager"} src={asset(theme.image)} alt={`${theme.name} Codex 界面预览`} />
@@ -161,6 +174,25 @@ export function App() {
               ))}
             </div>
           ) : <div className="empty-state"><b>没有找到相符主题</b><p>换个关键词，或切回“全部主题”再看看。</p></div>}
+
+          {filteredThemes.length > PAGE_SIZE && (
+            <nav className="pagination" aria-label="主题馆分页">
+              <button type="button" disabled={pagination.page === 1} onClick={() => changePage(pagination.page - 1)}>上一页</button>
+              <div className="page-numbers">
+                {Array.from({ length: pagination.pageCount }, (_, index) => index + 1).map((pageNumber) => (
+                  <button
+                    className={pagination.page === pageNumber ? "active" : ""}
+                    type="button"
+                    key={pageNumber}
+                    aria-label={`第 ${pageNumber} 页`}
+                    aria-current={pagination.page === pageNumber ? "page" : undefined}
+                    onClick={() => changePage(pageNumber)}
+                  >{pageNumber}</button>
+                ))}
+              </div>
+              <button type="button" disabled={pagination.page === pagination.pageCount} onClick={() => changePage(pagination.page + 1)}>下一页</button>
+            </nav>
+          )}
         </section>
 
         <section className="install-section" id="install" aria-labelledby="install-title">
