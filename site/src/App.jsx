@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+const applyUri = (version) => `dreamskin://apply?version=${version}`;
+const packageUri = (theme) => asset(`downloads/preset-${theme.id}.zip`);
 
 const themes = [
   { id: "zhuqing", name: "竹青", romanized: "Zhu Qing", tone: "light", toneLabel: "浅色", tagline: "竹影入窗，纸白生青", story: "以宣纸白承接青竹的清透，把长时间工作的界面收束成安静、克制的书斋。", colors: ["#edf3eb", "#a9d8bd", "#16815f"], image: "themes/zhuqing.png" },
@@ -11,6 +13,16 @@ const themes = [
   { id: "qinghua-ci", name: "青花瓷", romanized: "Qinghua Ci", tone: "light", toneLabel: "浅色", tagline: "釉白藏蓝，一器一境", story: "青花瓷器、折枝纹与淡米釉白共同降低蓝色饱和度，既有器物感，也适合长期阅读。", colors: ["#f7f2e8", "#c8d9d8", "#386b86"], image: "themes/qinghua-ci.png" },
   { id: "haitang-songjin", name: "海棠宋锦", romanized: "Haitang Songjin", tone: "light", toneLabel: "浅色", tagline: "经纬生花，海棠成锦", story: "将海棠纹、宋锦经纬与克制的胭脂色织入卡片边界，温润细密，却不压过代码内容。", colors: ["#f6eee7", "#d7aaa4", "#9f4b4d"], image: "themes/haitang-songjin.png" },
   { id: "jiye-xinghe", name: "霁夜星河", romanized: "Jiye Xinghe", tone: "dark", toneLabel: "深色", tagline: "星汉低垂，霁色如洗", story: "以宋代观星意象、浑仪和霁蓝夜空构成深色主题，金线星轨带来清晰的操作层级。", colors: ["#10182b", "#1e3b5c", "#c9a461"], image: "themes/jiye-xinghe.png" },
+  { id: "qianli-jiangshan", name: "千里江山", romanized: "Qianli Jiangshan", tone: "light", toneLabel: "浅色", tagline: "层峦入卷，碧水生辉", story: "矿物石青与石绿沿江山层叠铺展，鎏金轮廓收住气韵，为中央工作区留下一片温润开阔的宣纸。", colors: ["#f4efdf", "#4f9e91", "#c6a45a"], image: "themes/qianli-jiangshan.png" },
+  { id: "jingtai-hualan", name: "景泰华蓝", romanized: "Jingtai Hualan", tone: "dark", toneLabel: "深色", tagline: "铜丝点翠，华蓝凝光", story: "深海军蓝承托景泰蓝器的松石釉色与鎏金铜丝，把暗色工作界面做成克制的夜间展厅。", colors: ["#061729", "#2f9aa1", "#d3aa53"], image: "themes/jingtai-hualan.png" },
+  { id: "heiqi-luodian", name: "黑漆螺钿", romanized: "Heiqi Luodian", tone: "dark", toneLabel: "深色", tagline: "漆夜藏彩，螺光入屏", story: "黑漆的深沉与螺钿鸟梅屏的虹彩形成低调层次，贝母冷光只在操作边界轻轻浮现。", colors: ["#090a0b", "#72b9b0", "#8579a6"], image: "themes/heiqi-luodian.png" },
+  { id: "chayan-songfeng", name: "茶烟松风", romanized: "Chayan Songfeng", tone: "light", toneLabel: "浅色", tagline: "松风入盏，茶烟徐生", story: "松针、紫砂与一缕茶烟落在暖宣纸上，色彩朴素却不空，适合安静而长久的阅读与编写。", colors: ["#f5ead7", "#526d4c", "#8b5438"], image: "themes/chayan-songfeng.png" },
+  { id: "sunmao-danying", name: "榫卯丹楹", romanized: "Sunmao Danying", tone: "light", toneLabel: "浅色", tagline: "木构有序，丹楹承章", story: "以斗拱、榫卯结构和淡淡营造图谱组织界面，暖木与一笔丹红让工程秩序也有东方气韵。", colors: ["#f4eadb", "#8b4f2d", "#a73527"], image: "themes/sunmao-danying.png" },
+  { id: "ruihe-lingxiao", name: "瑞鹤凌霄", romanized: "Ruihe Lingxiao", tone: "light", toneLabel: "浅色", tagline: "云开鹤起，凌霄见晴", story: "雾蓝云海、丹顶鹤与远处宫阙构成轻盈天空，金线云纹保持细节，中心仍然清透易读。", colors: ["#f5f1e8", "#688c98", "#a34d45"], image: "themes/ruihe-lingxiao.png" },
+  { id: "tangsancai", name: "唐三彩", romanized: "Tang Sancai", tone: "light", toneLabel: "浅色", tagline: "三彩流釉，骏影生辉", story: "乳白陶胎上流动琥珀、橄榄与翠绿釉色，一匹三彩骏马镇住画面，古朴但不显沉闷。", colors: ["#f4e5c8", "#6f803e", "#d59a37"], image: "themes/tangsancai.png" },
+  { id: "hanjian-mohen", name: "汉简墨痕", romanized: "Hanjian Mohen", tone: "dark", toneLabel: "深色", tagline: "简牍藏字，墨痕有声", story: "焦茶色纸纤维、竹简与青铜绿锈构成沉静暗色书案，适合喜欢考古质感与低亮度界面的用户。", colors: ["#17120e", "#8f633f", "#385c51"], image: "themes/hanjian-mohen.png" },
+  { id: "luoshui-liuxia", name: "洛水流霞", romanized: "Luoshui Liuxia", tone: "dark", toneLabel: "深色", tagline: "月照洛水，流霞成绮", story: "靛青月夜映着水城、桥影与紫色流霞，玫瑰金的细光沿水面铺开，柔美而不甜腻。", colors: ["#17172b", "#9b78ad", "#d6a27e"], image: "themes/luoshui-liuxia.png" },
+  { id: "jinling-yunjin", name: "金陵云锦", romanized: "Jinling Yunjin", tone: "light", toneLabel: "浅色", tagline: "寸锦寸金，孔雀成章", story: "孔雀蓝、宝石绿与真金线织出云锦团花和孔雀羽纹，冷象牙丝面保持通透，也与海棠宋锦清晰区分。", colors: ["#f1eee5", "#0c5672", "#c99f41"], image: "themes/jinling-yunjin.png" },
 ];
 
 function updateQuery(filter, query) {
@@ -27,6 +39,7 @@ export function App() {
   const [filter, setFilter] = useState(["light", "dark"].includes(initialTone) ? initialTone : "all");
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [selected, setSelected] = useState(null);
+  const [launchHint, setLaunchHint] = useState(null);
   const closeButtonRef = useRef(null);
   const returnFocusRef = useRef(null);
 
@@ -79,29 +92,28 @@ export function App() {
           <img className="hero-bamboo" src={asset("decor/zhuqing-paper.jpg")} alt="" />
           <div className="hero-copy">
             <p className="eyebrow">CODEX · 东方数字展馆</p>
-            <h1 id="hero-title">为你的 Codex<br />换一袭东方颜色</h1>
-            <p className="hero-lead">八套原创国风主题，把瓷、锦、壁画、山水与星河带进熟悉的工作界面。Windows 一键切换，随时恢复官方外观。</p>
+            <h1 id="hero-title"><span>为你的 Codex</span><span>换一袭东方颜色</span></h1>
+            <p className="hero-lead">持续扩展的原创国风主题库，把瓷、锦、壁画、山水与星河带进熟悉的工作界面。兼容原版 DreamSkin，随时恢复官方外观。</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#gallery">浏览八套主题</a>
+              <a className="button button-primary" href="#gallery">浏览当前馆藏</a>
               <a className="button button-quiet" href="https://github.com/mhh16399-collab/codex-guofeng-themes" target="_blank" rel="noreferrer">在 GitHub 上收藏此馆</a>
             </div>
           </div>
 
-          <div className="featured-frame">
-            <div className="frame-label"><span>馆藏一号</span><b>竹青 · Zhu Qing</b></div>
+          <figure className="featured-frame">
             <img src={asset("themes/zhuqing.png")} alt="竹青主题在 Codex Windows 客户端中的预览" />
-            <div className="seal" aria-hidden="true">首发</div>
-          </div>
+            <figcaption>竹青</figcaption>
+          </figure>
         </section>
 
         <section className="gallery-section" id="gallery" aria-labelledby="gallery-title">
           <div className="section-heading">
             <div>
               <p className="eyebrow">THEME COLLECTION</p>
-              <h2 id="gallery-title">八色成卷，各有风骨</h2>
+              <h2 id="gallery-title">百色成卷，各有风骨</h2>
               <p>每套都包含背景、配色和安全样式，不修改 Codex 安装包。</p>
             </div>
-            <span className="collection-count">馆藏 {String(filteredThemes.length).padStart(2, "0")} / 08</span>
+            <span className="collection-count">馆藏 {String(filteredThemes.length).padStart(2, "0")} / {String(themes.length).padStart(2, "0")}</span>
           </div>
 
           <div className="gallery-tools">
@@ -133,8 +145,16 @@ export function App() {
                       <p className="card-tagline">{theme.tagline}</p>
                       <div className="card-footer">
                         <div className="swatches" aria-label={`${theme.name}配色`}>{theme.colors.map((color) => <i key={color} style={{ background: color }} />)}</div>
+                      </div>
+                      <div className="card-actions">
+                        {theme.communityVersion ? (
+                          <a href={applyUri(theme.communityVersion)} onClick={() => setLaunchHint(theme.id)}>一键换肤</a>
+                        ) : (
+                          <a href={packageUri(theme)} download>下载主题包</a>
+                        )}
                         <button type="button" onClick={(event) => openDetails(theme, event.currentTarget)}>查看详情</button>
                       </div>
+                      {launchHint === theme.id && <p className="launch-hint">没有唤起客户端？请先下载安装桌面端。</p>}
                     </div>
                   </div>
                 </article>
@@ -146,13 +166,13 @@ export function App() {
         <section className="install-section" id="install" aria-labelledby="install-title">
           <div className="install-copy">
             <p className="eyebrow">WINDOWS INSTALLER</p>
-            <h2 id="install-title">一套安装包，八套都带走</h2>
-            <p>安装后从系统托盘直接切换主题。所有动作可恢复，不替换官方 Codex 文件，也不需要关闭自动更新。</p>
-            <a className="button button-primary" href="https://github.com/mhh16399-collab/codex-guofeng-themes/releases/latest" target="_blank" rel="noreferrer">下载 Windows 安装包</a>
+            <h2 id="install-title">一套安装包，当前馆藏都带走</h2>
+            <p>先安装原版 DreamSkin，再从系统托盘导入国风主题 ZIP。主题审核取得版本 ID 后，网页按钮会直接使用原版一键换肤协议。</p>
+            <a className="button button-primary" href="https://github.com/Fei-Away/Codex-Dream-Skin/releases/latest" target="_blank" rel="noreferrer">下载原版 DreamSkin</a>
           </div>
           <ol className="install-steps">
-            <li><span>壹</span><div><b>下载安装</b><p>从 GitHub Release 获取经过校验的 Setup.exe。</p></div></li>
-            <li><span>贰</span><div><b>托盘切换</b><p>打开“已保存主题”，八套国风皮肤一键生效。</p></div></li>
+            <li><span>壹</span><div><b>安装原版客户端</b><p>从原项目 GitHub Release 获取经过校验的 Setup.exe。</p></div></li>
+            <li><span>贰</span><div><b>导入主题</b><p>下载国风主题 ZIP，在 DreamSkin 托盘菜单中导入并应用。</p></div></li>
             <li><span>叁</span><div><b>随时恢复</b><p>选择“恢复官方外观”，回到 Codex 原生界面。</p></div></li>
           </ol>
         </section>
@@ -175,7 +195,7 @@ export function App() {
               <p className="dialog-tagline">{selected.tagline}</p>
               <p>{selected.story}</p>
               <div className="dialog-actions">
-                <a className="button button-primary" href="https://github.com/mhh16399-collab/codex-guofeng-themes/releases/latest" target="_blank" rel="noreferrer">下载整套安装包</a>
+                <a className="button button-primary" href={packageUri(selected)} download>下载主题包</a>
                 <button className="button button-quiet" type="button" onClick={() => setSelected(null)}>继续逛主题馆</button>
               </div>
             </div>
