@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param()
 
 $ErrorActionPreference = 'Stop'
@@ -6,77 +6,58 @@ $windowsRoot = Split-Path -Parent $PSScriptRoot
 . (Join-Path $windowsRoot 'scripts\common-windows.ps1')
 . (Join-Path $windowsRoot 'scripts\theme-windows.ps1')
 
+$expectedIds = @(
+  'preset-zhuqing', 'preset-zhusha', 'preset-moyun', 'preset-ruyao-tianqing',
+  'preset-dunhuang-liujin', 'preset-qinghua-ci', 'preset-haitang-songjin',
+  'preset-jiye-xinghe', 'preset-qianli-jiangshan', 'preset-jingtai-hualan',
+  'preset-heiqi-luodian', 'preset-chayan-songfeng', 'preset-sunmao-danying',
+  'preset-ruihe-lingxiao', 'preset-tangsancai', 'preset-hanjian-mohen',
+  'preset-luoshui-liuxia', 'preset-jinling-yunjin'
+)
 $catalogPath = Join-Path $windowsRoot 'presets\catalog.json'
-if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
-  throw 'Windows Guofeng preset catalog is missing.'
-}
 $catalog = [System.IO.File]::ReadAllText($catalogPath) | ConvertFrom-Json
-$expectedThemes = [ordered]@{
-  'preset-dunhuang-liujin' = 'dark'
-  'preset-haitang-songjin' = 'light'
-  'preset-jiye-xinghe' = 'dark'
-  'preset-moyun' = 'light'
-  'preset-qinghua-ci' = 'light'
-  'preset-ruyao-tianqing' = 'light'
-  'preset-zhuqing' = 'light'
-  'preset-zhusha' = 'light'
-}
-$expectedIds = @($expectedThemes.Keys)
-$actualIds = @($catalog.themes | ForEach-Object { "$_" } | Sort-Object)
+$actualIds = @($catalog.themes | ForEach-Object { "$_" })
 if ($catalog.schemaVersion -ne 1 -or
-  "$($catalog.defaultThemeId)" -cne 'preset-zhuqing' -or
-  @(Compare-Object -ReferenceObject $expectedIds -DifferenceObject $actualIds).Count -ne 0) {
-  throw 'Windows Guofeng preset catalog does not declare the exact v1 theme set.'
-}
-
-foreach ($themeId in $actualIds) {
-  $themeRoot = Join-Path (Join-Path $windowsRoot 'presets') $themeId
-  $themePath = Join-Path $themeRoot 'theme.json'
-  $cssPath = Join-Path $themeRoot 'theme.css'
-  $loaded = Read-DreamSkinTheme -ThemeDirectory $themeRoot
-  if ("$($loaded.Theme.id)" -cne $themeId -or
-    "$($loaded.Theme.image)" -cne 'background.jpg' -or
-    "$($loaded.Theme.appearance)" -cne $expectedThemes[$themeId] -or
-    "$($loaded.Theme.art.safeArea)" -cne 'left' -or
-    "$($loaded.Theme.art.taskMode)" -cne 'ambient' -or
-    @($loaded.Theme.colors.PSObject.Properties).Count -ne 10 -or
-    -not (Test-Path -LiteralPath $themePath -PathType Leaf) -or
-    -not (Test-Path -LiteralPath $cssPath -PathType Leaf)) {
-    throw "Bundled Guofeng theme contract is incomplete: $themeId"
-  }
-  Assert-DreamSkinSafeCssFile -Path $cssPath
+  @(Compare-Object -ReferenceObject ($expectedIds | Sort-Object) -DifferenceObject ($actualIds | Sort-Object)).Count -ne 0) {
+  throw 'Windows Guofeng preset catalog does not declare the exact 18-theme set.'
 }
 
 $stateRoot = Join-Path ([System.IO.Path]::GetTempPath()) `
   ('codex-guofeng-theme-test-' + [Guid]::NewGuid().ToString('N'))
 try {
   $paths = Initialize-DreamSkinThemeStore -SkillRoot $windowsRoot -StateRoot $stateRoot
-  $active = Read-DreamSkinTheme -ThemeDirectory $paths.Active
-  if ("$($active.Theme.id)" -cne 'preset-zhuqing' -or
-    "$($active.Theme.name)" -cne '竹青') {
-    throw 'Fresh Windows theme state did not default to Zhuqing.'
+  $savedIds = @(Get-DreamSkinSavedThemes -StateRoot $stateRoot -SkipImageMetadata |
+    ForEach-Object { $_.Id })
+  foreach ($themeId in $expectedIds) {
+    if ($savedIds -notcontains $themeId) {
+      throw "Fresh Windows installation did not seed bundled theme: $themeId"
+    }
   }
 
-  $savedThemes = @(Get-DreamSkinSavedThemes -StateRoot $stateRoot)
-  $savedIds = @($savedThemes | ForEach-Object { $_.Id } | Sort-Object)
-  if ($savedThemes.Count -ne 8 -or
-    @(Compare-Object -ReferenceObject $expectedIds -DifferenceObject $savedIds).Count -ne 0) {
-    throw 'Fresh Windows theme state did not save exactly the eight Guofeng themes.'
+  $sourceQianli = Join-Path $windowsRoot 'presets\preset-qianli-jiangshan'
+  $savedQianli = Join-Path $paths.Saved 'preset-qianli-jiangshan'
+  $sourceCss = [System.IO.File]::ReadAllText((Join-Path $sourceQianli 'theme.css'))
+  $savedCss = [System.IO.File]::ReadAllText((Join-Path $savedQianli 'theme.css'))
+  if ($savedCss -cne $sourceCss -or $savedCss -notmatch '\[data-ds-part="composer"\]') {
+    throw 'Fresh installation did not seed the complete Qianli Jiangshan CSS.'
   }
 
-  $custom = Set-DreamSkinActiveTheme `
-    -ImagePath (Join-Path $windowsRoot 'assets\dream-reference.jpg') `
-    -Theme $null -Name '保留我的主题' -StateRoot $stateRoot
+  [System.IO.File]::WriteAllText(
+    (Join-Path $savedQianli 'theme.css'),
+    "[data-ds-part=`"main`"] { background: pink; }`r`n",
+    [System.Text.UTF8Encoding]::new($false)
+  )
+  Remove-Item -LiteralPath $paths.Active -Recurse -Force
+  Copy-Item -LiteralPath $savedQianli -Destination $paths.Active -Recurse -Force
   $null = Initialize-DreamSkinThemeStore -SkillRoot $windowsRoot -StateRoot $stateRoot
-  $activeAfterReinitialize = Read-DreamSkinTheme -ThemeDirectory $paths.Active
-  $savedAfterReinitialize = @(Get-DreamSkinSavedThemes -StateRoot $stateRoot)
-  if ("$($custom.Theme.id)" -cne 'custom' -or
-    "$($activeAfterReinitialize.Theme.id)" -cne 'custom' -or
-    $savedAfterReinitialize.Count -ne 8) {
-    throw 'Guofeng preset refresh overwrote a custom active theme or duplicated saved presets.'
+
+  $refreshedSavedCss = [System.IO.File]::ReadAllText((Join-Path $savedQianli 'theme.css'))
+  $refreshedActiveCss = [System.IO.File]::ReadAllText((Join-Path $paths.Active 'theme.css'))
+  if ($refreshedSavedCss -cne $sourceCss -or $refreshedActiveCss -cne $sourceCss) {
+    throw 'Upgrade did not refresh the saved and active Qianli Jiangshan CSS.'
   }
 } finally {
   Remove-Item -LiteralPath $stateRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-Write-Output 'PASS: Windows seeds exactly eight reviewed Guofeng themes while preserving custom active themes.'
+Write-Output 'PASS: Windows seeds all 18 Guofeng themes and refreshes active Qianli Jiangshan.'

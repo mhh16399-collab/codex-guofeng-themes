@@ -1056,3 +1056,12 @@ Updated: 2026-07-31 14:29 HKT (Asia/Hong_Kong)
   `git diff --check`, and a second real-DOM read-only cardinality check pass.
   No installed runtime, Codex process, active theme, PR, issue, commit, or push
   was changed by this focused task.
+
+## Guofeng Gallery v2 Publication (2026-08-23)
+
+- [fact] Work continues on `codex/guofeng-gallery-v2`; the user approved publishing the complete theme/gallery/injector work to this development branch, but did not authorize a main-branch merge, tag, GitHub Release, or Pages deployment.
+- [complete] Recovered the oversized local task transcript and confirmed the second visual refinement pass reached the final Jinling Yunjin theme. Its sidebar is now more transparent and no longer blurred; no live injector or installed runtime was changed.
+- [in progress] Replace fixed-count homepage positioning with a growing original Guofeng theme library, document the v1.7.1/v1.7.2 development history, audit all pending files, and run the required site and Windows checks.
+- [verified] Site production build and 10 site tests pass; all current theme ZIPs exactly match their preset sources; all 18 presets pass the incremental contract; bundled-theme initialization, installer static contracts, tray liveness, version consistency, runtime asset sync, renderer contract and secret scan pass.
+- [partial] The full Windows regression passed community-link/identity/apply/rollback safety before the user explicitly requested stopping the long-running suite and proceeding with the push. It was interrupted, so it is not recorded as a complete pass.
+- [in progress] Commit and push the reviewed repository state to `origin/codex/guofeng-gallery-v2`, then verify the exact remote head. Main/Pages publication remains a separate explicit decision.

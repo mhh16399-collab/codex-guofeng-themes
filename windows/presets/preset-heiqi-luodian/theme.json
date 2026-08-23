@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-heiqi-luodian",
+  "name": "黑漆螺钿",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "漆夜藏彩，螺光入屏。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "LUODIAN ONLINE",
+  "quote": "漆黑有光，贝彩成章",
+  "image": "background.jpg",
+  "appearance": "dark",
+  "art": { "focusX": 0.88, "focusY": 0.52, "safeArea": "left", "taskMode": "full" },
+  "colors": {
+    "background": "#090a0b", "panel": "#111416", "panelAlt": "#191d20",
+    "accent": "#72b9b0", "accentAlt": "#8579a6", "secondary": "#365c61",
+    "highlight": "#d5c9aa", "text": "#edf0eb", "muted": "#98a09f",
+    "line": "rgba(114, 185, 176, .22)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "黑漆螺钿 · Heiqi Luodian",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

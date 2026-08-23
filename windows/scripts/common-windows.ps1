@@ -366,32 +366,8 @@ function Install-DreamSkinRuntimeEngine {
     'assets\selectors.json',
     'assets\theme-package-validator.mjs',
     'assets\theme.json',
-    'assets\theme.css',
-    'presets\catalog.json',
-    'presets\preset-zhuqing\background.jpg',
-    'presets\preset-zhuqing\theme.json',
-    'presets\preset-zhuqing\theme.css',
-    'presets\preset-zhusha\background.jpg',
-    'presets\preset-zhusha\theme.json',
-    'presets\preset-zhusha\theme.css',
-    'presets\preset-moyun\background.jpg',
-    'presets\preset-moyun\theme.json',
-    'presets\preset-moyun\theme.css',
-    'presets\preset-ruyao-tianqing\background.jpg',
-    'presets\preset-ruyao-tianqing\theme.json',
-    'presets\preset-ruyao-tianqing\theme.css',
-    'presets\preset-dunhuang-liujin\background.jpg',
-    'presets\preset-dunhuang-liujin\theme.json',
-    'presets\preset-dunhuang-liujin\theme.css',
-    'presets\preset-qinghua-ci\background.jpg',
-    'presets\preset-qinghua-ci\theme.json',
-    'presets\preset-qinghua-ci\theme.css',
-    'presets\preset-haitang-songjin\background.jpg',
-    'presets\preset-haitang-songjin\theme.json',
-    'presets\preset-haitang-songjin\theme.css',
-    'presets\preset-jiye-xinghe\background.jpg',
-    'presets\preset-jiye-xinghe\theme.json',
-    'presets\preset-jiye-xinghe\theme.css',
+    'presets\preset-gothic-void-crusade\background.jpg',
+    'presets\preset-gothic-void-crusade\theme.json',
     'scripts\apply-community-theme.ps1',
     'scripts\common-windows.ps1',
     'scripts\check-update.ps1',
@@ -1294,6 +1270,19 @@ function Get-DreamSkinProcessStartedAt {
   }
 }
 
+function Test-DreamSkinRecordedInjectorRunning {
+  param([AllowNull()][object]$State)
+  if ($null -eq $State -or -not $State.injectorPid -or -not $State.injectorStartedAt) {
+    return $false
+  }
+  $processId = 0
+  if (-not [int]::TryParse("$($State.injectorPid)", [ref]$processId) -or $processId -le 0) {
+    return $false
+  }
+  $startedAt = Get-DreamSkinProcessStartedAt -ProcessId $processId
+  return $null -ne $startedAt -and $startedAt -ceq "$($State.injectorStartedAt)"
+}
+
 function Stop-DreamSkinRecordedInjector {
   param([AllowNull()][object]$State)
   if ($null -eq $State -or -not $State.injectorPid) { return $true }
@@ -1419,7 +1408,7 @@ function Stop-DreamSkinCodex {
 function Confirm-DreamSkinRestart {
   param([string]$Message)
   $shell = New-Object -ComObject WScript.Shell
-  return $shell.Popup($Message, 0, 'Codex Guofeng Themes', 52) -eq 6
+  return $shell.Popup($Message, 0, 'Codex Dream Skin', 52) -eq 6
 }
 
 function Invoke-DreamSkinCodexWindowActivation {

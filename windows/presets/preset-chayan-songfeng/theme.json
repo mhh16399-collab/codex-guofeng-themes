@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-chayan-songfeng",
+  "name": "茶烟松风",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "松风入盏，茶烟徐生。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "SONGFENG ONLINE",
+  "quote": "松声作伴，茶烟润笔",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": { "focusX": 0.88, "focusY": 0.55, "safeArea": "left", "taskMode": "full" },
+  "colors": {
+    "background": "#f5ead7", "panel": "#f8f0e3", "panelAlt": "#e9e4d2",
+    "accent": "#526d4c", "accentAlt": "#7d8c5c", "secondary": "#8b5438",
+    "highlight": "#b9814e", "text": "#28352b", "muted": "#747568",
+    "line": "rgba(82, 109, 76, .23)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "茶烟松风 · Chayan Songfeng",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

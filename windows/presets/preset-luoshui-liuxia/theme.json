@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-luoshui-liuxia",
+  "name": "洛水流霞",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "月照洛水，流霞成绮。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "LUOSHUI ONLINE",
+  "quote": "月沉洛水，霞落笔端",
+  "image": "background.jpg",
+  "appearance": "dark",
+  "art": { "focusX": 0.86, "focusY": 0.56, "safeArea": "left", "taskMode": "ambient" },
+  "colors": {
+    "background": "#17172b", "panel": "#211d37", "panelAlt": "#302645",
+    "accent": "#9b78ad", "accentAlt": "#695f9c", "secondary": "#a5617d",
+    "highlight": "#d6a27e", "text": "#f1e7ef", "muted": "#afa1b8",
+    "line": "rgba(155, 120, 173, .28)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "洛水流霞 · Luoshui Liuxia",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

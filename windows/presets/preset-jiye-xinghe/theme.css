@@ -1,10 +1,13 @@
 [data-ds-part="sidebar"] {
-  background-color: rgba(9, 20, 33, 0.87);
+  background-color: rgba(9, 20, 33, 0.24);
   border-right-color: rgba(182, 144, 83, 0.22);
   border-right-width: 1px;
   border-right-style: solid;
-  backdrop-filter: blur(18px) saturate(0.92);
+  backdrop-filter: none;
 }
+[data-ds-part="main"] { background-color: rgba(14, 26, 40, 0.18); }
+[data-ds-part="header"] { background-color: rgba(9, 20, 33, 0.24); backdrop-filter: none; }
+[data-ds-part="thread"] { background-color: rgba(14, 26, 40, 0.14); }
 [data-ds-part="home-hero"] {
   color: var(--ds-theme-color-text);
   letter-spacing: 0.25px;
@@ -12,11 +15,11 @@
 [data-ds-part="composer"] {
   background-color: rgba(14, 26, 40, 0.91);
   border-color: rgba(182, 144, 83, 0.28);
-  border-width: 1px;
+  border-width: 0;
   border-style: solid;
   border-radius: 17px;
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.32);
-  backdrop-filter: blur(19px) saturate(0.92);
+  box-shadow: none;
+  backdrop-filter: none;
 }
 [data-ds-part="dialog"] {
   background-color: rgba(14, 26, 40, 0.97);

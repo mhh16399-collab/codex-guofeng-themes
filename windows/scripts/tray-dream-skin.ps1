@@ -17,7 +17,7 @@ $powershell = (Get-Command powershell.exe -ErrorAction Stop).Source
 $startScript = Join-Path $PSScriptRoot 'start-dream-skin.ps1'
 $restoreScript = Join-Path $PSScriptRoot 'restore-dream-skin.ps1'
 $checkUpdateScript = Join-Path $PSScriptRoot 'check-update.ps1'
-$startupShortcut = Join-Path ([Environment]::GetFolderPath('Startup')) 'Codex Guofeng Themes.lnk'
+$startupShortcut = Join-Path ([Environment]::GetFolderPath('Startup')) 'Codex Dream Skin.lnk'
 
 $sid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
 $mutex = [System.Threading.Mutex]::new($false, "Local\CodexDreamSkin.$sid.Tray")
@@ -43,7 +43,7 @@ try {
   } else {
     $notify.Icon = [System.Drawing.SystemIcons]::Application
   }
-  $notify.Text = 'Codex Guofeng Themes'
+  $notify.Text = 'Codex Dream Skin'
   $notify.Visible = $true
   $menu = [System.Windows.Forms.ContextMenuStrip]::new()
   $notify.ContextMenuStrip = $menu
@@ -52,7 +52,7 @@ try {
     param([string]$Message)
     [void][System.Windows.Forms.MessageBox]::Show(
       $Message,
-      'Codex Guofeng Themes',
+      'Codex Dream Skin',
       [System.Windows.Forms.MessageBoxButtons]::OK,
       [System.Windows.Forms.MessageBoxIcon]::Error
     )
@@ -145,7 +145,7 @@ try {
     $shortcut.TargetPath = $powershell
     $shortcut.Arguments = "-NoProfile -STA -WindowStyle Hidden -ExecutionPolicy RemoteSigned -File `"$PSScriptRoot\tray-dream-skin.ps1`""
     $shortcut.WorkingDirectory = $SkillRoot
-    $shortcut.Description = 'Start Codex Guofeng Themes in the notification area'
+    $shortcut.Description = 'Start Codex Dream Skin in the notification area'
     $shortcut.Save()
   }
 
@@ -158,7 +158,7 @@ try {
     try { $active = Read-DreamSkinTheme -ThemeDirectory $paths.Active -SkipImageMetadata } catch {}
     $status = if ($paused) {
       Get-DreamSkinTrayText -Key 'StatusPaused'
-    } elseif ($state) {
+    } elseif (Test-DreamSkinRecordedInjectorRunning -State $state) {
       Get-DreamSkinTrayText -Key 'StatusRunning'
     } else {
       Get-DreamSkinTrayText -Key 'StatusStopped'
@@ -181,7 +181,7 @@ try {
         $null = Show-DreamSkinOperationUi -Session $session -Phase finish -Token $begin.Token `
           -UiState success -Message (Get-DreamSkinTrayText -Key 'ApplyStarted') -TimeoutMs 1500
       }
-      $notify.ShowBalloonTip(1800, 'Codex Guofeng Themes', (Get-DreamSkinTrayText -Key 'Applying'), [System.Windows.Forms.ToolTipIcon]::Info)
+      $notify.ShowBalloonTip(1800, 'Codex Dream Skin', (Get-DreamSkinTrayText -Key 'Applying'), [System.Windows.Forms.ToolTipIcon]::Info)
     }
     # Match macOS menubar: pause = mark + live remove; resume lets the serialized
     # start path clear pause only after its safety checks and any restart consent.
@@ -201,7 +201,7 @@ try {
         }
         $notify.ShowBalloonTip(
           1800,
-          'Codex Guofeng Themes',
+          'Codex Dream Skin',
           (Get-DreamSkinTrayText -Key 'Reapplying'),
           [System.Windows.Forms.ToolTipIcon]::Info
         )
@@ -225,7 +225,7 @@ try {
           [System.Windows.Forms.ToolTipIcon]::Warning
         }
         $removalMessage = $removal.Message
-        $notify.ShowBalloonTip(2800, 'Codex Guofeng Themes', $removalMessage, $icon)
+        $notify.ShowBalloonTip(2800, 'Codex Dream Skin', $removalMessage, $icon)
         if (-not $removal.Removed -and $removal.Attempted) {
           Show-DreamSkinTrayError -Message $removalMessage
         }
@@ -243,7 +243,7 @@ try {
               -StateRoot $StateRoot
             Set-DreamSkinPaused -Paused $false -StateRoot $StateRoot | Out-Null
           }
-          $notify.ShowBalloonTip(1800, 'Codex Guofeng Themes', (Get-DreamSkinTrayText -Key 'BackgroundUpdated'), [System.Windows.Forms.ToolTipIcon]::Info)
+          $notify.ShowBalloonTip(1800, 'Codex Dream Skin', (Get-DreamSkinTrayText -Key 'BackgroundUpdated'), [System.Windows.Forms.ToolTipIcon]::Info)
         }
       } finally {
         $dialog.Dispose()
@@ -283,7 +283,7 @@ try {
           } else {
             [System.Windows.Forms.ToolTipIcon]::Info
           }
-          $notify.ShowBalloonTip(4200, 'Codex Guofeng Themes', $message, $messageIcon)
+          $notify.ShowBalloonTip(4200, 'Codex Dream Skin', $message, $messageIcon)
         }
       } finally {
         $dialog.Dispose()
@@ -301,7 +301,7 @@ try {
         }
         $notify.ShowBalloonTip(
           1800,
-          'Codex Guofeng Themes',
+          'Codex Dream Skin',
           (Get-DreamSkinTrayText -Key 'Saved' -FormatArguments @($saved.Theme.name)),
           [System.Windows.Forms.ToolTipIcon]::Info
         )
@@ -329,7 +329,7 @@ try {
           }
           $notify.ShowBalloonTip(
             1800,
-            'Codex Guofeng Themes',
+            'Codex Dream Skin',
             (Get-DreamSkinTrayText -Key 'Applied' -FormatArguments @($savedName)),
             [System.Windows.Forms.ToolTipIcon]::Info
           )

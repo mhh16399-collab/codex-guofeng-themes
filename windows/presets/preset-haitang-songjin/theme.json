@@ -14,7 +14,7 @@
     "focusX": 0.9,
     "focusY": 0.53,
     "safeArea": "left",
-    "taskMode": "ambient"
+    "taskMode": "full"
   },
   "colors": {
     "background": "#f5ead4",

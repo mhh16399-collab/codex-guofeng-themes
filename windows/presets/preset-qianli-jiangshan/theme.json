@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-qianli-jiangshan",
+  "name": "千里江山",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": { "focusX": 0.86, "focusY": 0.58, "safeArea": "left", "taskMode": "full" },
+  "colors": {
+    "background": "#f4efdf", "panel": "#f7f3e8", "panelAlt": "#e7eee4",
+    "accent": "#287f78", "accentAlt": "#4f9e91", "secondary": "#2f7180",
+    "highlight": "#c6a45a", "text": "#183631", "muted": "#667b73",
+    "line": "rgba(40, 127, 120, .24)"
+  }
+}

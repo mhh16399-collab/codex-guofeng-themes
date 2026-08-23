@@ -117,6 +117,35 @@ html[data-dream-skin="active"][data-dream-shell="light"] {
    skin variables so those surfaces inherit the theme in both shells. */
 html[data-dream-skin="active"] {
   --color-token-dropdown-background: var(--ds-panel);
+  --color-token-foreground: var(--ds-text);
+  --color-token-text-secondary: var(--ds-muted);
+  --color-token-muted-foreground: var(--ds-muted);
+  --color-token-description-foreground: var(--ds-muted);
+  --color-background-surface: var(--ds-bg) !important;
+  --color-background-surface-under: var(--ds-panel-2) !important;
+  --color-background-panel: var(--ds-panel) !important;
+  --color-background-control: rgb(var(--ds-panel-rgb) / .96) !important;
+  --color-background-control-opaque: var(--ds-panel) !important;
+  --color-background-elevated-primary: rgb(var(--ds-panel-rgb) / .96) !important;
+  --color-background-elevated-primary-opaque: var(--ds-panel) !important;
+  --color-background-elevated-secondary: rgb(var(--ds-panel-2-rgb) / .94) !important;
+  --color-background-elevated-secondary-opaque: var(--ds-panel-2) !important;
+  --color-background-accent: rgb(var(--ds-accent-rgb) / .14) !important;
+  --color-background-accent-hover: rgb(var(--ds-accent-rgb) / .18) !important;
+  --color-background-accent-active: rgb(var(--ds-accent-rgb) / .24) !important;
+  --color-background-button-primary: var(--ds-accent) !important;
+  --color-background-button-primary-hover: var(--ds-accent-soft) !important;
+  --color-background-button-primary-active: var(--ds-secondary) !important;
+  --color-background-primary-solid: var(--ds-accent) !important;
+  --color-text-foreground: var(--ds-text) !important;
+  --color-text-foreground-secondary: var(--ds-muted) !important;
+  --color-text-foreground-tertiary: rgb(var(--ds-muted-rgb) / .78) !important;
+  --color-icon-primary: var(--ds-text) !important;
+  --color-icon-secondary: var(--ds-muted) !important;
+  --color-icon-tertiary: rgb(var(--ds-muted-rgb) / .78) !important;
+  --color-icon-accent: var(--ds-accent) !important;
+  --color-text-accent: var(--ds-accent) !important;
+  --color-border-focus: var(--ds-accent) !important;
 }
 
 html[data-dream-skin="active"] [class~="bg-token-dropdown-background"] {
@@ -246,6 +275,59 @@ html[data-dream-skin="active"] aside.app-shell-left-panel [class*="text-token-fo
 
 html[data-dream-skin="active"] aside.app-shell-left-panel [class*="text-token-input-placeholder-foreground"] {
   color: rgb(var(--ds-muted-rgb) / .92) !important;
+}
+
+@layer dreamskin-accessibility {
+  html[data-dream-skin="active"][data-dream-shell="light"] [class*="_markdown" i] {
+    color: var(--ds-text) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"] [data-ds-part="sidebar"] *,
+  html[data-dream-skin="active"][data-dream-shell="light"] [data-ds-part="thread"] *,
+  html[data-dream-skin="active"][data-dream-shell="light"] [data-ds-part="header"] * {
+    color: var(--ds-text) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"] [class*="_ApplicationMenuTopBar_"],
+  html[data-dream-skin="active"][data-dream-shell="light"] [class*="_ApplicationMenuTopBar_"] * {
+    color: var(--ds-text) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"] [class*="text-codex-description"],
+  html[data-dream-skin="active"][data-dream-shell="light"] [class*="text-text/"],
+  html[data-dream-skin="active"][data-dream-shell="light"] [class~="text-tertiary"] {
+    color: var(--ds-text) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"]
+    [class~="bg-background-primary-soft/70"] {
+    background: rgb(var(--ds-panel-rgb) / .88) !important;
+    border-color: var(--ds-line) !important;
+    color: var(--ds-text) !important;
+    box-shadow: 0 5px 18px rgb(var(--ds-bg-rgb) / .12) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"]
+    [class*="_ComposerLayoutRoot_"]:has([data-ds-part="composer"]) {
+    color: var(--ds-text) !important;
+    background: rgb(var(--ds-panel-rgb) / .94) !important;
+    border-color: var(--ds-line) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"]
+    [class*="_ComposerLayoutRoot_"]:has([data-ds-part="composer"]) * {
+    color: var(--ds-text) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"]
+    [class*="_ComposerLayoutRoot_"] .ProseMirror {
+    caret-color: var(--ds-text) !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-shell="light"]
+    [class*="_ComposerLayoutRoot_"] .ProseMirror [data-placeholder]::after {
+    color: rgb(var(--ds-muted-rgb) / .92) !important;
+  }
 }
 
 html[data-dream-skin="active"] aside.app-shell-left-panel svg {
@@ -447,7 +529,7 @@ html[data-dream-skin="active"]:is([data-dream-task-mode="ambient"], [data-dream-
 }
 
 html[data-dream-skin="active"]:is([data-dream-task-mode="ambient"], [data-dream-art-task-mode="ambient"], [data-dream-task-mode="banner"], [data-dream-art-task-mode="banner"], [data-dream-task-mode="full"], [data-dream-art-task-mode="full"])[data-dream-art-wide="true"]
-  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) [class*="_markdown"] {
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) [class*="_markdown" i] {
   color: var(--ds-text) !important;
   text-shadow:
     0 1px 2px rgb(var(--ds-bg-rgb) / .82),
@@ -455,7 +537,7 @@ html[data-dream-skin="active"]:is([data-dream-task-mode="ambient"], [data-dream-
 }
 
 html[data-dream-skin="active"][data-dream-shell="light"]:is([data-dream-task-mode="ambient"], [data-dream-art-task-mode="ambient"], [data-dream-task-mode="banner"], [data-dream-art-task-mode="banner"], [data-dream-task-mode="full"], [data-dream-art-task-mode="full"])[data-dream-art-wide="true"]
-  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) [class*="_markdown"] {
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) [class*="_markdown" i] {
   text-shadow:
     0 1px 2px rgb(var(--ds-panel-rgb) / .92),
     0 0 10px rgb(var(--ds-panel-rgb) / .72);
@@ -593,11 +675,25 @@ html[data-dream-skin="active"]
   transform: rotate(-3deg);
 }
 
+/* The home hero already renders this tagline below its heading. Do not repeat
+   it at window level where tall composers can overlap and crop it. */
+html[data-dream-skin="active"]
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):has([role="main"])::after {
+  content: none !important;
+}
+
 html[data-dream-skin="active"][data-dream-shell="light"]
   main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"])::before,
 html[data-dream-skin="active"][data-dream-shell="light"]
   main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"])::after {
   text-shadow: none;
+}
+
+/* Current Codex renders project controls in this native header. DreamSkin's
+   legacy brand labels overlap those controls, so keep the native chrome clean. */
+[data-ds-part="header"]::before,
+[data-ds-part="header"]::after {
+  content: none !important;
 }
 
 /* Windows keeps this native bar outside main; macOS simply has no match. */
@@ -1101,6 +1197,340 @@ html[data-dream-skin="active"][data-dream-shell="light"][data-dream-art-wide="tr
   backdrop-filter: blur(8px) saturate(102%) !important;
 }
 
+/* Qianli Jiangshan keeps the original pale celadon navigation panel while
+   softly blurring the landscape beneath it. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-qianli-jiangshan"][data-dream-art-wide="true"]
+  aside.app-shell-left-panel {
+  background: rgba(231, 238, 228, .58) !important;
+  backdrop-filter: blur(6px) saturate(90%) !important;
+}
+
+/* Chayan Songfeng places its pine and teaware on the right edge. Keep the
+   complete composition visible instead of turning the navigation opaque. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-chayan-songfeng"]
+  aside.app-shell-left-panel {
+  background: rgba(240, 232, 215, .58) !important;
+  backdrop-filter: blur(6px) saturate(.9) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-chayan-songfeng"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(240, 232, 215, .58) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: blur(6px) saturate(.9) !important;
+}
+
+/* Haitang Songjin should read as one continuous textile instead of separate
+   frosted navigation and content slabs. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-haitang-songjin"]
+  aside.app-shell-left-panel {
+  background: rgba(245, 236, 219, .22) !important;
+  backdrop-filter: none !important;
+}
+
+/* Jiye Xinghe keeps the star map sharp through the shell and uses one
+   readable composer surface instead of nested frosted cards. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-jiye-xinghe"]
+  aside.app-shell-left-panel {
+  background: rgba(9, 20, 33, .24) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jiye-xinghe"]
+  [class*="_ComposerLayoutRoot_"] {
+  background: rgba(14, 26, 40, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jiye-xinghe"]
+  [data-ds-part="composer"] {
+  background: rgba(14, 26, 40, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jiye-xinghe"]::after {
+  content: "" !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 168px !important;
+  height: 36px !important;
+  background: linear-gradient(90deg,
+    rgba(223, 231, 235, 0) 0%,
+    rgba(223, 231, 235, .76) 24%,
+    rgba(223, 231, 235, .92) 100%) !important;
+  z-index: 2147483646 !important;
+}
+
+/* Jingtai Hualan uses the same clear full-window treatment, preserving the
+   enamel details while keeping text and controls legible. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingtai-hualan"]
+  aside.app-shell-left-panel {
+  background: rgba(5, 19, 34, .72) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingtai-hualan"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(5, 19, 34, .72) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingtai-hualan"]
+  [class*="_ComposerLayoutRoot_"] {
+  background: rgba(11, 33, 55, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingtai-hualan"]
+  [data-ds-part="composer"] {
+  background: rgba(11, 33, 55, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingtai-hualan"]::after {
+  content: "" !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 168px !important;
+  height: 36px !important;
+  background: linear-gradient(90deg,
+    rgba(220, 230, 234, 0) 0%,
+    rgba(220, 230, 234, .76) 24%,
+    rgba(220, 230, 234, .92) 100%) !important;
+  z-index: 2147483646 !important;
+}
+
+/* Heiqi Luodian keeps the shell transparent enough to show the inlay and
+   avoids nested frosted surfaces around the composer. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-heiqi-luodian"]
+  aside.app-shell-left-panel {
+  background: rgba(8, 10, 11, .58) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-heiqi-luodian"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(8, 10, 11, .58) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-heiqi-luodian"]
+  [class*="_ComposerLayoutRoot_"] {
+  background: rgba(17, 20, 22, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-heiqi-luodian"]
+  [data-ds-part="composer"] {
+  background: rgba(17, 20, 22, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-heiqi-luodian"]::after {
+  content: "" !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 168px !important;
+  height: 36px !important;
+  background: linear-gradient(90deg,
+    rgba(222, 229, 230, 0) 0%,
+    rgba(222, 229, 230, .76) 24%,
+    rgba(222, 229, 230, .92) 100%) !important;
+  z-index: 2147483646 !important;
+}
+
+/* Sunmao Danying keeps the timber artwork visible through the navigation
+   instead of rendering it as a separate frosted panel. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-sunmao-danying"]
+  aside.app-shell-left-panel {
+  background: rgba(239, 225, 206, .68) !important;
+  backdrop-filter: blur(6px) saturate(.9) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-sunmao-danying"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(239, 225, 206, .68) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: blur(6px) saturate(.9) !important;
+}
+
+/* Ruihe Lingxiao uses the original cool blue-gray frosted navigation panel;
+   the crane painting remains in the main canvas. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-ruihe-lingxiao"]
+  aside.app-shell-left-panel {
+  background: rgba(235, 241, 240, .87) !important;
+  backdrop-filter: blur(19px) saturate(88%) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-ruihe-lingxiao"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(235, 241, 240, .87) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: blur(19px) saturate(88%) !important;
+}
+
+/* Tang Sancai keeps the glaze and horse painting visible beneath the shell. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-tangsancai"]
+  aside.app-shell-left-panel {
+  background: rgba(239, 225, 194, .82) !important;
+  backdrop-filter: blur(6px) saturate(.88) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-tangsancai"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(239, 225, 194, .82) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: blur(6px) saturate(.88) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-hanjian-mohen"]
+  aside.app-shell-left-panel {
+  background: rgba(23, 18, 14, .64) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-hanjian-mohen"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(23, 18, 14, .64) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-luoshui-liuxia"]
+  aside.app-shell-left-panel {
+  background: rgba(22, 20, 40, .64) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-luoshui-liuxia"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: linear-gradient(90deg,
+    rgba(22, 20, 40, .64) 0 var(--ds-live-sidebar-width, 360px),
+    transparent var(--ds-live-sidebar-width, 360px)) !important;
+  backdrop-filter: none !important;
+}
+
+/* Luoshui Liuxia is a 3:2 ambient illustration. It is visually wide enough
+   for the home canvas even though it is below the generic 1.75 wide cutoff. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-luoshui-liuxia"]:has(main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) [role="main"]) body {
+  background-image: var(--dream-skin-art) !important;
+  background-position: var(--ds-art-position) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-luoshui-liuxia"]
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):has([role="main"]) {
+  background: linear-gradient(90deg,
+    var(--ds-immersive-edge),
+    var(--ds-immersive-mid) 64%,
+    var(--ds-immersive-far)) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-luoshui-liuxia"]
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):has([role="main"])
+  > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"]) {
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Qinghua Ci uses a pale porcelain background. Preserve the blue floral
+   drawing through the navigation instead of frosting it into a grey slab. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-qinghua-ci"]
+  aside.app-shell-left-panel {
+  background: rgba(240, 246, 248, .58) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-qinghua-ci"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgba(240, 246, 248, .72) !important;
+  border-bottom-color: rgba(71, 104, 127, .14) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Dunhuang Liujin keeps the mural legible through the navigation instead of
+   blurring it into a nearly opaque black slab. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-dunhuang-liujin"] {
+  --ds-immersive-edge: rgba(21, 18, 16, .22);
+  --ds-immersive-mid: rgba(21, 18, 16, .14);
+  --ds-immersive-far: rgba(21, 18, 16, .08);
+  --ds-immersive-sidebar: rgba(21, 18, 16, .20);
+  --ds-immersive-composer-solid: rgba(27, 24, 21, .62);
+  --color-background-panel: rgba(27, 24, 21, .58) !important;
+  --color-background-elevated-primary: rgba(27, 24, 21, .58) !important;
+  --color-background-elevated-primary-opaque: rgba(27, 24, 21, .68) !important;
+  --color-background-elevated-secondary: rgba(39, 33, 28, .54) !important;
+  --color-background-elevated-secondary-opaque: rgba(39, 33, 28, .64) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-dunhuang-liujin"]
+  aside.app-shell-left-panel {
+  background: rgba(21, 18, 16, .24) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-dunhuang-liujin"]
+  [class*="_ComposerLayoutRoot_"] {
+  background: rgba(27, 24, 21, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-dunhuang-liujin"]
+  [data-ds-part="composer"] {
+  background: rgba(27, 24, 21, .62) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-dunhuang-liujin"]
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"]) {
+  background: rgba(21, 18, 16, .28) !important;
+  border-bottom-color: rgba(196, 151, 80, .16) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Electron's Windows caption glyphs are native and are not exposed in the
+   renderer DOM. The installed Codex shell keeps black caption glyphs even
+   when this dark artwork is active, so give only their hit area a pale,
+   non-interactive backing plate. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-dunhuang-liujin"]::after {
+  content: "" !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 168px !important;
+  height: 36px !important;
+  background: linear-gradient(90deg,
+    rgba(240, 228, 208, 0) 0%,
+    rgba(240, 228, 208, .76) 24%,
+    rgba(240, 228, 208, .92) 100%) !important;
+  z-index: 2147483646 !important;
+}
+
 html[data-dream-skin="active"][data-dream-shell="light"]
   .composer-surface-chrome p.placeholder::after {
   color: rgb(var(--ds-muted-rgb) / .78) !important;
@@ -1165,6 +1595,17 @@ html[data-dream-skin="active"][data-dream-shell="light"][data-dream-art-wide="tr
 html[data-dream-skin="active"] [class*="_homeUtilityBar_"] button,
 html[data-dream-skin="active"] .composer-surface-chrome button:not([class~="bg-token-foreground"]) {
   color: var(--ds-muted) !important;
+}
+
+html[data-dream-skin="active"]
+  .composer-surface-chrome button:is([class~="bg-token-foreground"], [class~="bg-primary-solid"]) {
+  background: var(--ds-accent) !important;
+  color: var(--ds-on-accent) !important;
+}
+
+html[data-dream-skin="active"]
+  .composer-surface-chrome button:is([class~="bg-token-foreground"], [class~="bg-primary-solid"]) * {
+  color: currentColor !important;
 }
 
 html[data-dream-skin="active"] [class*="_homeUtilityBar_"] button svg,
@@ -1278,6 +1719,96 @@ html[data-dream-skin="active"] button[class~="bg-token-foreground"] {
 
 html[data-dream-skin="active"] article,
 html[data-dream-skin="active"] [data-ds-part="message"] { border-radius: 16px; }
+
+/* Keep the native header geometry and its one-pixel divider, but never paint a
+   second opaque/frosted strip across the artwork. This final rule intentionally
+   comes after the route- and theme-specific header treatments. */
+html[data-dream-skin="active"]
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"]) {
+  background: transparent !important;
+  border-bottom: 1px solid var(--ds-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Codex 26.8+ puts data-ds-part="composer" on an inner footer while the
+   _ComposerLayoutRoot_ already owns the visible rounded shell. Community theme
+   declarations are important, so this invariant belongs in the earlier
+   accessibility layer whose important declarations win the layer cascade. */
+@layer dreamskin-accessibility {
+  html[data-dream-skin="active"][data-dream-theme-id]
+    [class*="_ComposerLayoutRoot_"] [data-ds-part="composer"] {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Codex also paints a route-level fade directly below the real header.
+     It is the broad horizontal band visible on non-wide artwork; the header's
+     one-pixel divider remains handled by the final header rule above. */
+  html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"])
+    :is(.app-shell-main-content-top-fade, [data-app-shell-main-content-top-fade], [class*="_MainContentTopFade_"]) {
+    display: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Image preview controls use stable accessible names. Theme-wide icon
+     colors can otherwise turn their glyphs almost white on pale circles. */
+  html[data-dream-skin="active"] :is(
+    button[aria-label="编辑图片"],
+    button[aria-label="编辑图像"],
+    button[aria-label="Edit image"],
+    button[aria-label="下载图片"],
+    button[aria-label="Download image"],
+    button[aria-label="关闭图片预览"],
+    button[aria-label="关闭图像预览"],
+    button[aria-label="Close image preview"]
+  ) {
+    color: #20242b !important;
+    --color-icon-primary: #20242b !important;
+    --color-icon-secondary: #20242b !important;
+    background: rgba(248, 249, 250, .94) !important;
+    border-color: rgba(32, 36, 43, .22) !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  html[data-dream-skin="active"] :is(
+    button[aria-label="编辑图片"],
+    button[aria-label="编辑图像"],
+    button[aria-label="Edit image"],
+    button[aria-label="下载图片"],
+    button[aria-label="Download image"],
+    button[aria-label="关闭图片预览"],
+    button[aria-label="关闭图像预览"],
+    button[aria-label="Close image preview"]
+  ) svg {
+    color: #20242b !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
+
+/* Electron's Windows caption glyphs are native black controls and cannot be
+   recolored from the page. Give them a quiet light backing in every dark skin;
+   the overlay sits below the native glyphs and never intercepts clicks. */
+html[data-dream-skin="active"][data-dream-shell="dark"]::after {
+  content: "" !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 168px !important;
+  height: 36px !important;
+  background: linear-gradient(90deg,
+    rgba(226, 232, 235, 0) 0%,
+    rgba(226, 232, 235, .76) 24%,
+    rgba(226, 232, 235, .92) 100%) !important;
+  z-index: 2147483646 !important;
+}
 
 @media (max-width: 1120px) {
   html[data-dream-skin="active"]

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-jingtai-hualan",
+  "name": "景泰华蓝",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "铜丝点翠，华蓝凝光。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "JINGTAI ONLINE",
+  "quote": "华蓝入夜，金线生辉",
+  "image": "background.jpg",
+  "appearance": "dark",
+  "art": { "focusX": 0.9, "focusY": 0.52, "safeArea": "left", "taskMode": "full" },
+  "colors": {
+    "background": "#061729", "panel": "#0b2137", "panelAlt": "#102c45",
+    "accent": "#2f9aa1", "accentAlt": "#236c8f", "secondary": "#0e5274",
+    "highlight": "#d3aa53", "text": "#f2e8ce", "muted": "#9fb3bd",
+    "line": "rgba(211, 170, 83, .28)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "景泰华蓝 · Jingtai Hualan",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

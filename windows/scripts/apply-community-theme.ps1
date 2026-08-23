@@ -31,7 +31,7 @@ function Show-DreamSkinCommunityMessage {
   }
   [void][System.Windows.Forms.MessageBox]::Show(
     $Message,
-    'Codex Guofeng Themes',
+    'Codex Dream Skin',
     [System.Windows.Forms.MessageBoxButtons]::OK,
     $icon
   )

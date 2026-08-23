@@ -138,11 +138,6 @@ try {
       $desktop = [Environment]::GetFolderPath('Desktop')
       $startMenu = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs'
       @(
-        (Join-Path $desktop 'Codex Guofeng Themes.lnk'),
-        (Join-Path $desktop 'Codex Guofeng Themes - Restore.lnk'),
-        (Join-Path $desktop 'Codex Guofeng Themes - Tray.lnk'),
-        (Join-Path $startMenu 'Codex Guofeng Themes.lnk'),
-        (Join-Path $startMenu 'Codex Guofeng Themes - Tray.lnk'),
         (Join-Path $desktop 'Codex Dream Skin.lnk'),
         (Join-Path $desktop 'Codex Dream Skin - Restore.lnk'),
         (Join-Path $desktop 'Codex Dream Skin - Tray.lnk'),

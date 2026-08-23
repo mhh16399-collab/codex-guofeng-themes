@@ -485,7 +485,7 @@ test("start cannot announce active after renderer verification exhausts its dead
   const startupCatch = source.indexOf("$startupError = $_", failureThrow);
   const stateCleanup = source.indexOf("Remove-Item -LiteralPath $StatePath", startupCatch);
   const rethrow = source.indexOf("throw $startupError", stateCleanup);
-  const activeMessage = source.indexOf('Write-Host "Codex Guofeng Themes is active', rethrow);
+  const activeMessage = source.indexOf('Write-Host "Codex Dream Skin is active', rethrow);
   assert.ok(verifyStart >= 0 && successBreak > verifyStart,
     "Startup must only leave the verify loop on a zero injector exit code.");
   assert.ok(failureThrow > successBreak && startupCatch > failureThrow,

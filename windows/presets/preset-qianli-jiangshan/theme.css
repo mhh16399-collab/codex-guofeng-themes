@@ -1,0 +1,39 @@
+[data-ds-part="root"] {
+  color: var(--ds-theme-color-text);
+}
+
+[data-ds-part="sidebar"] {
+  color: var(--ds-theme-color-text);
+  background-color: rgba(231, 238, 228, 0.58);
+  border-right-color: var(--ds-theme-color-line);
+  backdrop-filter: blur(6px) saturate(0.9);
+}
+
+[data-ds-part="main"] {
+  color: var(--ds-theme-color-text);
+  background-color: rgba(247, 243, 232, 0.26);
+}
+
+[data-ds-part="header"] {
+  color: var(--ds-theme-color-text);
+  background-color: rgba(247, 243, 232, 0.18);
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+}
+
+[data-ds-part="thread"] {
+  color: var(--ds-theme-color-text);
+  background-color: rgba(247, 243, 232, 0.18);
+}
+
+[data-ds-part="message"] {
+  color: var(--ds-theme-color-text);
+}
+
+[data-ds-part="composer"] {
+  color: var(--ds-theme-color-text);
+  background-color: rgba(247, 243, 232, 0.94);
+  border-color: var(--ds-theme-color-line);
+  border-radius: 22px;
+  backdrop-filter: blur(14px);
+}

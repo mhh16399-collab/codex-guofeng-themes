@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-jinling-yunjin",
+  "name": "金陵云锦",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "寸锦寸金，孔雀成章。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "YUNJIN ONLINE",
+  "quote": "金线织云，孔雀开屏",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": { "focusX": 0.88, "focusY": 0.5, "safeArea": "left", "taskMode": "ambient" },
+  "colors": {
+    "background": "#f1eee5", "panel": "#f6f2e9", "panelAlt": "#e5e8df",
+    "accent": "#0c5672", "accentAlt": "#16756b", "secondary": "#0b2f55",
+    "highlight": "#c99f41", "text": "#18373e", "muted": "#65787a",
+    "line": "rgba(12, 86, 114, .24)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "金陵云锦 · Jinling Yunjin",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

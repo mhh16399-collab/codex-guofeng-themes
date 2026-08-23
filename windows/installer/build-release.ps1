@@ -26,19 +26,8 @@ $innoChineseLanguagePath = Join-Path $innoLanguageRoot 'ChineseSimplified.isl'
 $innoSetupLicensePath = Join-Path $innoLanguageRoot 'Inno-Setup-License.txt'
 $innoChineseLanguageSha256 = '7d544b9bb1d142cfa11f2e5d3cc8abe2e55f8e066c5124e3772675aa236e1278'
 $innoSetupLicenseSha256 = '0c81595601bce47eeef8d865d5da7f9ca2c6a12235b7482b29f5ab23ed02ee5a'
-$guofengPresetsRoot = Join-Path $windowsRoot 'presets'
-$guofengPresetIds = @(
-  'preset-zhuqing',
-  'preset-zhusha',
-  'preset-moyun',
-  'preset-ruyao-tianqing',
-  'preset-dunhuang-liujin',
-  'preset-qinghua-ci',
-  'preset-haitang-songjin',
-  'preset-jiye-xinghe'
-)
-$guofengPresetHashes = [ordered]@{
-  'catalog.json' = 'a75e704d806003eff3c075da0d19eb4041cc1b79a9264fe88d4b436486de27be'
+$reviewedWindowsPresetSha256 = @{
+  'catalog.json' = '26f2204a70306e6cae93c89d6ddbd764a22e7b2b91d2b0b547ac0fd5cd387222'
   'preset-zhuqing\background.jpg' = '2715879d9a476d868146b9b9241a97fe10ef2d4eb0111ccb862ad09138449dde'
   'preset-zhuqing\theme.json' = '4e9b1d3a7ca0772a7980dbef7cdbf593bf5da0d18f1046ae240e46a37440dd01'
   'preset-zhuqing\theme.css' = '0e2c52f085d532d29a28f131d953877c8de93f1acdd0cebcfe606d67209b1201'
@@ -52,17 +41,47 @@ $guofengPresetHashes = [ordered]@{
   'preset-ruyao-tianqing\theme.json' = '6f3020e846402d330d47e9d5f18c15155b67edbd8f7a3d146702ea1c7fa9e974'
   'preset-ruyao-tianqing\theme.css' = '6753a134b469828a3655f8b707f7caff094ff7d886dd359809c2f13ded07769e'
   'preset-dunhuang-liujin\background.jpg' = '87833dc26c437f1c3245ef95c7936c55be51453e863e0cd0d129cd001df5ff24'
-  'preset-dunhuang-liujin\theme.json' = 'bc2adac7a2f6e77413c0063eb830671ff751fdf88a1a6105fd1956165ad466a3'
-  'preset-dunhuang-liujin\theme.css' = '075edda2eccda8f6fbe26bf5911ccdb2c14a51ac4b0618f82170011e5efe4b87'
+  'preset-dunhuang-liujin\theme.json' = '37f31fe66e22caa5ce914085d6585740f1d89742aae3983dc47fe793c8e5ae07'
+  'preset-dunhuang-liujin\theme.css' = '8bfc269261d5d98233fd43fa7d006aae72d19e13bdb2b49b86fd1f05d894b962'
   'preset-qinghua-ci\background.jpg' = '8d9800617948999be55ba79a819b3db5e3d0066de84217e04e68f3b7ac885160'
   'preset-qinghua-ci\theme.json' = '5e11b1834f97505cc0d2941e144496cfa02af0e86bfbc47625b5648345b2c3f3'
-  'preset-qinghua-ci\theme.css' = 'd51ce0c0f35e65bb69773b680e01b312412bea09116600c4914326b58197de2c'
+  'preset-qinghua-ci\theme.css' = '0ed0de7e538e1a8e842f8a19e5ae976089fd0b08b3d4cd45e3dbf665f47af9ae'
   'preset-haitang-songjin\background.jpg' = '61e11828a9becd41817ce9cfaf10c9567c3c2df50859d60d06ed9f16694612df'
-  'preset-haitang-songjin\theme.json' = '1939e5ead83d3573a9a658936452cf37f838673aecb2ad6a390d4ec026e343d0'
-  'preset-haitang-songjin\theme.css' = 'b540c2faba3d1a49bc05803409408605577a4c0a75279ec549ecd537d847ed47'
+  'preset-haitang-songjin\theme.json' = '8089fed6e63967ff0768025a0b1c23bb14f23cc070147eab13cc9fb1811f7f52'
+  'preset-haitang-songjin\theme.css' = '37891dd26c76968f2c853511f317d9f323dcaa20ffd30d1b8ef55a5c83a41285'
   'preset-jiye-xinghe\background.jpg' = '175e7bcd2c4c518ddbcbcf9db2434475d1233d18ccbcc61739a5c7154fe76de2'
-  'preset-jiye-xinghe\theme.json' = '0b7a30ec80faffe3c90fb0bcf5280375760de463ac708903f5aee42b8fc58305'
-  'preset-jiye-xinghe\theme.css' = '14ba1625d1577ad99136903cf40070a97f1de22859c70057f48fe53030c1bb03'
+  'preset-jiye-xinghe\theme.json' = 'c9abcd8048c34bec1498f2c56b6cdd25f4e5855ba05450d28dbc36141bddda47'
+  'preset-jiye-xinghe\theme.css' = '039ef77ace4eec4c4557911585358fa096dd400676cdb9d1b54120b357d63f50'
+  'preset-qianli-jiangshan\background.jpg' = '192478e4158c9bb855e26b3121a31dd7fc7f5593754b891581cd12a8f9a19e82'
+  'preset-qianli-jiangshan\theme.json' = 'e4ac69245dadac99ed955f0a1eee81fd6bf737c9b5a89b42adbacc0b5c772a2f'
+  'preset-qianli-jiangshan\theme.css' = '8f74fe4c80f715a1adb671b45b7d465e296f1ba231e4a00986cd9a66656010a7'
+  'preset-jingtai-hualan\background.jpg' = '30302c7b43d4d23c24139d02d9f4ec7636a6e3258babd21eacb3092533b4e0dc'
+  'preset-jingtai-hualan\theme.json' = 'e94443ce8001d07cae86f67d28b51142aa1c5ec624a3dd528462dc6cedce6c8e'
+  'preset-jingtai-hualan\theme.css' = '84d4b9d521f0119738d5f839b47f62e55d64a4f65a0dfcd7aaf5fea4c22da584'
+  'preset-heiqi-luodian\background.jpg' = '26d33618bc7891d74e8f7cea7f593101307337bf7ca7917f2f0db16b69482b0a'
+  'preset-heiqi-luodian\theme.json' = '9aaededae95912e1b3af9aa282c2c90fc17d23290de13b6ce6ddb44ab27e2b8a'
+  'preset-heiqi-luodian\theme.css' = 'd66d55bff404bc82bdd777bea22ce8df085f14d384fc7f8e53fcd50af6af0142'
+  'preset-chayan-songfeng\background.jpg' = 'c9687ccc3d856db576bb23e51cdff98dc979c5fa485ff79aae6f8dd2d51ddeee'
+  'preset-chayan-songfeng\theme.json' = 'e4ec2f0af7b7ecbb9e55625dfdf8bf7f1218ee26c53213284a962817e9c70d84'
+  'preset-chayan-songfeng\theme.css' = '0683facee12988df10bdfeed528f89ca804ddcd410cd044caef513455367e3b1'
+  'preset-sunmao-danying\background.jpg' = '9f0ba408d16df4db512949536e7e30a3dbadecfff538fa897b3c81266a720a8e'
+  'preset-sunmao-danying\theme.json' = '8ecd581426958f91420044e7eaea90cc97714649b9e08faacfbf5830ba294635'
+  'preset-sunmao-danying\theme.css' = '9fd7696971ffba7ce25d6bb6a18b542e8c9b4b2912ec2856ef2adaf8a69226be'
+  'preset-ruihe-lingxiao\background.jpg' = 'b28285d58fd5ba8d607c7300ab51cd85fc251409aac0e02167d5e35a03d3ce1e'
+  'preset-ruihe-lingxiao\theme.json' = '7137b9238125f6ad5eaef4f3a120197ff77604f6eb03ef487c43db79e0c66668'
+  'preset-ruihe-lingxiao\theme.css' = '14c1650fecbf754e610b204dbde456d10633d0fa4df410070819eecb0c7875b2'
+  'preset-tangsancai\background.jpg' = 'f99084b7a42c198fe07f0ac78761e27df688efa4a8cf1811897d4f409940a5a3'
+  'preset-tangsancai\theme.json' = '30bec52696ea91c99a651393bdc048ba695652d076eda57a00d8f4a3ccef0673'
+  'preset-tangsancai\theme.css' = '1b26dc50a359dab7a90219bc302bbf40788c5728501b57d0fc8a146bb90f76e4'
+  'preset-hanjian-mohen\background.jpg' = 'cd109013b6ac12ea8539d2105d2d2ef11c088e3e4f74995c3c88f80df3a87af7'
+  'preset-hanjian-mohen\theme.json' = '3a7ff6b349adb176a6c1e745e68af4455feb02fd133d43ab01ce4b9813c875d5'
+  'preset-hanjian-mohen\theme.css' = '1901e44327024f95d985751a6bed075e1063681378a9522684f14e76b803f9b5'
+  'preset-luoshui-liuxia\background.jpg' = 'de459c151d4be27b7333489ec491d37308a24e9118945582b1ccb2aecc361853'
+  'preset-luoshui-liuxia\theme.json' = '1d5bd28b9360cc3cbffea8532f581a5cf39d36ba55ebe4ee32b0d993eeb9c2e5'
+  'preset-luoshui-liuxia\theme.css' = '4c9dec03616ea5bb40e911da5cc7ccc9058392a69b14cdf896c9a230aafa430f'
+  'preset-jinling-yunjin\background.jpg' = 'fed8ad25a74d8c2ff12872a0f0ddbe41b369a73ad58595f180fc2a637656854f'
+  'preset-jinling-yunjin\theme.json' = 'd00cc1230bce0f1d43f6fc9fc47f8de3c747337b5b855c19c96a564cca518ae3'
+  'preset-jinling-yunjin\theme.css' = 'f898c4038b3d3f001ddff22b942463740c040adf36a56c34d808191db5e7d05a'
 }
 
 function Read-ReleaseTextFile {
@@ -201,7 +220,8 @@ function Write-DreamSkinIcon {
           $edgeCoverage = 0
           foreach ($sampleY in @(0.125, 0.375, 0.625, 0.875)) {
             foreach ($sampleX in @(0.125, 0.375, 0.625, 0.875)) {
-              # Guofeng mark：宣纸圆角方 + 竹青对角半区 + 朱砂印点 + 发丝描边环。
+              # DreamSkin 品牌 mark（与网站 favicon 同源）：白圆角方 +
+              # 墨色对角半区（x+y>=1）+ 青点 + 14% 发丝描边环。
               $x = ($column + $sampleX) / $size
               $y = ($row + $sampleY) / $size
               $dx = [Math]::Max([Math]::Abs($x - 0.5) - 0.16, 0.0)
@@ -223,15 +243,15 @@ function Write-DreamSkinIcon {
           $darkBlend = $darkCoverage / 16.0
           $dotBlend = $dotCoverage / 16.0
           $edgeBlend = 0.14 * ($edgeCoverage / 16.0)
-          $red = 247.0 * (1.0 - $darkBlend) + 47.0 * $darkBlend
-          $green = 248.0 * (1.0 - $darkBlend) + 111.0 * $darkBlend
-          $blue = 242.0 * (1.0 - $darkBlend) + 89.0 * $darkBlend
-          $red = $red * (1.0 - $dotBlend) + 183.0 * $dotBlend
-          $green = $green * (1.0 - $dotBlend) + 73.0 * $dotBlend
-          $blue = $blue * (1.0 - $dotBlend) + 58.0 * $dotBlend
-          $red = [int][Math]::Round($red * (1.0 - $edgeBlend) + 31.0 * $edgeBlend)
-          $green = [int][Math]::Round($green * (1.0 - $edgeBlend) + 78.0 * $edgeBlend)
-          $blue = [int][Math]::Round($blue * (1.0 - $edgeBlend) + 62.0 * $edgeBlend)
+          $red = 253.0 * (1.0 - $darkBlend) + 23.0 * $darkBlend
+          $green = 253.0 * (1.0 - $darkBlend) + 24.0 * $darkBlend
+          $blue = 252.0 * (1.0 - $darkBlend) + 28.0 * $darkBlend
+          $red = $red * (1.0 - $dotBlend) + 45.0 * $dotBlend
+          $green = $green * (1.0 - $dotBlend) + 225.0 * $dotBlend
+          $blue = $blue * (1.0 - $dotBlend) + 194.0 * $dotBlend
+          $red = [int][Math]::Round($red * (1.0 - $edgeBlend) + 23.0 * $edgeBlend)
+          $green = [int][Math]::Round($green * (1.0 - $edgeBlend) + 24.0 * $edgeBlend)
+          $blue = [int][Math]::Round($blue * (1.0 - $edgeBlend) + 28.0 * $edgeBlend)
           $writer.Write([byte]$blue)
           $writer.Write([byte]$green)
           $writer.Write([byte]$red)
@@ -317,52 +337,15 @@ $innoSetupLicenseHash = (Get-FileHash -LiteralPath $innoSetupLicensePath -Algori
 if ($innoSetupLicenseHash -cne $innoSetupLicenseSha256) {
   throw "The pinned Inno Setup license changed. Expected $innoSetupLicenseSha256, found $innoSetupLicenseHash."
 }
-$guofengCatalog = (Read-ReleaseTextFile -Path (Join-Path $guofengPresetsRoot 'catalog.json')) |
-  ConvertFrom-Json
-if ([int]$guofengCatalog.schemaVersion -ne 1 -or
-  "$($guofengCatalog.defaultThemeId)" -cne 'preset-zhuqing' -or
-  @($guofengCatalog.themes).Count -ne $guofengPresetIds.Count) {
-  throw 'The reviewed Guofeng theme catalog metadata is unexpected.'
-}
-
-function Get-ReleaseReviewedFileHash {
-  param(
-    [Parameter(Mandatory = $true)][string]$Path,
-    [switch]$NormalizeText
-  )
-  if (-not $NormalizeText) {
-    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+foreach ($relativePath in $reviewedWindowsPresetSha256.Keys) {
+  $presetPath = Join-Path (Join-Path $windowsRoot 'presets') $relativePath
+  if (-not (Test-Path -LiteralPath $presetPath -PathType Leaf)) {
+    throw "The reviewed Windows preset file is missing: $relativePath"
   }
-
-  $text = (Read-ReleaseTextFile -Path $Path).Replace("`r`n", "`n").Replace("`r", "`n")
-  $bytes = [System.Text.UTF8Encoding]::new($false).GetBytes($text)
-  $sha256 = [System.Security.Cryptography.SHA256]::Create()
-  try {
-    return ([System.BitConverter]::ToString($sha256.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
-  } finally {
-    $sha256.Dispose()
-  }
-}
-for ($presetIndex = 0; $presetIndex -lt $guofengPresetIds.Count; $presetIndex++) {
-  $presetId = $guofengPresetIds[$presetIndex]
-  if ("$(@($guofengCatalog.themes)[$presetIndex])" -cne $presetId) {
-    throw 'The reviewed Guofeng theme catalog order is unexpected.'
-  }
-  $presetTheme = (Read-ReleaseTextFile -Path (Join-Path $guofengPresetsRoot "$presetId\theme.json")) |
-    ConvertFrom-Json
-  if ("$($presetTheme.id)" -cne $presetId -or "$($presetTheme.image)" -cne 'background.jpg') {
-    throw "The reviewed Guofeng theme metadata is unexpected: $presetId"
-  }
-}
-foreach ($relative in $guofengPresetHashes.Keys) {
-  $sourceFile = Join-Path $guofengPresetsRoot $relative
-  if (-not (Test-Path -LiteralPath $sourceFile -PathType Leaf)) {
-    throw "A reviewed Guofeng theme file is missing: $relative"
-  }
-  $actualHash = Get-ReleaseReviewedFileHash -Path $sourceFile `
-    -NormalizeText:($relative -cnotmatch '\.jpg$')
-  if ($actualHash -cne $guofengPresetHashes[$relative]) {
-    throw "A reviewed Guofeng theme file changed: $relative"
+  $presetHash = (Get-FileHash -LiteralPath $presetPath -Algorithm SHA256).Hash.ToLowerInvariant()
+  $expectedPresetHash = $reviewedWindowsPresetSha256[$relativePath]
+  if ($presetHash -cne $expectedPresetHash) {
+    throw "The reviewed Windows preset file changed: $relativePath. Expected $expectedPresetHash, found $presetHash."
   }
 }
 $compiler = Resolve-IsccExecutable -RequestedPath $IsccPath
@@ -416,7 +399,7 @@ try {
   New-Item -ItemType Directory -Path $languageRoot | Out-Null
   Copy-ReleaseDirectory -Source (Join-Path $windowsRoot 'assets') -Destination (Join-Path $payloadRoot 'assets')
   Copy-ReleaseDirectory -Source (Join-Path $windowsRoot 'scripts') -Destination (Join-Path $payloadRoot 'scripts')
-  Copy-ReleaseDirectory -Source $guofengPresetsRoot -Destination (Join-Path $payloadRoot 'presets')
+  Copy-ReleaseDirectory -Source (Join-Path $windowsRoot 'presets') -Destination (Join-Path $payloadRoot 'presets')
   [System.IO.File]::WriteAllText(
     (Join-Path $payloadRoot 'VERSION'),
     "$version`r`n",
@@ -478,6 +461,36 @@ try {
     'presets\preset-jiye-xinghe\background.jpg',
     'presets\preset-jiye-xinghe\theme.json',
     'presets\preset-jiye-xinghe\theme.css',
+    'presets\preset-qianli-jiangshan\background.jpg',
+    'presets\preset-qianli-jiangshan\theme.json',
+    'presets\preset-qianli-jiangshan\theme.css',
+    'presets\preset-jingtai-hualan\background.jpg',
+    'presets\preset-jingtai-hualan\theme.json',
+    'presets\preset-jingtai-hualan\theme.css',
+    'presets\preset-heiqi-luodian\background.jpg',
+    'presets\preset-heiqi-luodian\theme.json',
+    'presets\preset-heiqi-luodian\theme.css',
+    'presets\preset-chayan-songfeng\background.jpg',
+    'presets\preset-chayan-songfeng\theme.json',
+    'presets\preset-chayan-songfeng\theme.css',
+    'presets\preset-sunmao-danying\background.jpg',
+    'presets\preset-sunmao-danying\theme.json',
+    'presets\preset-sunmao-danying\theme.css',
+    'presets\preset-ruihe-lingxiao\background.jpg',
+    'presets\preset-ruihe-lingxiao\theme.json',
+    'presets\preset-ruihe-lingxiao\theme.css',
+    'presets\preset-tangsancai\background.jpg',
+    'presets\preset-tangsancai\theme.json',
+    'presets\preset-tangsancai\theme.css',
+    'presets\preset-hanjian-mohen\background.jpg',
+    'presets\preset-hanjian-mohen\theme.json',
+    'presets\preset-hanjian-mohen\theme.css',
+    'presets\preset-luoshui-liuxia\background.jpg',
+    'presets\preset-luoshui-liuxia\theme.json',
+    'presets\preset-luoshui-liuxia\theme.css',
+    'presets\preset-jinling-yunjin\background.jpg',
+    'presets\preset-jinling-yunjin\theme.json',
+    'presets\preset-jinling-yunjin\theme.css',
     'scripts\apply-community-theme.ps1',
     'scripts\check-update.ps1',
     'scripts\common-windows.ps1',
@@ -500,12 +513,11 @@ try {
       throw "Staged installer payload is incomplete: $relative"
     }
   }
-  foreach ($relative in $guofengPresetHashes.Keys) {
-    $stagedHash = Get-ReleaseReviewedFileHash `
-      -Path (Join-Path (Join-Path $payloadRoot 'presets') $relative) `
-      -NormalizeText:($relative -cnotmatch '\.jpg$')
-    if ($stagedHash -cne $guofengPresetHashes[$relative]) {
-      throw 'Staged installer payload did not retain the reviewed Guofeng theme catalog.'
+  foreach ($relativePath in $reviewedWindowsPresetSha256.Keys) {
+    $stagedPresetPath = Join-Path (Join-Path $payloadRoot 'presets') $relativePath
+    $stagedPresetHash = (Get-FileHash -LiteralPath $stagedPresetPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($stagedPresetHash -cne $reviewedWindowsPresetSha256[$relativePath]) {
+      throw "Staged installer payload changed a reviewed Guofeng file: $relativePath"
     }
   }
 

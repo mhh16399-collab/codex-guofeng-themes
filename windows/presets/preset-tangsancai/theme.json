@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-tangsancai",
+  "name": "唐三彩",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "三彩流釉，骏影生辉。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "SANCAI ONLINE",
+  "quote": "釉色奔流，驼铃入梦",
+  "image": "background.jpg",
+  "appearance": "light",
+  "art": { "focusX": 0.91, "focusY": 0.47, "safeArea": "left", "taskMode": "full" },
+  "colors": {
+    "background": "#f4e5c8", "panel": "#f8edda", "panelAlt": "#e6dec2",
+    "accent": "#6f803e", "accentAlt": "#4f6b35", "secondary": "#a76224",
+    "highlight": "#d59a37", "text": "#3e3524", "muted": "#7d735e",
+    "line": "rgba(111, 128, 62, .24)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "唐三彩 · Tang Sancai",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

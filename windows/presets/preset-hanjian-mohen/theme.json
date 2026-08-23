@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-hanjian-mohen",
+  "name": "汉简墨痕",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "简牍藏字，墨痕有声。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "HANJIAN ONLINE",
+  "quote": "简书旧事，墨写新章",
+  "image": "background.jpg",
+  "appearance": "dark",
+  "art": { "focusX": 0.88, "focusY": 0.58, "safeArea": "left", "taskMode": "ambient" },
+  "colors": {
+    "background": "#17120e", "panel": "#211a14", "panelAlt": "#2d241b",
+    "accent": "#8f633f", "accentAlt": "#6e754f", "secondary": "#385c51",
+    "highlight": "#b58a59", "text": "#eee0c8", "muted": "#aa9780",
+    "line": "rgba(143, 99, 63, .28)"
+  },
+  "promoTitle": "Codex 国风主题工坊",
+  "promoSub": "汉简墨痕 · Hanjian Mohen",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}
