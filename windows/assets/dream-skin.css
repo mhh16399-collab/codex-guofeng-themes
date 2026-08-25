@@ -540,42 +540,13 @@ html[data-dream-skin="active"] main:is(.main-surface, [data-app-shell-main-surfa
   backdrop-filter: blur(14px) saturate(108%) !important;
 }
 
-/* Decorative chrome lives on the native shell; no injected positioning host is needed. */
+/* Keep Codex's native task header clean. Injected theme labels and status text
+   collide with the task title, share controls, and window actions in current builds. */
 html[data-dream-skin="active"]
-  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"])::before {
-  content: var(--dream-skin-name, "Codex Dream Skin") " · "
-    var(--dream-skin-brand-subtitle, "CODEX DREAM SKIN");
-  position: absolute;
-  left: 22px;
-  top: 4px;
-  z-index: 2;
-  max-width: min(42%, 360px);
-  overflow: hidden;
-  color: var(--ds-accent);
-  font: 800 11px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: .03em;
-  text-overflow: ellipsis;
-  text-shadow: 0 1px 12px rgb(var(--ds-bg-rgb) / .32);
-  white-space: nowrap;
-  pointer-events: none;
-}
-
+  main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"])::before,
 html[data-dream-skin="active"]
   main:is(.main-surface, [data-app-shell-main-surface], [class*="_MainContentSurface_"]):not(:has([role="main"])) > header:is(.app-header-tint, [data-app-shell-header-edge-scroll], [class*="_Header_"])::after {
-  content: var(--dream-skin-status, "DREAM SKIN ONLINE");
-  position: absolute;
-  right: 84px;
-  top: 13px;
-  z-index: 2;
-  max-width: 28%;
-  overflow: hidden;
-  color: var(--ds-muted);
-  font: 700 9px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: .08em;
-  text-overflow: ellipsis;
-  text-shadow: 0 1px 10px rgb(var(--ds-bg-rgb) / .32);
-  white-space: nowrap;
-  pointer-events: none;
+  content: none !important;
 }
 
 html[data-dream-skin="active"]
@@ -1099,6 +1070,20 @@ html[data-dream-skin="active"][data-dream-shell="light"][data-dream-art-wide="tr
     inset 0 0 0 1px var(--ds-immersive-line),
     inset 0 1px rgb(var(--ds-panel-rgb) / .72) !important;
   backdrop-filter: blur(8px) saturate(102%) !important;
+}
+
+/* Yanlan Liubai keeps native application chrome cool and opaque so the
+   full-window xuan-paper art cannot tint the Windows menu bar. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-yanlan-liubai"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgb(232, 235, 231) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-bingqing-yuanxiu"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgb(232, 238, 238) !important;
+  backdrop-filter: none !important;
 }
 
 /* Jingxiang Chaxi follows the selected reference exactly: dark walnut chrome

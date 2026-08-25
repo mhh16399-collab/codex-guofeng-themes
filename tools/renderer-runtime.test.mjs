@@ -338,8 +338,12 @@ export async function runRendererRuntimeTest(assetRoot) {
   assert.match(css, /header:is\(\.app-header-tint, \[data-app-shell-header-edge-scroll\], \[class\*=\"_Header_\"\]\)/);
   assert.match(css, /:is\(\.app-shell-main-content-top-fade, \[data-app-shell-main-content-top-fade\], \[class\*=\"_MainContentTopFade_\"\]\)/);
   assert.doesNotMatch(css, /:has\([^()]*:has\(/);
-  assert.match(css, /content:\s*var\(--dream-skin-name[\s\S]{0,180}var\(--dream-skin-brand-subtitle/);
-  assert.match(css, /content:\s*var\(--dream-skin-status/);
+  assert.doesNotMatch(css, /header:is\([^)]*app-header-tint[^)]*\)::before\s*\{[^}]*content:\s*var\(--dream-skin-name/s);
+  assert.doesNotMatch(css, /header:is\([^)]*app-header-tint[^)]*\)::after\s*\{[^}]*content:\s*var\(--dream-skin-status/s);
+  assert.match(
+    css,
+    /header:is\([^)]*app-header-tint[^)]*\)::after\s*\{\s*content:\s*none\s*!important;/,
+  );
   assert.match(css, /content:\s*var\(--dream-skin-quote/);
   assert.match(css, /--ds-task-full-veil/);
   assert.match(css, /data-dream-task-mode="full"/);

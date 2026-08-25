@@ -12,5 +12,26 @@
     "layout": "windows-codex",
     "containsRealDesktopContent": false,
     "sha256": "f085b120b693570a96dd5488ed3b4c1c49404765da65f417fb316f3917875a91"
+  },
+  "qingming-changjuan": {
+    "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
+    "containsRealDesktopContent": false,
+    "sha256": "87cc16b5d2abda52b23df26dd7ac2f58cac7700e0071009b2d4aac288e9ede72"
+  },
+  "yanlan-liubai": {
+    "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
+    "containsRealDesktopContent": false,
+    "sha256": "5483b23515c97a30ef1423ad7d52583241bf56deb1bd37301857a198e4914367"
+  },
+  "bingqing-yuanxiu": {
+    "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
+    "containsRealDesktopContent": false,
+    "sha256": "433bd0afc99d5f331a9c356ff97ce23218ece00906519844b0e5ce65bcadf6de"
   }
 }

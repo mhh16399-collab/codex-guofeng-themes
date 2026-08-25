@@ -17,15 +17,26 @@
       --surface: rgba(244, 238, 226, .91);
       --surface-border: rgba(78, 60, 43, .30);
       --veil: linear-gradient(90deg, rgba(248,243,234,.25), rgba(248,243,234,.08));
+      --window-bg: none;
+      --workspace-bg: none;
+      --sidebar-filter: blur(14px) saturate(.9);
+      --titlebar: rgba(240,238,232,.94);
       font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
       color: var(--ink);
       background: #ddd;
     }
     button { font: inherit; }
-    .app { width: 100%; height: 100%; position: relative; background: #ddd; }
+    .app {
+      width: 100%; height: 100%; position: relative;
+      background-color: #ddd;
+      background-image: var(--window-bg);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
     .titlebar {
       height: 52px; display: flex; align-items: center; justify-content: space-between;
-      padding-left: 18px; color: #252525; background: rgba(240,238,232,.94);
+      padding-left: 18px; color: #252525; background: var(--titlebar);
       border-bottom: 1px solid rgba(0,0,0,.10); backdrop-filter: blur(14px);
     }
     .menu, .window-controls { display: flex; align-items: center; height: 100%; }
@@ -39,9 +50,9 @@
     .window-controls button:last-child:hover { color: white; background: #c42b1c; }
     .shell { height: calc(100% - 52px); display: grid; grid-template-columns: 360px 1fr; }
     .sidebar {
-      position: relative; padding: 22px 18px 20px; color: var(--sidebar-text);
+      position: relative; padding: 22px 18px 82px; color: var(--sidebar-text);
       background: var(--sidebar); border-right: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(14px) saturate(.9);
+      backdrop-filter: var(--sidebar-filter);
     }
     .brand-row { display: flex; align-items: center; justify-content: space-between; margin: 0 5px 21px; }
     .brand { font-size: 24px; font-weight: 650; }
@@ -57,10 +68,17 @@
     .project-row { font-weight: 600; }
     .task-row { padding-left: 35px; color: var(--sidebar-text); font-size: 16px; }
     .task-row .bell { margin-left: auto; color: var(--sidebar-muted); }
-    .settings { position: absolute; left: 20px; right: 20px; bottom: 18px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.12); font-size: 17px; }
+    .profile {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 66px;
+      display: flex; align-items: center; gap: 11px; padding: 0 20px;
+      border-top: 1px solid rgba(120,120,120,.18); background: rgba(245,245,240,.16);
+      font-size: 17px;
+    }
+    .avatar { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; color: white; background: #8a5bb7; font-size: 11px; }
+    .profile-spacer { flex: 1; }
     .workspace {
       position: relative; min-width: 0; overflow: hidden;
-      background-image: var(--veil), var(--bg);
+      background-image: var(--veil), var(--workspace-bg);
       background-position: center; background-size: cover; background-repeat: no-repeat;
     }
     .workspace::after {
@@ -73,7 +91,7 @@
     }
     .prompt-icon { display: block; margin: 0 auto 28px; width: 54px; height: 54px; border: 3px solid currentColor; border-radius: 48% 52% 55% 45%; opacity: .74; text-align: center; line-height: 46px; }
     .composer {
-      position: absolute; z-index: 2; left: 7%; right: 6%; bottom: 44px;
+      position: absolute; z-index: 2; left: 7%; right: 6%; bottom: 24px;
       color: var(--ink); filter: drop-shadow(0 8px 22px rgba(22,16,10,.18));
     }
     .composer-meta {
@@ -82,10 +100,14 @@
       font-size: 16px; backdrop-filter: blur(14px);
     }
     .composer-input {
-      height: 82px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px 0 24px;
+      height: 116px; display: flex; flex-direction: column; align-items: stretch; justify-content: space-between; padding: 16px 16px 12px 24px;
       background: rgba(250,247,240,.95); border: 1px solid var(--surface-border); border-radius: 17px;
       font-size: 17px; color: #8c887f; backdrop-filter: blur(14px);
     }
+    .composer-toolbar { display: flex; align-items: center; gap: 18px; color: var(--ink); font-size: 15px; }
+    .access { color: #d85c34; font-weight: 600; }
+    .toolbar-spacer { flex: 1; }
+    .voice { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 50%; color: white; background: #111; }
     .send {
       width: 45px; height: 45px; display: grid; place-items: center; border: 0; border-radius: 50%;
       color: white; background: var(--accent); font-size: 26px;
@@ -117,13 +139,16 @@
           <div class="task-row">优化页面层级<span class="bell">♧</span></div>
           <div class="task-row">查看构建结果<span class="bell">♧</span></div>
         </div>
-        <div class="settings">⚙　设置</div>
+        <div class="profile" data-region="profile"><span class="avatar">MH</span><span>Mm Hh</span><span class="profile-spacer"></span><span>▥　语音</span><span>ⓘ</span></div>
       </aside>
       <section class="workspace" data-region="workspace">
         <div class="prompt"><span class="prompt-icon">⌁</span><span id="promptText"></span></div>
         <div class="composer" data-region="composer">
           <div class="composer-meta"><span>▱　示例工坊</span><span>▰　本地</span><span>⑂　main⌄</span></div>
-          <div class="composer-input"><span>随心输入</span><button class="send">↑</button></div>
+          <div class="composer-input">
+            <span>随心输入</span>
+            <div class="composer-toolbar" data-region="composer-toolbar"><span>＋</span><span class="access">♢ 完全访问</span><span class="toolbar-spacer"></span><span>ϟ 5.6 Sol</span><span>中⌄</span><span>♩</span><span class="voice">▥</span></div>
+          </div>
         </div>
       </section>
     </div>
@@ -133,6 +158,7 @@
       "jingxiang-chaxi": {
         name: "静香茶席",
         bg: "url('../../windows/presets/preset-jingxiang-chaxi/background.png')",
+        wallpaperMode: "main",
         sidebar: "rgba(31,25,19,.86)", sidebarText: "#eadfce", sidebarMuted: "#c8b9a4",
         selected: "rgba(220,202,174,.30)", accent: "#71826b", ink: "#3a2b20",
         surface: "rgba(244,238,226,.91)", border: "rgba(78,60,43,.30)",
@@ -141,16 +167,53 @@
       "citong-haibo": {
         name: "刺桐海舶",
         bg: "url('../../windows/presets/preset-citong-haibo/background.png')",
+        wallpaperMode: "main",
         sidebar: "rgba(6,25,33,.87)", sidebarText: "#d7d6cc", sidebarMuted: "#9ea9a5",
         selected: "rgba(86,106,103,.68)", accent: "#8d543e", ink: "#26373e",
         surface: "rgba(226,222,210,.93)", border: "rgba(76,64,50,.48)",
         veil: "linear-gradient(90deg, rgba(225,231,229,.15), rgba(225,231,229,.02))"
+      },
+      "qingming-changjuan": {
+        name: "清明长卷",
+        bg: "url('../../windows/presets/preset-qingming-changjuan/background.png')",
+        wallpaperMode: "window",
+        sidebarFilter: "none",
+        titlebar: "rgba(240,238,232,.94)",
+        sidebar: "rgba(242,235,219,.58)", sidebarText: "#2f2c27", sidebarMuted: "#8b8376",
+        selected: "rgba(150,140,120,.23)", accent: "#a45135", ink: "#302c26",
+        surface: "rgba(250,247,239,.94)", border: "rgba(103,87,65,.24)",
+        veil: "linear-gradient(90deg, rgba(255,252,243,.12), rgba(255,252,243,.02))"
+      },
+      "yanlan-liubai": {
+        name: "烟岚留白",
+        bg: "url('../../windows/presets/preset-yanlan-liubai/background.png')",
+        wallpaperMode: "window",
+        sidebarFilter: "none",
+        titlebar: "rgb(232,235,231)",
+        sidebar: "rgba(231,235,231,.64)", sidebarText: "#283237", sidebarMuted: "#727d7d",
+        selected: "rgba(113,126,123,.18)", accent: "#b54b3d", ink: "#283237",
+        surface: "rgba(247,246,240,.94)", border: "rgba(74,86,84,.22)",
+        veil: "linear-gradient(90deg, rgba(244,247,244,.08), rgba(244,247,244,.01))"
+      },
+      "bingqing-yuanxiu": {
+        name: "冰青远岫",
+        bg: "url('../../windows/presets/preset-bingqing-yuanxiu/background.png')",
+        wallpaperMode: "window",
+        sidebarFilter: "none",
+        titlebar: "rgb(232,238,238)",
+        sidebar: "rgba(232,240,240,.68)", sidebarText: "#294951", sidebarMuted: "#6d858a",
+        selected: "rgba(70,118,125,.16)", accent: "#5b8f97", ink: "#294951",
+        surface: "rgba(247,250,249,.94)", border: "rgba(62,94,100,.20)",
+        veil: "linear-gradient(90deg, rgba(244,249,249,.06), rgba(244,249,249,.01))"
       }
     };
     const id = new URLSearchParams(location.search).get("theme") || "jingxiang-chaxi";
     const theme = themes[id] || themes["jingxiang-chaxi"];
     const root = document.body.style;
-    root.setProperty("--bg", theme.bg);
+    root.setProperty("--window-bg", theme.wallpaperMode === "window" ? theme.bg : "none");
+    root.setProperty("--workspace-bg", theme.wallpaperMode === "main" ? theme.bg : "none");
+    root.setProperty("--sidebar-filter", theme.sidebarFilter || "blur(14px) saturate(.9)");
+    root.setProperty("--titlebar", theme.titlebar || "rgba(240,238,232,.94)");
     root.setProperty("--sidebar", theme.sidebar);
     root.setProperty("--sidebar-text", theme.sidebarText);
     root.setProperty("--sidebar-muted", theme.sidebarMuted);

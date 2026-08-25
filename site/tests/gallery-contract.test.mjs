@@ -36,8 +36,8 @@ test("gallery exposes the current reviewed Guofeng themes and core controls", as
   assert.match(source, /全部主题/);
   assert.match(source, /浅色/);
   assert.match(source, /深色/);
-  assert.doesNotMatch(source, /dreamskin:\/\/preset\?theme=/);
-  assert.match(source, /dreamskin:\/\/apply\?version=/);
+  assert.match(source, /dreamskin:\/\/preset\?theme=preset-/);
+  assert.doesNotMatch(source, /dreamskin:\/\/apply\?version=/);
   assert.match(source, /下载主题包/);
   assert.match(source, /查看详情/);
   assert.match(source, /下载原版 DreamSkin/);

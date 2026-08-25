@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-yanlan-liubai",
+  "name": "烟岚留白",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "一舟入烟岚，千峰留素白。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "YANLAN ONLINE",
+  "quote": "远山含黛，孤舟听风",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.58,
+    "focusY": 0.55,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#e8ebe7",
+    "panel": "#e7ebe7",
+    "panelAlt": "#d6dcda",
+    "accent": "#b54b3d",
+    "accentAlt": "#cf7062",
+    "secondary": "#687779",
+    "highlight": "#b9c4c2",
+    "text": "#283237",
+    "muted": "#727d7d",
+    "line": "rgba(74, 86, 84, .22)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "烟岚留白 · Yanlan Liubai",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

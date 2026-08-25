@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-bingqing-yuanxiu",
+  "name": "冰青远岫",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "冰青入岫，云水无声。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "YUANXIU ONLINE",
+  "quote": "远岫含青，云开见境",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.62,
+    "focusY": 0.56,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#e8eeee",
+    "panel": "#e8f0f0",
+    "panelAlt": "#d8e5e5",
+    "accent": "#5b8f97",
+    "accentAlt": "#78a9ae",
+    "secondary": "#6e8f95",
+    "highlight": "#aac6c9",
+    "text": "#294951",
+    "muted": "#6d858a",
+    "line": "rgba(62, 94, 100, .22)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "冰青远岫 · Bingqing Yuanxiu",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

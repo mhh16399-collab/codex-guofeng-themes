@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { paginateThemes } from "./pagination.js";
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
-const applyUri = (version) => `dreamskin://apply?version=${version}`;
+const applyUri = (theme) => `dreamskin://preset?theme=preset-${theme.id}`;
 const packageUri = (theme) => asset(`downloads/preset-${theme.id}.zip`);
 const PAGE_SIZE = 6;
 
@@ -27,6 +27,9 @@ const themes = [
   { id: "jinling-yunjin", name: "金陵云锦", romanized: "Jinling Yunjin", tone: "light", toneLabel: "浅色", tagline: "寸锦寸金，孔雀成章", story: "孔雀蓝、宝石绿与真金线织出云锦团花和孔雀羽纹，冷象牙丝面保持通透，也与海棠宋锦清晰区分。", colors: ["#f1eee5", "#0c5672", "#c99f41"], image: "themes/jinling-yunjin.png" },
   { id: "jingxiang-chaxi", name: "静香茶席", romanized: "Jingxiang Chaxi", tone: "light", toneLabel: "浅色", tagline: "静火温盏，香篆入席", story: "暖褐茶室、暗木格与一席茶器围住浅宣纸阅读区，让顶栏与侧栏连成安静的茶席，同时保持正文清楚易读。", colors: ["#f1dfc2", "#9b7651", "#2a2119"], image: "themes/jingxiang-chaxi.png" },
   { id: "citong-haibo", name: "刺桐海舶", romanized: "Citong Haibo", tone: "light", toneLabel: "浅色", tagline: "刺桐潮起，海舶云集", story: "深蓝黑船腹框住左侧导航，雾海与湿船坞铺开中央留白，右侧巨型福船在旧铜与灰蓝色里静静泊岸。", colors: ["#d8d9d0", "#6d8581", "#172a31"], image: "themes/citong-haibo.png" },
+  { id: "qingming-changjuan", name: "清明长卷", romanized: "Qingming Changjuan", tone: "light", toneLabel: "浅色", tagline: "汴水入卷，清明有声", story: "宣纸长卷从城门、市井一路铺向汴河与虹桥，左侧保留清晰画面，右侧卷轴与朱印收住古意，整窗连续而不虚化。", colors: ["#efe5cf", "#827564", "#a45135"], image: "themes/qingming-changjuan.png" },
+  { id: "yanlan-liubai", name: "烟岚留白", romanized: "Yanlan Liubai", tone: "light", toneLabel: "浅色", tagline: "一舟入烟岚，千峰留素白", story: "冷灰水墨山峦、孤舟与一轮淡朱日构成大面积留白，左侧山石松影直接入画，清晰克制，适合长时间阅读。", colors: ["#e8ebe7", "#687779", "#b54b3d"], image: "themes/yanlan-liubai.png" },
+  { id: "bingqing-yuanxiu", name: "冰青远岫", romanized: "Bingqing Yuanxiu", tone: "light", toneLabel: "浅色", tagline: "冰青入岫，云水无声", story: "冰青与浅玉色山体以现代几何层次向远处递进，冷灰顶栏和通透侧栏保持统一，画面轻盈而富有辨识度。", colors: ["#e8eeee", "#6e8f95", "#5b8f97"], image: "themes/bingqing-yuanxiu.png" },
 ];
 
 function updateQuery(filter, query) {
@@ -162,11 +165,7 @@ export function App() {
                         <div className="swatches" aria-label={`${theme.name}配色`}>{theme.colors.map((color) => <i key={color} style={{ background: color }} />)}</div>
                       </div>
                       <div className="card-actions">
-                        {theme.communityVersion ? (
-                          <a href={applyUri(theme.communityVersion)} onClick={() => setLaunchHint(theme.id)}>一键换肤</a>
-                        ) : (
-                          <a href={packageUri(theme)} download>下载主题包</a>
-                        )}
+                        <a href={applyUri(theme)} onClick={() => setLaunchHint(theme.id)}>一键换肤</a>
                         <button type="button" onClick={(event) => openDetails(theme, event.currentTarget)}>查看详情</button>
                       </div>
                       {launchHint === theme.id && <p className="launch-hint">没有唤起客户端？请先下载安装桌面端。</p>}
@@ -201,7 +200,7 @@ export function App() {
           <div className="install-copy">
             <p className="eyebrow">WINDOWS INSTALLER</p>
             <h2 id="install-title">一套安装包，当前馆藏都带走</h2>
-            <p>先安装原版 DreamSkin，再从系统托盘导入国风主题 ZIP。主题审核取得版本 ID 后，网页按钮会直接使用原版一键换肤协议。</p>
+            <p>先安装原版 DreamSkin，再从系统托盘导入国风主题 ZIP。网页的一键换肤按钮会调用本机已捆绑主题，详情中也可下载 ZIP 导入。</p>
             <a className="button button-primary" href="https://github.com/Fei-Away/Codex-Dream-Skin/releases/latest" target="_blank" rel="noreferrer">下载原版 DreamSkin</a>
           </div>
           <ol className="install-steps">

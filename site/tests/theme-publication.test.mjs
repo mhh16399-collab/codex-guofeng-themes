@@ -11,9 +11,12 @@ const clientRoot = path.resolve(here, "../dist/client");
 const publishedThemes = [
   { id: "jingxiang-chaxi", name: "静香茶席" },
   { id: "citong-haibo", name: "刺桐海舶" },
+  { id: "qingming-changjuan", name: "清明长卷" },
+  { id: "yanlan-liubai", name: "烟岚留白" },
+  { id: "bingqing-yuanxiu", name: "冰青远岫" },
 ];
 
-test("production gallery publishes both approved themes with previews and downloads", async () => {
+test("production gallery publishes all approved themes with previews and downloads", async () => {
   const assetNames = await readdir(path.join(clientRoot, "assets"));
   const scriptNames = assetNames.filter((name) => name.endsWith(".js"));
   const scripts = await Promise.all(

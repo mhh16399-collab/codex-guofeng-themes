@@ -8,6 +8,8 @@ When implementing from a selected generated mock, treat that image as the source
 
 For theme previews, preserve each source image's natural aspect ratio. Do not crop or stretch preview art to make cards uniform. The home hero keeps a large right-side preview that uses the available width without leaving conspicuous dead space, but it must show the original image directly without a museum-label header or launch seal; use only a restrained theme-name caption such as “竹青”. On desktop, the gallery uses three large cards per row so the interface previews remain legible; detail previews must also prioritize the complete uncropped image over decorative framing.
 
+All newly published theme previews use one shared synthetic Windows Codex interface. Only the background, palette, and explicitly selected sidebar composition may vary; never use the user's real desktop or real conversation content. Full-window art must remain clear in the sidebar without backdrop blur, native top bars use an opaque theme-matched color, and injected brand/status decorations must not overlap native task chrome.
+
 Gallery cards use a rounded outer container plus an inset, rounded preview frame with a visible paper-colored breathing ring, light border, and restrained shadow. Preview images must not sit flush against the outer card edge.
 
 Every gallery card exposes two real actions. `一键换肤` must use the strict local bundled-preset protocol `dreamskin://preset?theme=preset-<id>`; it must never put a download URL, file path, or command into the protocol. `查看详情` opens the complete uncropped preview in the existing accessible detail dialog. Keep these actions visually inside the rounded card rather than overlaying the artwork.
