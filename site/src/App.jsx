@@ -25,6 +25,8 @@ const themes = [
   { id: "hanjian-mohen", name: "汉简墨痕", romanized: "Hanjian Mohen", tone: "dark", toneLabel: "深色", tagline: "简牍藏字，墨痕有声", story: "焦茶色纸纤维、竹简与青铜绿锈构成沉静暗色书案，适合喜欢考古质感与低亮度界面的用户。", colors: ["#17120e", "#8f633f", "#385c51"], image: "themes/hanjian-mohen.png" },
   { id: "luoshui-liuxia", name: "洛水流霞", romanized: "Luoshui Liuxia", tone: "dark", toneLabel: "深色", tagline: "月照洛水，流霞成绮", story: "靛青月夜映着水城、桥影与紫色流霞，玫瑰金的细光沿水面铺开，柔美而不甜腻。", colors: ["#17172b", "#9b78ad", "#d6a27e"], image: "themes/luoshui-liuxia.png" },
   { id: "jinling-yunjin", name: "金陵云锦", romanized: "Jinling Yunjin", tone: "light", toneLabel: "浅色", tagline: "寸锦寸金，孔雀成章", story: "孔雀蓝、宝石绿与真金线织出云锦团花和孔雀羽纹，冷象牙丝面保持通透，也与海棠宋锦清晰区分。", colors: ["#f1eee5", "#0c5672", "#c99f41"], image: "themes/jinling-yunjin.png" },
+  { id: "jingxiang-chaxi", name: "静香茶席", romanized: "Jingxiang Chaxi", tone: "light", toneLabel: "浅色", tagline: "静火温盏，香篆入席", story: "暖褐茶室、暗木格与一席茶器围住浅宣纸阅读区，让顶栏与侧栏连成安静的茶席，同时保持正文清楚易读。", colors: ["#f1dfc2", "#9b7651", "#2a2119"], image: "themes/jingxiang-chaxi.png" },
+  { id: "citong-haibo", name: "刺桐海舶", romanized: "Citong Haibo", tone: "light", toneLabel: "浅色", tagline: "刺桐潮起，海舶云集", story: "深蓝黑船腹框住左侧导航，雾海与湿船坞铺开中央留白，右侧巨型福船在旧铜与灰蓝色里静静泊岸。", colors: ["#d8d9d0", "#6d8581", "#172a31"], image: "themes/citong-haibo.png" },
 ];
 
 function updateQuery(filter, query) {

@@ -1101,6 +1101,114 @@ html[data-dream-skin="active"][data-dream-shell="light"][data-dream-art-wide="tr
   backdrop-filter: blur(8px) saturate(102%) !important;
 }
 
+/* Jingxiang Chaxi follows the selected reference exactly: dark walnut chrome
+   on the left, a warm tea-paper wash through the center, and a dark right cap. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+  __DREAM_SELECTOR_LEFT_PANEL__ {
+  background: rgba(30, 25, 20, .78) !important;
+  backdrop-filter: blur(4px) saturate(.82) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+  __DREAM_SELECTOR_LEFT_PANEL__ * {
+  color: #eadfce !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+  __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"] {
+  background: rgba(220, 202, 174, .72) !important;
+  border-color: rgba(235, 220, 196, .22) !important;
+  color: #2a2119 !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+  __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"] * {
+  color: #2a2119 !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgba(30, 25, 20, .22) !important;
+  backdrop-filter: none !important;
+}
+
+/* The light-shell accessibility layer otherwise repaints every sidebar and
+   application-menu child with the dark main-content token. Keep these two
+   dark chrome regions warm-white while preserving the selected row contrast. */
+@layer dreamskin-accessibility {
+  html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+    __DREAM_SELECTOR_LEFT_PANEL__ * {
+    color: #eadfce !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+    [class*="_ApplicationMenuTopBar_"] * {
+    color: #eadfce !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+    __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"],
+  html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]
+    __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"] * {
+    color: #2a2119 !important;
+  }
+}
+
+/* Citong Haibo keeps the reference's dark ship-hull navigation, one
+   uninterrupted misty titlebar, and a pale working surface over the harbor. */
+html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+  __DREAM_SELECTOR_LEFT_PANEL__ {
+  background: rgba(6, 25, 33, .82) !important;
+  backdrop-filter: blur(2px) saturate(.78) !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+  __DREAM_SELECTOR_LEFT_PANEL__ * {
+  color: #d7d6cc !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+  __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"] {
+  background: rgba(86, 106, 103, .68) !important;
+  border-color: rgba(180, 142, 88, .55) !important;
+  color: #e4e2d7 !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+  __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"] * {
+  color: #e4e2d7 !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgba(8, 24, 31, .22) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+  [class*="_ComposerLayoutRoot_"] {
+  background: rgba(226, 222, 210, .94) !important;
+  border: 1px solid rgba(76, 64, 50, .54) !important;
+  box-shadow: 0 10px 28px rgba(5, 20, 26, .20) !important;
+  backdrop-filter: none !important;
+}
+
+@layer dreamskin-accessibility {
+  html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+    __DREAM_SELECTOR_LEFT_PANEL__ *,
+  html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+    [class*="_ApplicationMenuTopBar_"] * {
+    color: #d7d6cc !important;
+  }
+
+  html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+    __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"],
+  html[data-dream-skin="active"][data-dream-theme-id="preset-citong-haibo"]
+    __DREAM_SELECTOR_LEFT_PANEL__ [aria-current="page"] * {
+    color: #e4e2d7 !important;
+  }
+}
+
 html[data-dream-skin="active"][data-dream-shell="light"]
   __DREAM_SELECTOR_COMPOSER_CHROME__ p.placeholder::after {
   color: rgb(var(--ds-muted-rgb) / .78) !important;

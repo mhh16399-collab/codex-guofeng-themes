@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-citong-haibo",
+  "name": "刺桐海舶",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "刺桐潮起，海舶云集。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "HAIBO ONLINE",
+  "quote": "万里云帆，泊于刺桐",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.78,
+    "focusY": 0.5,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#8e9996",
+    "panel": "#d8d9d0",
+    "panelAlt": "#7c8986",
+    "accent": "#6d8581",
+    "accentAlt": "#b08e58",
+    "secondary": "#3d595e",
+    "highlight": "#b08e58",
+    "text": "#172a31",
+    "muted": "#647477",
+    "line": "rgba(47, 69, 71, .30)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "刺桐海舶 · Citong Haibo",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

@@ -1,5 +1,14 @@
 # Task Progress
 
+## 静香茶席与刺桐海舶网站发布（2026-08-25）
+
+- [目标] 接管中断任务，将用户确认的「静香茶席」与「刺桐海舶」加入现有国风主题馆，提供实机预览和可直接下载的严格三文件 ZIP。
+- [主题] 两套源主题均包含非空 `theme.json`、`theme.css` 与清单引用的 PNG 背景；针对性真实界面回归均通过，连续顶栏、正文可读性和单层输入框约束已锁定。
+- [网站] 已新增两套主题的画廊数据、完整未裁切实机预览和下载包；生产构建中的馆藏由 18 套增至 20 套，搜索、明暗筛选、分页和详情弹窗沿用现有行为。
+- [测试] 新增网站发布契约测试并完成红绿循环：首次因缺少 `jingxiang-chaxi.png` 按预期失败，补齐实现后通过；Sites worker 4/4 通过，Vite production build 成功。
+- [Sites] `site/.openai/hosting.json` 的 `project_id` 明确绑定本次创建并成功部署的 Codex 国风主题馆；生产地址为 `https://codex-guofeng-themes.mhh16399.chatgpt.site`，后续 Sites 更新必须复用该项目，避免重复建站。
+- [当前] Sites 生产部署已成功；公开 GitHub Pages 仍等待本提交合入 `main` 并完成 Pages workflow，尚未宣称客户端 Release 已完成。
+
 ## Codex 国风主题馆与五套新主题 v2（2026-08-20）
 
 - [目标] 在 Windows v1.6.0 上增加汝窑天青、敦煌鎏金、青花瓷、海棠宋锦、霁夜星河五套主题，并建设 GitHub Pages“Codex 国风主题馆”；完成后共 8 套内置主题，竹青仍为默认。

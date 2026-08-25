@@ -1,0 +1,12 @@
+{
+  "jingxiang-chaxi": {
+    "kind": "synthetic-ui-mockup",
+    "containsRealDesktopContent": false,
+    "sha256": "8111d61a625585ff8a91aaaa0024e9ab2b9e5decfb99fa98391de63e6520fff5"
+  },
+  "citong-haibo": {
+    "kind": "synthetic-ui-mockup",
+    "containsRealDesktopContent": false,
+    "sha256": "1a0abbbb0c88af4fae650a01a1b84e311992fd92dc751da00fd0da69cb879229"
+  }
+}
