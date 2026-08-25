@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows Codex Theme Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body {
+      --sidebar: rgba(31, 25, 19, .84);
+      --sidebar-text: #eadfce;
+      --sidebar-muted: #c8b9a4;
+      --selected: rgba(220, 202, 174, .30);
+      --accent: #71826b;
+      --ink: #3a2b20;
+      --surface: rgba(244, 238, 226, .91);
+      --surface-border: rgba(78, 60, 43, .30);
+      --veil: linear-gradient(90deg, rgba(248,243,234,.25), rgba(248,243,234,.08));
+      font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+      color: var(--ink);
+      background: #ddd;
+    }
+    button { font: inherit; }
+    .app { width: 100%; height: 100%; position: relative; background: #ddd; }
+    .titlebar {
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+      padding-left: 18px; color: #252525; background: rgba(240,238,232,.94);
+      border-bottom: 1px solid rgba(0,0,0,.10); backdrop-filter: blur(14px);
+    }
+    .menu, .window-controls { display: flex; align-items: center; height: 100%; }
+    .menu { gap: 26px; font-size: 17px; }
+    .app-mark { font-size: 21px; font-weight: 700; margin-right: 2px; }
+    .nav-arrow { color: #5a5a5a; font-size: 24px; }
+    .window-controls button {
+      width: 48px; height: 100%; border: 0; color: #343434; background: transparent;
+      font-size: 18px; line-height: 1;
+    }
+    .window-controls button:last-child:hover { color: white; background: #c42b1c; }
+    .shell { height: calc(100% - 52px); display: grid; grid-template-columns: 360px 1fr; }
+    .sidebar {
+      position: relative; padding: 22px 18px 20px; color: var(--sidebar-text);
+      background: var(--sidebar); border-right: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px) saturate(.9);
+    }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; margin: 0 5px 21px; }
+    .brand { font-size: 24px; font-weight: 650; }
+    .brand-actions { display: flex; gap: 18px; font-size: 22px; }
+    .nav-list, .task-list { display: grid; gap: 7px; }
+    .nav-item, .project-row, .task-row {
+      min-height: 42px; display: flex; align-items: center; gap: 13px; padding: 0 11px;
+      border-radius: 9px; font-size: 18px;
+    }
+    .nav-item.active { background: var(--selected); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+    .ico { width: 22px; text-align: center; font-size: 20px; color: inherit; }
+    .section-title { margin: 23px 8px 9px; color: var(--sidebar-muted); font-size: 15px; }
+    .project-row { font-weight: 600; }
+    .task-row { padding-left: 35px; color: var(--sidebar-text); font-size: 16px; }
+    .task-row .bell { margin-left: auto; color: var(--sidebar-muted); }
+    .settings { position: absolute; left: 20px; right: 20px; bottom: 18px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.12); font-size: 17px; }
+    .workspace {
+      position: relative; min-width: 0; overflow: hidden;
+      background-image: var(--veil), var(--bg);
+      background-position: center; background-size: cover; background-repeat: no-repeat;
+    }
+    .workspace::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 42%, rgba(0,0,0,.07));
+    }
+    .prompt {
+      position: absolute; z-index: 1; left: 12%; top: 43%; transform: translateY(-50%);
+      font-size: 34px; font-weight: 500; letter-spacing: .02em; text-shadow: 0 1px 8px rgba(255,255,255,.48);
+    }
+    .prompt-icon { display: block; margin: 0 auto 28px; width: 54px; height: 54px; border: 3px solid currentColor; border-radius: 48% 52% 55% 45%; opacity: .74; text-align: center; line-height: 46px; }
+    .composer {
+      position: absolute; z-index: 2; left: 7%; right: 6%; bottom: 44px;
+      color: var(--ink); filter: drop-shadow(0 8px 22px rgba(22,16,10,.18));
+    }
+    .composer-meta {
+      height: 55px; display: flex; align-items: center; gap: 29px; padding: 0 24px;
+      background: var(--surface); border: 1px solid var(--surface-border); border-radius: 16px 16px 0 0;
+      font-size: 16px; backdrop-filter: blur(14px);
+    }
+    .composer-input {
+      height: 82px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px 0 24px;
+      background: rgba(250,247,240,.95); border: 1px solid var(--surface-border); border-radius: 17px;
+      font-size: 17px; color: #8c887f; backdrop-filter: blur(14px);
+    }
+    .send {
+      width: 45px; height: 45px; display: grid; place-items: center; border: 0; border-radius: 50%;
+      color: white; background: var(--accent); font-size: 26px;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="titlebar" data-region="windows-titlebar">
+      <div class="menu"><span class="app-mark">▣</span><span class="nav-arrow">←</span><span class="nav-arrow">→</span><span>文件</span><span>编辑</span><span>视图</span><span>帮助</span></div>
+      <div class="window-controls"><button aria-label="最小化">─</button><button aria-label="最大化">□</button><button aria-label="关闭">×</button></div>
+    </header>
+    <div class="shell">
+      <aside class="sidebar" data-region="sidebar">
+        <div class="brand-row"><span class="brand">Codex⌄</span><span class="brand-actions"><span>⌕</span><span>♧</span></span></div>
+        <nav class="nav-list">
+          <div class="nav-item"><span class="ico">✎</span>新对话</div>
+          <div class="nav-item active"><span class="ico">⑂</span>拉取请求</div>
+          <div class="nav-item"><span class="ico">⌘</span>站点</div>
+          <div class="nav-item"><span class="ico">◷</span>已安排</div>
+          <div class="nav-item"><span class="ico">＠</span>插件</div>
+        </nav>
+        <div class="section-title">项目</div>
+        <div class="project-row"><span class="ico">▱</span>示例工坊<span style="margin-left:auto">›</span></div>
+        <div class="section-title">任务</div>
+        <div class="task-list">
+          <div class="task-row">整理界面规范<span class="bell">♧</span></div>
+          <div class="task-row">检查组件状态<span class="bell">♧</span></div>
+          <div class="task-row">优化页面层级<span class="bell">♧</span></div>
+          <div class="task-row">查看构建结果<span class="bell">♧</span></div>
+        </div>
+        <div class="settings">⚙　设置</div>
+      </aside>
+      <section class="workspace" data-region="workspace">
+        <div class="prompt"><span class="prompt-icon">⌁</span><span id="promptText"></span></div>
+        <div class="composer" data-region="composer">
+          <div class="composer-meta"><span>▱　示例工坊</span><span>▰　本地</span><span>⑂　main⌄</span></div>
+          <div class="composer-input"><span>随心输入</span><button class="send">↑</button></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const themes = {
+      "jingxiang-chaxi": {
+        name: "静香茶席",
+        bg: "url('../../windows/presets/preset-jingxiang-chaxi/background.png')",
+        sidebar: "rgba(31,25,19,.86)", sidebarText: "#eadfce", sidebarMuted: "#c8b9a4",
+        selected: "rgba(220,202,174,.30)", accent: "#71826b", ink: "#3a2b20",
+        surface: "rgba(244,238,226,.91)", border: "rgba(78,60,43,.30)",
+        veil: "linear-gradient(90deg, rgba(248,243,234,.22), rgba(248,243,234,.04))"
+      },
+      "citong-haibo": {
+        name: "刺桐海舶",
+        bg: "url('../../windows/presets/preset-citong-haibo/background.png')",
+        sidebar: "rgba(6,25,33,.87)", sidebarText: "#d7d6cc", sidebarMuted: "#9ea9a5",
+        selected: "rgba(86,106,103,.68)", accent: "#8d543e", ink: "#26373e",
+        surface: "rgba(226,222,210,.93)", border: "rgba(76,64,50,.48)",
+        veil: "linear-gradient(90deg, rgba(225,231,229,.15), rgba(225,231,229,.02))"
+      }
+    };
+    const id = new URLSearchParams(location.search).get("theme") || "jingxiang-chaxi";
+    const theme = themes[id] || themes["jingxiang-chaxi"];
+    const root = document.body.style;
+    root.setProperty("--bg", theme.bg);
+    root.setProperty("--sidebar", theme.sidebar);
+    root.setProperty("--sidebar-text", theme.sidebarText);
+    root.setProperty("--sidebar-muted", theme.sidebarMuted);
+    root.setProperty("--selected", theme.selected);
+    root.setProperty("--accent", theme.accent);
+    root.setProperty("--ink", theme.ink);
+    root.setProperty("--surface", theme.surface);
+    root.setProperty("--surface-border", theme.border);
+    root.setProperty("--veil", theme.veil);
+    document.getElementById("promptText").textContent = `想在${theme.name}中构建什么？`;
+  </script>
+</body>
+</html>

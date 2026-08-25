@@ -1,12 +1,16 @@
 {
   "jingxiang-chaxi": {
     "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
     "containsRealDesktopContent": false,
-    "sha256": "8111d61a625585ff8a91aaaa0024e9ab2b9e5decfb99fa98391de63e6520fff5"
+    "sha256": "8fd84332d2bb89c775063b930f268f828cf97bf9652552c24a9144bdad7fcd1c"
   },
   "citong-haibo": {
     "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
     "containsRealDesktopContent": false,
-    "sha256": "1a0abbbb0c88af4fae650a01a1b84e311992fd92dc751da00fd0da69cb879229"
+    "sha256": "f085b120b693570a96dd5488ed3b4c1c49404765da65f417fb316f3917875a91"
   }
 }
