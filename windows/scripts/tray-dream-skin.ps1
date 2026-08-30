@@ -352,13 +352,10 @@ try {
       Start-DreamSkinPowerShell -Script $checkUpdateScript -Arguments @('-Interactive')
     }
     $null = Add-DreamSkinTrayItem -Items $menu.Items -Text (Get-DreamSkinTrayText -Key 'Gallery') -Action {
-      Start-Process -FilePath 'https://dreamskin.cc/gallery' | Out-Null
-    }
-    $null = Add-DreamSkinTrayItem -Items $menu.Items -Text (Get-DreamSkinTrayText -Key 'Studio') -Action {
-      Start-Process -FilePath 'https://dreamskin.cc/studio' | Out-Null
+      Start-Process -FilePath 'https://mhh16399-collab.github.io/codex-guofeng-themes/' | Out-Null
     }
     $null = Add-DreamSkinTrayItem -Items $menu.Items -Text (Get-DreamSkinTrayText -Key 'OpenSite') -Action {
-      Start-Process -FilePath 'https://dreamskin.cc' | Out-Null
+      Start-Process -FilePath 'https://github.com/mhh16399-collab/codex-guofeng-themes' | Out-Null
     }
     $autoStartEnabled = Test-Path -LiteralPath $startupShortcut -PathType Leaf
     $autoStartAction = {
