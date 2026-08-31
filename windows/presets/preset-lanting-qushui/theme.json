@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-lanting-qushui",
+  "name": "兰亭曲水",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "曲水流觞，竹影入怀。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "LANTING ONLINE",
+  "quote": "清流映竹，雅集成章",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.62,
+    "focusY": 0.55,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#f3efe4",
+    "panel": "#ecece5",
+    "panelAlt": "#d9e1dd",
+    "accent": "#537c76",
+    "accentAlt": "#789992",
+    "secondary": "#6d7e7b",
+    "highlight": "#bccbc6",
+    "text": "#263334",
+    "muted": "#6f7d7a",
+    "line": "rgba(74, 94, 91, .22)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "兰亭曲水 · Lanting Qushui",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

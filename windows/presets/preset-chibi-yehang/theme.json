@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-chibi-yehang",
+  "name": "赤壁夜航",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "月照赤壁，一苇夜航。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "CHIBI ONLINE",
+  "quote": "江流有声，孤舟见月",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.68,
+    "focusY": 0.52,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#0c151f",
+    "panel": "#0f1b27",
+    "panelAlt": "#172736",
+    "accent": "#b45c45",
+    "accentAlt": "#d08466",
+    "secondary": "#74899b",
+    "highlight": "#324a5e",
+    "text": "#e6e2da",
+    "muted": "#9ba7b0",
+    "line": "rgba(132, 151, 168, .25)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "赤壁夜航 · Chibi Yehang",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

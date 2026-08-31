@@ -21,6 +21,11 @@
       --workspace-bg: none;
       --sidebar-filter: blur(14px) saturate(.9);
       --titlebar: rgba(240,238,232,.94);
+      --titlebar-filter: blur(14px);
+      --titlebar-text: #252525;
+      --composer-input: rgba(250,247,240,.95);
+      --composer-filter: blur(14px);
+      --composer-muted: #8c887f;
       font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
       color: var(--ink);
       background: #ddd;
@@ -36,15 +41,15 @@
     }
     .titlebar {
       height: 52px; display: flex; align-items: center; justify-content: space-between;
-      padding-left: 18px; color: #252525; background: var(--titlebar);
-      border-bottom: 1px solid rgba(0,0,0,.10); backdrop-filter: blur(14px);
+      padding-left: 18px; color: var(--titlebar-text); background: var(--titlebar);
+      border-bottom: 1px solid rgba(0,0,0,.10); backdrop-filter: var(--titlebar-filter);
     }
     .menu, .window-controls { display: flex; align-items: center; height: 100%; }
     .menu { gap: 26px; font-size: 17px; }
     .app-mark { font-size: 21px; font-weight: 700; margin-right: 2px; }
     .nav-arrow { color: #5a5a5a; font-size: 24px; }
     .window-controls button {
-      width: 48px; height: 100%; border: 0; color: #343434; background: transparent;
+      width: 48px; height: 100%; border: 0; color: var(--titlebar-text); background: transparent;
       font-size: 18px; line-height: 1;
     }
     .window-controls button:last-child:hover { color: white; background: #c42b1c; }
@@ -97,12 +102,12 @@
     .composer-meta {
       height: 55px; display: flex; align-items: center; gap: 29px; padding: 0 24px;
       background: var(--surface); border: 1px solid var(--surface-border); border-radius: 16px 16px 0 0;
-      font-size: 16px; backdrop-filter: blur(14px);
+      font-size: 16px; backdrop-filter: var(--composer-filter);
     }
     .composer-input {
       height: 116px; display: flex; flex-direction: column; align-items: stretch; justify-content: space-between; padding: 16px 16px 12px 24px;
-      background: rgba(250,247,240,.95); border: 1px solid var(--surface-border); border-radius: 17px;
-      font-size: 17px; color: #8c887f; backdrop-filter: blur(14px);
+      background: var(--composer-input); border: 1px solid var(--surface-border); border-radius: 17px;
+      font-size: 17px; color: var(--composer-muted); backdrop-filter: var(--composer-filter);
     }
     .composer-toolbar { display: flex; align-items: center; gap: 18px; color: var(--ink); font-size: 15px; }
     .access { color: #d85c34; font-weight: 600; }
@@ -205,6 +210,42 @@
         selected: "rgba(70,118,125,.16)", accent: "#5b8f97", ink: "#294951",
         surface: "rgba(247,250,249,.94)", border: "rgba(62,94,100,.20)",
         veil: "linear-gradient(90deg, rgba(244,249,249,.06), rgba(244,249,249,.01))"
+      },
+      "lanting-qushui": {
+        name: "兰亭曲水",
+        bg: "url('../../windows/presets/preset-lanting-qushui/background.png')",
+        wallpaperMode: "window",
+        sidebarFilter: "none", titlebarFilter: "none", composerFilter: "none",
+        titlebar: "rgb(243,239,228)", titlebarText: "#263334",
+        sidebar: "rgba(243,239,228,.72)", sidebarText: "#263334", sidebarMuted: "#6f7d7a",
+        selected: "rgba(83,124,118,.16)", accent: "#537c76", ink: "#263334",
+        surface: "rgba(248,247,241,.94)", composerInput: "rgba(248,247,241,.97)", composerMuted: "#6f7d7a",
+        border: "rgba(74,94,91,.22)",
+        veil: "linear-gradient(90deg, rgba(248,247,241,.05), rgba(248,247,241,.01))"
+      },
+      "yanshan-qiuse": {
+        name: "燕山秋色",
+        bg: "url('../../windows/presets/preset-yanshan-qiuse/background.png')",
+        wallpaperMode: "window",
+        sidebarFilter: "none", titlebarFilter: "none", composerFilter: "none",
+        titlebar: "rgb(238,229,213)", titlebarText: "#332d27",
+        sidebar: "rgba(238,229,213,.72)", sidebarText: "#332d27", sidebarMuted: "#786f65",
+        selected: "rgba(166,90,56,.14)", accent: "#a65a38", ink: "#332d27",
+        surface: "rgba(249,245,236,.94)", composerInput: "rgba(249,245,236,.97)", composerMuted: "#786f65",
+        border: "rgba(101,83,65,.24)",
+        veil: "linear-gradient(90deg, rgba(250,246,238,.05), rgba(250,246,238,.01))"
+      },
+      "chibi-yehang": {
+        name: "赤壁夜航",
+        bg: "url('../../windows/presets/preset-chibi-yehang/background.png')",
+        wallpaperMode: "window",
+        sidebarFilter: "none", titlebarFilter: "none", composerFilter: "none",
+        titlebar: "rgb(12,21,31)", titlebarText: "#e6e2da",
+        sidebar: "rgba(7,15,24,.82)", sidebarText: "#e6e2da", sidebarMuted: "#9ba7b0",
+        selected: "rgba(180,92,69,.20)", accent: "#b45c45", ink: "#e6e2da",
+        surface: "rgba(15,27,39,.96)", composerInput: "rgba(15,27,39,.98)", composerMuted: "#9ba7b0",
+        border: "rgba(132,151,168,.26)",
+        veil: "linear-gradient(90deg, rgba(7,14,23,.12), rgba(7,14,23,.03))"
       }
     };
     const id = new URLSearchParams(location.search).get("theme") || "jingxiang-chaxi";
@@ -214,6 +255,11 @@
     root.setProperty("--workspace-bg", theme.wallpaperMode === "main" ? theme.bg : "none");
     root.setProperty("--sidebar-filter", theme.sidebarFilter || "blur(14px) saturate(.9)");
     root.setProperty("--titlebar", theme.titlebar || "rgba(240,238,232,.94)");
+    root.setProperty("--titlebar-filter", theme.titlebarFilter || "blur(14px)");
+    root.setProperty("--titlebar-text", theme.titlebarText || "#252525");
+    root.setProperty("--composer-filter", theme.composerFilter || "blur(14px)");
+    root.setProperty("--composer-input", theme.composerInput || "rgba(250,247,240,.95)");
+    root.setProperty("--composer-muted", theme.composerMuted || "#8c887f");
     root.setProperty("--sidebar", theme.sidebar);
     root.setProperty("--sidebar-text", theme.sidebarText);
     root.setProperty("--sidebar-muted", theme.sidebarMuted);

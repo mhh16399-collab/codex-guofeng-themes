@@ -26,11 +26,18 @@ test("theme previews use one fixed Windows Codex layout", async () => {
   assert.match(source, /"qingming-changjuan"/);
   assert.match(source, /"yanlan-liubai"/);
   assert.match(source, /"bingqing-yuanxiu"/);
+  assert.match(source, /"lanting-qushui"/);
+  assert.match(source, /"yanshan-qiuse"/);
+  assert.match(source, /"chibi-yehang"/);
   assert.match(source, /wallpaperMode:\s*"window"/);
   assert.match(source, /wallpaperMode:\s*"main"/);
   assert.match(source, /--window-bg/);
   assert.match(source, /--workspace-bg/);
   assert.match(source, /--sidebar-filter/);
   assert.match(source, /--titlebar/);
+  assert.match(source, /--titlebar-filter/);
+  assert.match(source, /--composer-filter/);
   assert.match(source, /sidebarFilter:\s*"none"/);
+  assert.match(source, /titlebarFilter:\s*"none"/);
+  assert.match(source, /composerFilter:\s*"none"/);
 });

@@ -14,6 +14,9 @@ const publishedThemes = [
   { id: "qingming-changjuan", name: "清明长卷" },
   { id: "yanlan-liubai", name: "烟岚留白" },
   { id: "bingqing-yuanxiu", name: "冰青远岫" },
+  { id: "lanting-qushui", name: "兰亭曲水" },
+  { id: "yanshan-qiuse", name: "燕山秋色" },
+  { id: "chibi-yehang", name: "赤壁夜航" },
 ];
 
 test("production gallery publishes all approved themes with previews and downloads", async () => {

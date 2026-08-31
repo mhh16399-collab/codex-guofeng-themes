@@ -1086,6 +1086,24 @@ html[data-dream-skin="active"][data-dream-theme-id="preset-bingqing-yuanxiu"]
   backdrop-filter: none !important;
 }
 
+html[data-dream-skin="active"][data-dream-theme-id="preset-lanting-qushui"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgb(243, 239, 228) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-yanshan-qiuse"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgb(238, 229, 213) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-dream-skin="active"][data-dream-theme-id="preset-chibi-yehang"]
+  [class*="_ApplicationMenuTopBar_"] {
+  background: rgb(12, 21, 31) !important;
+  backdrop-filter: none !important;
+}
+
 /* Jingxiang Chaxi follows the selected reference exactly: dark walnut chrome
    on the left, a warm tea-paper wash through the center, and a dark right cap. */
 html[data-dream-skin="active"][data-dream-theme-id="preset-jingxiang-chaxi"]

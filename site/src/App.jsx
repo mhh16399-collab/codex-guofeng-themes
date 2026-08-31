@@ -30,6 +30,9 @@ const themes = [
   { id: "qingming-changjuan", name: "清明长卷", romanized: "Qingming Changjuan", tone: "light", toneLabel: "浅色", tagline: "汴水入卷，清明有声", story: "宣纸长卷从城门、市井一路铺向汴河与虹桥，左侧保留清晰画面，右侧卷轴与朱印收住古意，整窗连续而不虚化。", colors: ["#efe5cf", "#827564", "#a45135"], image: "themes/qingming-changjuan.png" },
   { id: "yanlan-liubai", name: "烟岚留白", romanized: "Yanlan Liubai", tone: "light", toneLabel: "浅色", tagline: "一舟入烟岚，千峰留素白", story: "冷灰水墨山峦、孤舟与一轮淡朱日构成大面积留白，左侧山石松影直接入画，清晰克制，适合长时间阅读。", colors: ["#e8ebe7", "#687779", "#b54b3d"], image: "themes/yanlan-liubai.png" },
   { id: "bingqing-yuanxiu", name: "冰青远岫", romanized: "Bingqing Yuanxiu", tone: "light", toneLabel: "浅色", tagline: "冰青入岫，云水无声", story: "冰青与浅玉色山体以现代几何层次向远处递进，冷灰顶栏和通透侧栏保持统一，画面轻盈而富有辨识度。", colors: ["#e8eeee", "#6e8f95", "#5b8f97"], image: "themes/bingqing-yuanxiu.png" },
+  { id: "lanting-qushui", name: "兰亭曲水", romanized: "Lanting Qushui", tone: "light", toneLabel: "浅色", tagline: "流觞曲水，竹影入怀", story: "冷白宣纸、浅墨竹影与蜿蜒曲水铺开清雅书斋，左栏保留独立竹石构图，整窗不虚化，适合安静而长久的工作。", colors: ["#f3efe4", "#9eb4aa", "#537c76"], image: "themes/lanting-qushui.png" },
+  { id: "yanshan-qiuse", name: "燕山秋色", romanized: "Yanshan Qiuse", tone: "light", toneLabel: "浅色", tagline: "霜染层峦，秋意入卷", story: "暖宣纸承托燕山层峦与疏朗秋林，赭石、灰墨和克制朱红共同收住画面，顶栏与侧栏保持一体而不遮蔽原画。", colors: ["#eee5d5", "#96785c", "#a65a38"], image: "themes/yanshan-qiuse.png" },
+  { id: "chibi-yehang", name: "赤壁夜航", romanized: "Chibi Yehang", tone: "dark", toneLabel: "深色", tagline: "月照赤壁，孤舟夜航", story: "深靛夜色、赤壁峭岩与江上孤舟构成沉浸式暗色工作场，月光沿水面留出阅读区，一点舟火和朱砂压住冷色。", colors: ["#0c151f", "#344c5e", "#b45c45"], image: "themes/chibi-yehang.png" },
 ];
 
 function updateQuery(filter, query) {

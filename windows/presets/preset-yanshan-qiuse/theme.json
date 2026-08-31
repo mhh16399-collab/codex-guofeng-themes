@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-yanshan-qiuse",
+  "name": "燕山秋色",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "燕山叠翠，秋色入屏。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "YANSHAN ONLINE",
+  "quote": "层峦染秋，万壑生风",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.66,
+    "focusY": 0.54,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#eee5d5",
+    "panel": "#f1e7d6",
+    "panelAlt": "#ddcfbb",
+    "accent": "#a65a38",
+    "accentAlt": "#c37b55",
+    "secondary": "#796d60",
+    "highlight": "#c9b79d",
+    "text": "#332d27",
+    "muted": "#786f65",
+    "line": "rgba(101, 83, 65, .24)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "燕山秋色 · Yanshan Qiuse",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}
