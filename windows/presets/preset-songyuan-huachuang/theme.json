@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-songyuan-huachuang",
+  "name": "宋园花窗",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "花窗借景，宋园生青。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "SONGYUAN ONLINE",
+  "quote": "一窗纳园，半池含翠",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.64,
+    "focusY": 0.50,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#edf1e9",
+    "panel": "#f2f3ec",
+    "panelAlt": "#d9e2d8",
+    "accent": "#537d6b",
+    "accentAlt": "#7b9b88",
+    "secondary": "#6d756d",
+    "highlight": "#becdc0",
+    "text": "#26312c",
+    "muted": "#68736c",
+    "line": "rgba(64, 83, 72, .22)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "宋园花窗 · Songyuan Huachuang",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

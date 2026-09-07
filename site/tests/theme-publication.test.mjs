@@ -17,6 +17,9 @@ const publishedThemes = [
   { id: "lanting-qushui", name: "兰亭曲水" },
   { id: "yanshan-qiuse", name: "燕山秋色" },
   { id: "chibi-yehang", name: "赤壁夜航" },
+  { id: "meixue-shuzhai", name: "梅雪书斋" },
+  { id: "songyuan-huachuang", name: "宋园花窗" },
+  { id: "changan-dengshi", name: "长安灯市" },
 ];
 
 test("production gallery publishes all approved themes with previews and downloads", async () => {

@@ -54,5 +54,26 @@
     "layout": "windows-codex",
     "containsRealDesktopContent": false,
     "sha256": "1806d6f4066bfd2f337e68c7da03cbb8ecf13cb99da7d6646c4e67028ddafad8"
+  },
+  "meixue-shuzhai": {
+    "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
+    "containsRealDesktopContent": false,
+    "sha256": "4e7586ba6b5d530d7880ce46953e2dcbb65307ee02b629a904592442720bd19d"
+  },
+  "songyuan-huachuang": {
+    "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
+    "containsRealDesktopContent": false,
+    "sha256": "a0aefffb953dcdeb2c11a9d642fccfe071f4ad9feedb3f54280479a577643524"
+  },
+  "changan-dengshi": {
+    "kind": "synthetic-ui-mockup",
+    "generator": "fixed-windows-html-template",
+    "layout": "windows-codex",
+    "containsRealDesktopContent": false,
+    "sha256": "482f37b6b731ee8286d10676057013b3f5dff6e15cd03b15aa86c11a1aebe924"
   }
 }

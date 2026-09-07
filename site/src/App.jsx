@@ -33,6 +33,9 @@ const themes = [
   { id: "lanting-qushui", name: "兰亭曲水", romanized: "Lanting Qushui", tone: "light", toneLabel: "浅色", tagline: "流觞曲水，竹影入怀", story: "冷白宣纸、浅墨竹影与蜿蜒曲水铺开清雅书斋，左栏保留独立竹石构图，整窗不虚化，适合安静而长久的工作。", colors: ["#f3efe4", "#9eb4aa", "#537c76"], image: "themes/lanting-qushui.png" },
   { id: "yanshan-qiuse", name: "燕山秋色", romanized: "Yanshan Qiuse", tone: "light", toneLabel: "浅色", tagline: "霜染层峦，秋意入卷", story: "暖宣纸承托燕山层峦与疏朗秋林，赭石、灰墨和克制朱红共同收住画面，顶栏与侧栏保持一体而不遮蔽原画。", colors: ["#eee5d5", "#96785c", "#a65a38"], image: "themes/yanshan-qiuse.png" },
   { id: "chibi-yehang", name: "赤壁夜航", romanized: "Chibi Yehang", tone: "dark", toneLabel: "深色", tagline: "月照赤壁，孤舟夜航", story: "深靛夜色、赤壁峭岩与江上孤舟构成沉浸式暗色工作场，月光沿水面留出阅读区，一点舟火和朱砂压住冷色。", colors: ["#0c151f", "#344c5e", "#b45c45"], image: "themes/chibi-yehang.png" },
+  { id: "meixue-shuzhai", name: "梅雪书斋", romanized: "Meixue Shuzhai", tone: "light", toneLabel: "浅色", tagline: "梅映晴雪，墨暖书斋", story: "暖白书斋、浅木书案与窗外雪梅彼此映照，左栏独立留出疏朗梅枝，中心阅读区干净温润，不与宋园景致重复。", colors: ["#f4ede3", "#b79779", "#a84435"], image: "themes/meixue-shuzhai.png" },
+  { id: "songyuan-huachuang", name: "宋园花窗", romanized: "Songyuan Huachuang", tone: "light", toneLabel: "浅色", tagline: "花窗借景，宋园生青", story: "象牙白园墙、月洞门与一池青水构成清晰的建筑秩序，左栏以独立花窗和竹影收边，画面清爽而不虚化。", colors: ["#edf1e9", "#9bb3a2", "#537d6b"], image: "themes/songyuan-huachuang.png" },
+  { id: "changan-dengshi", name: "长安灯市", romanized: "Changan Dengshi", tone: "dark", toneLabel: "深色", tagline: "灯火长街，夜映长安", story: "深靛夜空、唐风楼阁与层层灯火铺成长街，左栏由近景檐角与宫灯独立构图，暖金光线只在操作边界轻轻提亮。", colors: ["#07111f", "#9b4b2f", "#d69552"], image: "themes/changan-dengshi.png" },
 ];
 
 function updateQuery(filter, query) {

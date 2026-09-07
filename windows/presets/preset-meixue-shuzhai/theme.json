@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-meixue-shuzhai",
+  "name": "梅雪书斋",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "梅映晴雪，墨暖书斋。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "MEIXUE ONLINE",
+  "quote": "雪静梅香，书斋生暖",
+  "image": "background.png",
+  "appearance": "light",
+  "art": {
+    "focusX": 0.58,
+    "focusY": 0.48,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#f4ede3",
+    "panel": "#f7f2ea",
+    "panelAlt": "#e6d7c6",
+    "accent": "#a84435",
+    "accentAlt": "#c46955",
+    "secondary": "#745847",
+    "highlight": "#d8c4ae",
+    "text": "#312923",
+    "muted": "#786d64",
+    "line": "rgba(91, 68, 51, .22)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "梅雪书斋 · Meixue Shuzhai",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

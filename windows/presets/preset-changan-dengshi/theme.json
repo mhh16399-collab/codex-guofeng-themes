@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "preset-changan-dengshi",
+  "name": "长安灯市",
+  "brandSubtitle": "CODEX GUOFENG THEMES",
+  "tagline": "灯火长街，夜映长安。",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "◉  选择项目",
+  "statusText": "CHANGAN ONLINE",
+  "quote": "长街灯暖，万户夜明",
+  "image": "background.png",
+  "appearance": "dark",
+  "art": {
+    "focusX": 0.62,
+    "focusY": 0.44,
+    "safeArea": "left",
+    "taskMode": "full"
+  },
+  "colors": {
+    "background": "#07111f",
+    "panel": "#0c1725",
+    "panelAlt": "#172638",
+    "accent": "#c77443",
+    "accentAlt": "#dfa45f",
+    "secondary": "#9a806b",
+    "highlight": "#554036",
+    "text": "#f0e4cf",
+    "muted": "#a9a397",
+    "line": "rgba(206, 170, 118, .24)"
+  },
+  "promoTitle": "Codex 国风主题",
+  "promoSub": "长安灯市 · Changan Dengshi",
+  "promoUrl": "https://github.com/mhh16399-collab/codex-guofeng-themes"
+}

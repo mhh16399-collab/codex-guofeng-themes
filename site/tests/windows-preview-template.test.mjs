@@ -29,6 +29,9 @@ test("theme previews use one fixed Windows Codex layout", async () => {
   assert.match(source, /"lanting-qushui"/);
   assert.match(source, /"yanshan-qiuse"/);
   assert.match(source, /"chibi-yehang"/);
+  assert.match(source, /"meixue-shuzhai"/);
+  assert.match(source, /"songyuan-huachuang"/);
+  assert.match(source, /"changan-dengshi"/);
   assert.match(source, /wallpaperMode:\s*"window"/);
   assert.match(source, /wallpaperMode:\s*"main"/);
   assert.match(source, /--window-bg/);
